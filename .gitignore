@@ -1,0 +1,10 @@
+bin/
+lib/
+target/
+.classpath
+.project
+.settings/
+*.iml
+*.ipr
+*.iws
+.DS_Store
