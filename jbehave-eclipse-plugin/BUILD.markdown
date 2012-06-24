@@ -59,24 +59,24 @@ Dependencies that are not part of the plugin executable (e.g. test scoped ones) 
 # To build the plugin
 
 * Retrieve the external dependencies to the lib/ directory via Maven:
-
-**  mvn dependency:copy-dependencies
+ 
+  mvn dependency:copy-dependencies
 
 * Using Maven: 
 
-**  mvn clean install 
+  mvn clean install 
   
 * Using Eclipse: 
 
-** Right click on the plugin
-** Export...
-** *Deployable plug-ins and fragments*
-** "Next"
-** Select the corresponding plugin 
-** Define the wanted directory
-** Click "Finish"
+  Right click on the plugin 
+  Export...
+  *Deployable plug-ins and fragments*
+  "Next"
+  Select the corresponding plugin 
+  Define the wanted directory
+  Click "Finish"
 
 # To launch the plugin in an runtime workspace
 
 * Run as... Eclipse Application, configure and select required plugin
-* or right click on `Eclipse Application.launch` Run as...
+* or right click on `Eclipse Workbench.launch` Run as...
