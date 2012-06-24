@@ -77,13 +77,7 @@ The Eclipse project Build Path is declared in the `.classpath` and will include 
   
 * Using Eclipse: 
 
-  Right click on the plugin 
-  Export...
-  *Deployable plug-ins and fragments*
-  "Next"
-  Select the corresponding plugin 
-  Define the wanted directory
-  Click "Finish"
+  Right click on the plugin > Export... > *Deployable plug-ins and fragments* > "Next" > Select the corresponding plugin > Define the wanted directory > Click "Finish"
 
 # To launch the plugin in an runtime workspace
 
