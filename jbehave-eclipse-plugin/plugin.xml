@@ -17,13 +17,13 @@
    <extension
          point="org.eclipse.ui.editors.templates">
       <include
-            file="jbehave_templates/jbehave_templates_shared.xml" />
+            file="templates/jbehave_templates_shared.xml" />
       <include
-            file="jbehave_templates/jbehave_templates_en.xml" />
+            file="templates/jbehave_templates_en.xml" />
       <include
-            file="jbehave_templates/jbehave_templates_fr.xml"/>
+            file="templates/jbehave_templates_fr.xml"/>
       <include
-            file="jbehave_templates/jbehave_templates_fr_FR_Traditional.xml"/>
+            file="templates/jbehave_templates_fr_FR_Traditional.xml"/>
             
       <contextType
             class="org.jbehave.eclipse.editor.story.completion.StoryContextType"
