@@ -13,7 +13,7 @@ Plugin dependencies are of two types:
 
 Project classpath relies on the **plugin nature** of the project: 
 
-* Eclipse plugin dependencies managed through the plugin nature and declared in `META-INF/MANIFEST.MF`
+* Eclipse plugin dependencies are declared in `META-INF/MANIFEST.MF`
     
 ```
 Require-Bundle: org.eclipse.ui,
@@ -24,19 +24,19 @@ Require-Bundle: org.eclipse.ui,
  ...
 ```
 
-* External dependencies (retrieved through Maven) from the plugin point of view are declared in: `build.properties` and `META-INF/MANIFEST.MF`. 
-Thus both files must be updated according to modified or added dependencies. Test dependencies can be found in the lib directory, 
-but since they are not part of the `build.properties` nor `META-INF/MANIFEST.MF`, they are not exported with the plugin.
+* External dependencies (retrieved via Maven) are declared in the `META-INF/MANIFEST.MF` 
 
 ```
 Bundle-ClassPath: .,
+ lib/jbehave-core-3.6.7.jar,
+ lib/commons-codec-1.6.jar,
  lib/commons-collections-3.2.1.jar,
  lib/commons-io-2.1.jar,
  lib/commons-lang-2.5.jar,
  ...
 ```
 
-Dependencies that are not part of the plugin executable (e.g. test scoped ones) must be manually added in the project dependencies:
+The Eclipse project Build Path is declared in the `.classpath` and will include non-runtime dependencies (e.g. compile and test scoped ones)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -47,11 +47,20 @@ Dependencies that are not part of the plugin executable (e.g. test scoped ones) 
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="examples/user-account/src/main/java"/>
 	<classpathentry kind="src" path="examples/user-account/src/main/story"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/guava-10.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/functionaljava-3.0.jar"/>
+	<classpathentry kind="lib" path="lib/junit-dep-4.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/hamcrest-core-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/testng-6.3.1.jar"/>
 	<classpathentry kind="lib" path="lib/hamcrest-integration-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/hamcrest-library-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.8.4.jar"/>
+	<classpathentry kind="lib" path="lib/logback-classic-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/logback-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="lib/plexus-utils-2.0.5.jar"/>
+	... 
 	<classpathentry kind="output" path="bin"/>
 </classpath>
 ```

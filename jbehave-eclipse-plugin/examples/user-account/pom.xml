@@ -7,8 +7,6 @@
 
 	<properties>
 		<jbehave.version>3.6.7</jbehave.version>
-		<functionaljava.version>3.0</functionaljava.version>
-		<guava.version>10.0.1</guava.version>
 	</properties>
 	
 	<dependencies>
@@ -17,16 +15,13 @@
 			<artifactId>jbehave-core</artifactId>
 			<version>${jbehave.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.functionaljava</groupId>
-			<artifactId>functionaljava</artifactId>
-			<version>${functionaljava.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
 	</dependencies>
-	
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/story</directory>
+			</resource>
+		</resources>
+	</build>
 </project>
