@@ -7,8 +7,7 @@ import static org.jbehave.util.Strings.removeTrailingNewlines;
 import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
-import org.jbehave.util.Strings;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class StringsTest {
     @Test

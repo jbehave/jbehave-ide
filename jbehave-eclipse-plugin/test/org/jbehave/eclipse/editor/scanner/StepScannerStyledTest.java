@@ -22,11 +22,11 @@ import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.util.StepLocator;
 import org.jbehave.util.Visitor;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class StepScannerStyledTest {
     private static final String STEP1 = "an account named '$name' with the following properties:$properties";
@@ -47,7 +47,7 @@ public class StepScannerStyledTest {
     private JBehaveProject jbehaveProject;
 
     @SuppressWarnings("rawtypes")
-    @BeforeMethod
+    @Before
     public void prepare () throws JavaModelException {
         stepLocator = mock(StepLocator.class);
         textAttributeProvider = mock(TextAttributeProvider.class);

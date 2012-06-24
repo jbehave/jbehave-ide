@@ -12,13 +12,10 @@ import org.eclipse.jdt.core.IMethod;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.PotentialStep;
-import org.jbehave.parser.Constants;
-import org.jbehave.parser.ContentWithIgnorableEmitter;
-import org.jbehave.parser.StoryPart;
 import org.jbehave.util.ParametrizedString;
 import org.jbehave.util.ParametrizedString.WeightChain;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ContentWithIgnorableEmitterTest {
     private static final String STEP1 = "Given an account named '$name' with the following properties:$properties";
@@ -55,7 +52,7 @@ public class ContentWithIgnorableEmitterTest {
 
     private LocalizedStepSupport localizedStepSupport;
 
-    @BeforeMethod
+    @Before
     public void setUp () {
         localizedStepSupport = new LocalizedStepSupport();
         localizedStepSupport.setStoryLocale(Locale.ENGLISH);

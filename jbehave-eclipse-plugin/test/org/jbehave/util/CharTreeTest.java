@@ -8,15 +8,14 @@ import static org.jbehave.support.JBKeyword.Narrative;
 
 import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.support.JBKeyword;
-import org.jbehave.util.CharTree;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CharTreeTest {
     
     private CharTree<JBKeyword> cn;
 
-    @BeforeMethod
+    @Before
     public void setUp () {
         LocalizedKeywords keywords = new LocalizedKeywords();
         cn = new CharTree<JBKeyword>('/', null);
@@ -24,8 +23,7 @@ public class CharTreeTest {
             cn.push(kw.asString(keywords), kw);
         
     }
-    
-    
+        
     @Test
     public void lookup() {
         assertEquals(Given, cn.lookup("Given"));

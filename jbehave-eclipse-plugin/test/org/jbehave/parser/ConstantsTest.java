@@ -3,14 +3,15 @@ package org.jbehave.parser;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.jbehave.parser.Constants.*;
+import static org.jbehave.parser.Constants.containsExampleTable;
+import static org.jbehave.parser.Constants.removeComment;
+import static org.jbehave.parser.Constants.removeTrailingComment;
 
 import java.util.List;
 
-import org.jbehave.parser.Constants;
 import org.jbehave.parser.Constants.TokenizerCallback;
 import org.jbehave.util.New;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class ConstantsTest {
     

@@ -12,14 +12,14 @@ import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
 import org.jbehave.core.parsers.StepMatcher;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.util.New;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StepParameterTest {
 
     private RegexPrefixCapturingPatternParser parser;
 
-    @BeforeMethod
+    @Before
     public void setUp() {
         parser = new RegexPrefixCapturingPatternParser();
     }

@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.jbehave.eclipse.jface.TemplateUtils.templatizeVariables;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class TemplateUtilsTest {
 

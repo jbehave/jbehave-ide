@@ -9,17 +9,15 @@ import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
 import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.parser.StoryParser;
-import org.jbehave.parser.StoryPart;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StoryParserTest {
     
     private LocalizedStepSupport localizedStepSupport;
     private StoryParser parser;
 
-    @BeforeMethod
+    @Before
     public void setUp () {
         localizedStepSupport = new LocalizedStepSupport();
         localizedStepSupport.setStoryLocale(Locale.ENGLISH);

@@ -7,15 +7,14 @@ import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.jbehave.util.ProcessGroup;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ProcessGroupTest {
 
     private ProcessGroup<Integer> group;
     
-    @BeforeMethod
+    @Before
     public void setUp () {
         group = new ProcessGroup<Integer>(Executors.newFixedThreadPool(4));
     }

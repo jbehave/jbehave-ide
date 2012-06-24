@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.jbehave.util.StringEnhancer.enhanceString;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class StringEnhancerTest {
 

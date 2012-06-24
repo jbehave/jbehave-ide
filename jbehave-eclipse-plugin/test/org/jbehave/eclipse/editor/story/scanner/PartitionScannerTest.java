@@ -17,9 +17,8 @@ import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.editor.story.scanner.StoryPartitionScanner;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class PartitionScannerTest {
 
@@ -27,7 +26,7 @@ public class PartitionScannerTest {
     private LocalizedStepSupport localizedSupport;
     private JBehaveProject jbehaveProject;
     
-    @BeforeMethod
+    @Before
     public void setUp () throws IOException {
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx01.story"));
         jbehaveProject = mock(JBehaveProject.class);

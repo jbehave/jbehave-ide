@@ -8,10 +8,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jbehave.util.ParametrizedString;
 import org.jbehave.util.ParametrizedString.Token;
 import org.jbehave.util.ParametrizedString.WeightChain;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class ParametrizedStringTest {
 

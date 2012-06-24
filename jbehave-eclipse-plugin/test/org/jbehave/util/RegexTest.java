@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.jbehave.support.JBKeyword;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class RegexTest {
 

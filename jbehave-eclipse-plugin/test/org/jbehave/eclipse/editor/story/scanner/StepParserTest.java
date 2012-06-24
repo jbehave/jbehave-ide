@@ -18,17 +18,17 @@ import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.PotentialStep;
-import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.eclipse.util.StepLocator;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 public class StepParserTest {
     private Logger log = LoggerFactory.getLogger(StepParserTest.class);
@@ -48,7 +48,7 @@ public class StepParserTest {
     private int offset;
     private TextAttribute exampleTableCell;
     
-    @BeforeMethod
+    @Before
     public void setUp () throws IOException {
         defaultAttr = mock(TextAttribute.class);
         keywordAttr = mock(TextAttribute.class);
@@ -337,7 +337,8 @@ public class StepParserTest {
         assertThat(offset, equalTo(document.getLength()));
     }
     
-    @Test(enabled=false)
+    @Test
+    @Ignore
     public void usecase_ex4() throws Exception {
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/domain/i_can_login_using_parameters_table.story"));
         
@@ -365,7 +366,8 @@ public class StepParserTest {
         assertThat(offset, equalTo(document.getLength()));
     }
     
-    @Test(enabled=false)
+    @Test
+    @Ignore
     public void usecase_ex5() throws Exception {
         PotentialStep seeHomePage = thenStep("agent see the application home page");
         when(locator.findFirstStep("agent see the application home page")).thenReturn(seeHomePage);

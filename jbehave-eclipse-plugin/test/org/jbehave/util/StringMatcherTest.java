@@ -3,15 +3,14 @@ package org.jbehave.util;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.jbehave.util.StringMatcher;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class StringMatcherTest {
     
     private StringMatcher matcher;
     
-    @BeforeMethod
+    @Before
     public void setup () {
         matcher = new StringMatcher();
     }

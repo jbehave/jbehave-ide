@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.jface;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 public class HtmlStateMachineTest {
 
