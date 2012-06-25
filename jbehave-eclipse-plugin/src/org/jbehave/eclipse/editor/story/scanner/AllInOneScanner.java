@@ -81,7 +81,7 @@ public class AllInOneScanner extends AbstractStoryPartBasedScanner {
     protected void emitPart(StoryPart part) {
         Keyword keyword = part.getPreferredKeyword();
         if(keyword==null) {
-            logger.warn("Weird case: no keywork for part. Content: {}", part);
+			logger.debug("No keyword found for story part: {}", part);
             emitCommentAware(getErrorToken(), part.getOffset(), part.getContent());
             return;
         }

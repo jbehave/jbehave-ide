@@ -16,12 +16,12 @@ import org.eclipse.ui.dialogs.PropertyPage;
 import org.eclipse.wb.swt.ResourceManager;
 import org.jbehave.eclipse.Activator;
 
-public class JBehavePluginPreferencePage extends PropertyPage implements IWorkbenchPreferencePage {
+public class PluginPreferencePage extends PropertyPage implements IWorkbenchPreferencePage {
 
     /**
      * Create the preference page.
      */
-    public JBehavePluginPreferencePage() {
+    public PluginPreferencePage() {
     }
 
     /**
@@ -40,24 +40,24 @@ public class JBehavePluginPreferencePage extends PropertyPage implements IWorkbe
         lblLogo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
         lblLogo.setImage(ResourceManager.getPluginImage("jbehave-eclipse-plugin", "icons/jbehave-plugin-logo.png"));
         
-        Label lblJbehaveEclipsePlugin = new Label(container, SWT.NONE);
-        lblJbehaveEclipsePlugin.setText(bundle.getString("jbehavePreferencePage.title"));
+        Label lblTitle = new Label(container, SWT.NONE);
+        lblTitle.setText(bundle.getString("pluginPreferencePage.title"));
         
         Label lblVersion = new Label(container, SWT.NONE);
-        String versionPattern = bundle.getString("jbehavePreferencePage.version");
+        String versionPattern = bundle.getString("pluginPreferencePage.version");
         lblVersion.setText(MessageFormat.format(versionPattern, Activator.getDefault().getVersion()));
         
         Link lblPluginSite = new Link(container, SWT.NONE);
         lblPluginSite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-        lblPluginSite.setText(bundle.getString("jbehavePreferencePage.pluginLink"));
+        lblPluginSite.setText(bundle.getString("pluginPreferencePage.pluginLink"));
         
         Link lblJbehaveSite = new Link(container, SWT.NONE);
         lblJbehaveSite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-        lblJbehaveSite.setText(bundle.getString("jbehavePreferencePage.jbehaveLink"));
+        lblJbehaveSite.setText(bundle.getString("pluginPreferencePage.jbehaveLink"));
         
         Link lblIntroductionPage = new Link(container, SWT.NONE);
         lblIntroductionPage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-        lblIntroductionPage.setText(bundle.getString("jbehavePreferencePage.prez"));
+        lblIntroductionPage.setText(bundle.getString("pluginPreferencePage.prez"));
 
         return container;
     }

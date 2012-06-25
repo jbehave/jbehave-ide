@@ -34,7 +34,7 @@ public class LoggerPreferencePage extends PropertyPage implements org.eclipse.ui
      * Create the property page.
      */
     public LoggerPreferencePage() {
-        setTitle("Configure the Console Logger");
+        setTitle("Configure the Logger levels");
         setDescription("Configure the level threshold of the loggers");
     }
 

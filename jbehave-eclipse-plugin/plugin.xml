@@ -103,7 +103,7 @@
 
     <extension point="org.eclipse.ui.preferencePages">
     	<page
-            class="org.jbehave.eclipse.preferences.JBehavePluginPreferencePage"
+            class="org.jbehave.eclipse.preferences.PluginPreferencePage"
             id="org.jbehave.eclipse.preferences"
             name="JBehave">
       	</page>
@@ -111,13 +111,13 @@
             category="org.jbehave.eclipse.preferences"
          	class="org.jbehave.eclipse.preferences.EditorColorPreferencePage"
           	id="org.jbehave.eclipse.preferences.editor"
-          	name="Story Editor">
+          	name="Editor Themes">
         </page>
         <page
             category="org.jbehave.eclipse.preferences"
          	class="org.jbehave.eclipse.preferences.ProjectPreferencePage"
           	id="org.jbehave.eclipse.preferences.project"
-          	name="Project settings">
+          	name="Project Settings">
         </page>
         <page
             category="org.jbehave.eclipse.preferences"
@@ -129,7 +129,7 @@
             category="org.jbehave.eclipse.preferences"
             class="org.jbehave.eclipse.preferences.LoggerPreferencePage"
             id="org.jbehave.eclipse.preferences.logger"
-            name="Logger &amp; Console">
+            name="Logger Levels">
       	</page>      	
     </extension>
  
@@ -141,7 +141,7 @@
 
 	<extension point="org.eclipse.ui.propertyPages">
 	  <page
-            class="org.jbehave.eclipse.preferences.JBehavePluginPreferencePage"
+            class="org.jbehave.eclipse.preferences.PluginPreferencePage"
             id="org.jbehave.eclipse.properties"
             name="JBehave">
 		<enabledWhen>

@@ -115,6 +115,6 @@ public class StoryPart {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(ToStringStyle.SIMPLE_STYLE).append("locale", localizedStepSupport.getLocale()).append("content", content.replace("\n", "\\n")).toString();
+        return new ToStringBuilder(ToStringStyle.SHORT_PREFIX_STYLE).append("locale", localizedStepSupport.getLocale()).append("content", content.replace("\n", "\\n")).toString();
     }
 }
