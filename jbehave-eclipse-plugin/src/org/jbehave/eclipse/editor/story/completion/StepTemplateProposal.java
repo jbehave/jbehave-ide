@@ -11,7 +11,7 @@ import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.WeightedCandidateStep;
+import org.jbehave.eclipse.step.WeightedStep;
 
 public class StepTemplateProposal extends TemplateProposal implements 
         ICompletionProposalExtension4, ICompletionProposalExtension5,
@@ -20,21 +20,21 @@ public class StepTemplateProposal extends TemplateProposal implements
     private final LocalizedStepSupport jbehaveProject;
     private final String complete;
     private final String label;
-    private final WeightedCandidateStep weightedCandidateStep;
+    private final WeightedStep weightedStep;
 
     public StepTemplateProposal(
             LocalizedStepSupport jbehaveProject, //
             Template template, TemplateContext context, IRegion region, 
-            String complete, String label, WeightedCandidateStep weightedCandidateStep) {
+            String complete, String label, WeightedStep weightedStep) {
         super(template, context, region, null, 0);
         this.jbehaveProject = jbehaveProject;
         this.complete = complete;
         this.label = label;
-        this.weightedCandidateStep = weightedCandidateStep;
+        this.weightedStep = weightedStep;
     }
     
     @Override
-    public LocalizedStepSupport getJBehaveProject() {
+    public LocalizedStepSupport getLocalizedStepSupport() {
         return jbehaveProject;
     }
     
@@ -50,11 +50,11 @@ public class StepTemplateProposal extends TemplateProposal implements
     }
 
     /* (non-Javadoc)
-     * @see org.jbehave.eclipse.editor.story.completion.StepCompletionProposalMixin.Trait#getWeightedCandidateStep()
+     * @see org.jbehave.eclipse.editor.story.completion.StepCompletionProposalMixin.Trait#getWeightedStep()
      */
     @Override
-    public WeightedCandidateStep getWeightedCandidateStep() {
-        return weightedCandidateStep;
+    public WeightedStep getWeightedStep() {
+        return weightedStep;
     }
 
     /* (non-Javadoc)

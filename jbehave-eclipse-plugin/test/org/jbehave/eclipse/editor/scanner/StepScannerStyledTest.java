@@ -19,7 +19,7 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
 import org.jbehave.eclipse.util.Visitor;
 import org.junit.Before;
@@ -42,7 +42,7 @@ public class StepScannerStyledTest {
     private StepScannerStyled scanner;
     private Document document;
     private StepLocator stepLocator;
-    private PotentialStep potentialStep;
+    private StepCandidate candidate;
     private LocalizedStepSupport localizedStepSupport;
     private JBehaveProject jbehaveProject;
 
@@ -61,11 +61,11 @@ public class StepScannerStyledTest {
             @SuppressWarnings("unchecked")
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
-                Visitor<PotentialStep, ?> visitor = (Visitor<PotentialStep, ?>)invocation.getArguments()[0];
-                visitor.visit(potentialStep);
+                Visitor<StepCandidate, ?> visitor = (Visitor<StepCandidate, ?>)invocation.getArguments()[0];
+                visitor.visit(candidate);
                 return null;
             }
-        }).when(jbehaveProject).traverseSteps(Mockito.<Visitor<PotentialStep, ?>>any());
+        }).when(jbehaveProject).traverseSteps(Mockito.<Visitor<StepCandidate, ?>>any());
         
         scanner = new StepScannerStyled(jbehaveProject, textAttributeProvider) {
             @Override
@@ -76,16 +76,16 @@ public class StepScannerStyledTest {
         document = new Document(GIVEN1);
         IMethod method = null;
         IAnnotation annotation = null;
-        potentialStep = new PotentialStep(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
+        candidate = new StepCandidate(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
     }
     
     @Test
     public void useCase_ex1() {
-        when(stepLocator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<PotentialStep>() {
+        when(stepLocator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<StepCandidate>() {
             @Override
-            public PotentialStep answer(InvocationOnMock invocation) throws Throwable {
+            public StepCandidate answer(InvocationOnMock invocation) throws Throwable {
                 System.out.println("StepScannerStyledTest.useCase_ex1(" + invocation + ")");
-                return potentialStep;
+                return candidate;
             }
         });
         

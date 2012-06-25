@@ -14,9 +14,9 @@ import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
-import org.jbehave.eclipse.util.ParametrizedString;
-import org.jbehave.eclipse.util.ParametrizedString.WeightChain;
+import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.step.ParametrizedStep;
+import org.jbehave.eclipse.step.ParametrizedStep.WeightChain;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,8 +49,8 @@ public class ContentWithIgnorableEmitterTest {
             "<C>" + NL + "!-- Other comment" + NL + "</C>";
     
     private StoryPart storyPart;
-    private PotentialStep potentialStep;
-    private ParametrizedString pString;
+    private StepCandidate candidate;
+    private ParametrizedStep parametrizedStep;
     private Collector collector;
 
     private LocalizedStepSupport localizedStepSupport;
@@ -62,8 +62,8 @@ public class ContentWithIgnorableEmitterTest {
         
         IMethod method = null;
         IAnnotation annotation = null;
-        potentialStep = new PotentialStep(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
-        pString = potentialStep.getParametrizedString();
+        candidate = new StepCandidate(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
+        parametrizedStep = candidate.getParametrizedStep();
         
         collector = new Collector();
     }
@@ -77,10 +77,10 @@ public class ContentWithIgnorableEmitterTest {
         String input = emitter.contentWithoutIgnorables();
         
         int offset = 0;
-        WeightChain chain = pString.calculateWeightChain(input);
+        WeightChain chain = parametrizedStep.calculateWeightChain(input);
         List<String> chainTokens = chain.tokenize();
         for(int i=0;i<chainTokens.size();i++) {
-            org.jbehave.eclipse.util.ParametrizedString.Token pToken = pString.getToken(i);
+            org.jbehave.eclipse.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
             // be aware that the token length can be shorter than the content length
             // because content can also contain comment :)
             String content = chainTokens.get(i);
@@ -107,10 +107,10 @@ public class ContentWithIgnorableEmitterTest {
         String input = emitter.contentWithoutIgnorables();
         
         int offset = 0;
-        WeightChain chain = pString.calculateWeightChain(input);
+        WeightChain chain = parametrizedStep.calculateWeightChain(input);
         List<String> chainTokens = chain.tokenize();
         for(int i=0;i<chainTokens.size();i++) {
-            org.jbehave.eclipse.util.ParametrizedString.Token pToken = pString.getToken(i);
+            org.jbehave.eclipse.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
             // be aware that the token length can be shorter than the content length
             // because content can also contain comment :)
             String content = chainTokens.get(i);

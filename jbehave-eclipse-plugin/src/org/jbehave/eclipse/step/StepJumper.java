@@ -16,10 +16,10 @@ import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.util.Ref;
 import org.jbehave.eclipse.util.Strings;
 
-public class StepUtils {
+public class StepJumper {
     
     private JBehaveProject jbehaveProject;
-    public StepUtils(JBehaveProject jbehaveProject) {
+    public StepJumper(JBehaveProject jbehaveProject) {
         super();
         this.jbehaveProject = jbehaveProject;
     }

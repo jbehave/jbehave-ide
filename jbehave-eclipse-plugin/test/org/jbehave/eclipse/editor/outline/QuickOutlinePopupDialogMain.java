@@ -15,28 +15,28 @@ import org.eclipse.swt.widgets.Shell;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.editor.story.StoryEditor;
 import org.jbehave.eclipse.editor.story.outline.QuickOutlinePopupDialog;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.util.New;
 
 public class QuickOutlinePopupDialogMain {
     public static void main(String[] args) {
-        List<PotentialStep> steps = New.arrayList();
-        steps.add(new PotentialStep(null, "$", null, null, StepType.GIVEN, "a user named $username", 0));
-        steps.add(new PotentialStep(null, "$", null, null, StepType.WHEN, "the user's firstname is changed to $firstname", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.WHEN, "the user's lastname is changed to $lastname", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.WHEN, "the user's login is changed to $login", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.WHEN, "the user clicks on $button button", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the '$password' field becomes '$color'", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the page title is '$title'", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the user is logged", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.GIVEN, "the account balance is $amount", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.GIVEN, "the card is valid", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.GIVEN, "the machine contains enough money", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.WHEN, "the Account Holder requests $amount", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the ATM should not dispense any money", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the ATM should say there are insufficient funds", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the account balance should be $amount", 0));
-        steps.add(new PotentialStep(null, "$", null, null,StepType.THEN, "the card should be returned", 0));
+        List<StepCandidate> steps = New.arrayList();
+        steps.add(new StepCandidate(null, "$", null, null, StepType.GIVEN, "a user named $username", 0));
+        steps.add(new StepCandidate(null, "$", null, null, StepType.WHEN, "the user's firstname is changed to $firstname", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.WHEN, "the user's lastname is changed to $lastname", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.WHEN, "the user's login is changed to $login", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.WHEN, "the user clicks on $button button", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the '$password' field becomes '$color'", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the page title is '$title'", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the user is logged", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.GIVEN, "the account balance is $amount", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.GIVEN, "the card is valid", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.GIVEN, "the machine contains enough money", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.WHEN, "the Account Holder requests $amount", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the ATM should not dispense any money", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the ATM should say there are insufficient funds", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the account balance should be $amount", 0));
+        steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the card should be returned", 0));
 
         final StoryEditor editor = mock(StoryEditor.class);
         when(editor.getPotentialSteps()).thenReturn(steps);

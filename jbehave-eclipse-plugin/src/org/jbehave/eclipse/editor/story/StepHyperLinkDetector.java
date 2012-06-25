@@ -10,7 +10,7 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.StepUtils;
+import org.jbehave.eclipse.step.StepJumper;
 import org.jbehave.eclipse.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.util.Ref;
 import org.slf4j.Logger;
@@ -71,7 +71,7 @@ public class StepHyperLinkDetector implements IHyperlinkDetector {
             @Override
             public void open() {
                 try {
-                    new StepUtils(jbehaveProject).jumpToDeclaration(viewer, step);
+                    new StepJumper(jbehaveProject).jumpToDeclaration(viewer, step);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }

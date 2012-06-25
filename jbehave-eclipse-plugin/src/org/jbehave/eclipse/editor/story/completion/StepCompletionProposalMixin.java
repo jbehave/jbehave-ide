@@ -12,22 +12,22 @@ import org.eclipse.swt.graphics.Image;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.ImageIds;
-import org.jbehave.eclipse.step.StepParser;
+import org.jbehave.eclipse.step.StepSupport;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
-import org.jbehave.eclipse.step.WeightedCandidateStep;
+import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.step.WeightedStep;
 
 public class StepCompletionProposalMixin {
 
     public interface Trait {
-        LocalizedStepSupport getJBehaveProject();
-        WeightedCandidateStep getWeightedCandidateStep();
+        LocalizedStepSupport getLocalizedStepSupport();
+        WeightedStep getWeightedStep();
         String getComplete();
         String getLabel();
     }
     
     public static StepType getStepType (Trait trait) {
-        return trait.getWeightedCandidateStep().potentialStep.stepType;
+        return trait.getWeightedStep().stepCandidate.stepType;
     }
     
     private static Pattern parameterPattern = Pattern.compile("\\$[a-zA-Z0-9\\-_]+");
@@ -37,7 +37,7 @@ public class StepCompletionProposalMixin {
         
         String label = trait.getLabel();
         // remove step keyword if any, information is provided through the icon
-        label = StepParser.extractStepSentence(trait.getJBehaveProject(), label);
+        label = StepSupport.extractStepSentence(trait.getLocalizedStepSupport(), label);
         
         Matcher matcher = parameterPattern.matcher(label);
         int prev = 0;
@@ -52,12 +52,11 @@ public class StepCompletionProposalMixin {
         if(prev<label.length())
             styledString.append(label.substring(prev));
         
-        //styledString.append(" (" + trait.getWeightedCandidateStep().potentialStep.fullStep() + ")", StyledString.QUALIFIER_STYLER);
         return styledString;
     }
     
     public static String getAdditionalHTML(Trait trait) {
-        PotentialStep pStep = trait.getWeightedCandidateStep().potentialStep;
+        StepCandidate pStep = trait.getWeightedStep().stepCandidate;
         
         String htmlString = "<b>" + pStep.fullStep() + "</b>";
         htmlString += "<br><br>";

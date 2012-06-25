@@ -3,15 +3,15 @@ package org.jbehave.eclipse.step;
 
 import fj.F;
 
-final class PotentialStepFilter extends F<PotentialStep, Boolean> {
+final class FilterByPriority extends F<StepCandidate, Boolean> {
     private final int maxPrio;
 
-    PotentialStepFilter(int maxPrio) {
+    FilterByPriority(int maxPrio) {
         this.maxPrio = maxPrio;
     }
 
     @Override
-    public Boolean f(PotentialStep pStep) {
+    public Boolean f(StepCandidate pStep) {
         return maxPrio == pStep.priority;
     }
 }

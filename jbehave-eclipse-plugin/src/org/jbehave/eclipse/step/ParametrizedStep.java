@@ -1,13 +1,15 @@
-package org.jbehave.eclipse.util;
+package org.jbehave.eclipse.step;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.jbehave.eclipse.util.FJ;
+
 import fj.F;
 
-public class ParametrizedString {
+public class ParametrizedStep {
     
     private static Pattern compileParameterPattern(String parameterPrefix) {
         return Pattern.compile("(\\" + parameterPrefix + "\\w*)(\\W|\\Z)", Pattern.DOTALL);
@@ -17,11 +19,11 @@ public class ParametrizedString {
     private final String content;
     private final String parameterPrefix;
     
-    public ParametrizedString(String content) {
+    public ParametrizedStep(String content) {
         this(content, "$");
     }
     
-    public ParametrizedString(String content, String parameterPrefix) {
+    public ParametrizedStep(String content, String parameterPrefix) {
         if(content==null)
             throw new IllegalArgumentException("Content cannot be null");
         this.content = content;
@@ -36,12 +38,12 @@ public class ParametrizedString {
     
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof ParametrizedString))
+        if(!(obj instanceof ParametrizedStep))
             return false;
-        return isSameAs((ParametrizedString)obj);
+        return isSameAs((ParametrizedStep)obj);
     }
     
-    public boolean isSameAs(ParametrizedString other) {
+    public boolean isSameAs(ParametrizedStep other) {
         return other.content.equals(content);
     }
     
@@ -135,7 +137,7 @@ public class ParametrizedString {
     }
     
     public static fj.F<Token,Boolean> isIdentifier() {
-        return new F<ParametrizedString.Token, Boolean>() {
+        return new F<ParametrizedStep.Token, Boolean>() {
             @Override
             public Boolean f(Token token) {
                 return token.isIdentifier;

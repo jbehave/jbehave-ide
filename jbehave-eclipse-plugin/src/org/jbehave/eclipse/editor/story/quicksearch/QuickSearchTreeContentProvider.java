@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 
 public class QuickSearchTreeContentProvider implements ITreeContentProvider {
 
@@ -22,7 +22,7 @@ public class QuickSearchTreeContentProvider implements ITreeContentProvider {
     public Object[] getChildren(Object parent) {
         if(parent instanceof List) {
             @SuppressWarnings("unchecked")
-            List<PotentialStep> candidates = (List<PotentialStep>)parent;
+            List<StepCandidate> candidates = (List<StepCandidate>)parent;
             return candidates.toArray();
         }
         return NO_CHILDREN;
@@ -42,7 +42,7 @@ public class QuickSearchTreeContentProvider implements ITreeContentProvider {
     public boolean hasChildren(Object parent) {
         if(parent instanceof List) {
             @SuppressWarnings("unchecked")
-            List<PotentialStep> candidates = (List<PotentialStep>)parent;
+            List<StepCandidate> candidates = (List<StepCandidate>)parent;
             return !candidates.isEmpty();
         }
         return false;

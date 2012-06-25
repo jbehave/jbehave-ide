@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.step.StepUtils;
+import org.jbehave.eclipse.step.StepJumper;
 import org.jbehave.eclipse.util.New;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -298,7 +298,7 @@ public class StoryAnnotationHover implements IAnnotationHover, IAnnotationHoverE
                 if(!initial) {
                     try {
                         String qname = removeStart(event.location, "file:///");
-                        new StepUtils(getProject()).jumpToMethod(qname);
+                        new StepJumper(getProject()).jumpToMethod(qname);
                     } catch (PartInitException e) {
                         log.error("Failed to jump to <" + event.location + ">", e);
                     } catch (JavaModelException e) {

@@ -7,7 +7,7 @@ import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.util.StringEnhancer;
 import org.jbehave.eclipse.util.Strings;
 
-public class StepParser {
+public class StepSupport {
     
     public static boolean isTheStartIgnoringCaseOfStep(LocalizedStepSupport localizedStepSupport, String line) {
         return enhanceString(line).isTheStartIgnoringCaseOfOneOf(//

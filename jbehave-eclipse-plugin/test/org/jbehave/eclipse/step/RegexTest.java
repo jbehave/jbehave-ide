@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.util;
+package org.jbehave.eclipse.step;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

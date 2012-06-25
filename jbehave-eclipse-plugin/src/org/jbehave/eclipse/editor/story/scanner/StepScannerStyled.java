@@ -12,13 +12,13 @@ import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.step.StepParser;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.ParametrizedStep;
+import org.jbehave.eclipse.step.StepSupport;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
+import org.jbehave.eclipse.step.ParametrizedStep.WeightChain;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.eclipse.util.ParametrizedString;
 import org.jbehave.eclipse.util.Strings;
-import org.jbehave.eclipse.util.ParametrizedString.WeightChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +78,7 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
         log.debug("Parsing step, offset: {}, length: {}, content: <{}>", 
                 o(initialOffset, stepContent.length(), f(stepContent)));
         int offset = initialOffset;
-        int stepSep = StepParser.stepSentenceIndex(getLocalizedStepSupport(), stepContent);
+        int stepSep = StepSupport.stepSentenceIndex(getLocalizedStepSupport(), stepContent);
          
         emit(keywordToken, offset, stepSep);
         offset += stepSep;
@@ -92,22 +92,22 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
         String cleanedAfterKeyword = emitter.contentWithoutIgnorables();
         String cleanedStepSentence = Strings.removeTrailingNewlines(cleanedAfterKeyword);
         
-        PotentialStep potentialStep = getStepLocator().findFirstStep(cleanedStepSentence);
-        if(potentialStep==null) {
+        StepCandidate candidate = getStepLocator().findFirstStep(cleanedStepSentence);
+        if(candidate==null) {
             log.debug("No step found");
             emitVariables(emitter, cleanedAfterKeyword, offset);
             offset += rawAfterKeyword.length();
         }
-        else if(potentialStep.hasVariable()) {
+        else if(candidate.hasParameters()) {
 
-            ParametrizedString pString = potentialStep.getParametrizedString();
+            ParametrizedStep pString = candidate.getParametrizedStep();
             WeightChain chain = pString.calculateWeightChain(cleanedStepSentence);
             List<String> chainTokens = chain.tokenize();
             
             log.debug("Step found with variable {} tokens in chain", chainTokens.size());
 
             for(int i=0;i<chainTokens.size();i++) {
-                org.jbehave.eclipse.util.ParametrizedString.Token pToken = pString.getToken(i);
+                org.jbehave.eclipse.step.ParametrizedStep.Token pToken = pString.getToken(i);
                 String content = chainTokens.get(i);
                 
                 log.debug("Token content - length: {}, content: <{}>",

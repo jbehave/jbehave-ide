@@ -56,8 +56,8 @@ import org.jbehave.eclipse.jface.TemplateUtils;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.preferences.PreferenceConstants;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
-import org.jbehave.eclipse.step.StepUtils;
+import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.step.StepJumper;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.eclipse.textstyle.TextStylePreferences;
 import org.jbehave.eclipse.util.Runnables;
@@ -265,17 +265,17 @@ public class StoryEditor extends TextEditor {
 
     }
 
-    public Iterable<PotentialStep> getPotentialSteps() {
-        Visitor<PotentialStep, PotentialStep> collector = new Visitor<PotentialStep, PotentialStep>() {
+    public Iterable<StepCandidate> getPotentialSteps() {
+        Visitor<StepCandidate, StepCandidate> collector = new Visitor<StepCandidate, StepCandidate>() {
             @Override
-            public void visit(PotentialStep step) {
+            public void visit(StepCandidate step) {
                 add(step);
             }
         };
         try {
             getJBehaveProject().traverseSteps(collector);
         } catch (JavaModelException e) {
-            Activator.logError("Failed to collect PotentialStep", e);
+            Activator.logError("Failed to collect StepCandidate", e);
         }
         return collector.getFounds();
     }
@@ -285,7 +285,7 @@ public class StoryEditor extends TextEditor {
         return JBehaveProjectRegistry.get().getOrCreateProject(project);
     }
 
-    public void insert(PotentialStep pStep) {
+    public void insert(StepCandidate pStep) {
         Point point = getSourceViewer().getSelectedRange();
         try {
             getInputDocument().replace(point.x, 0, pStep.fullStep() + "\n");
@@ -294,7 +294,7 @@ public class StoryEditor extends TextEditor {
         }
     }
 
-    public void insertAsTemplate(PotentialStep pStep) {
+    public void insertAsTemplate(StepCandidate pStep) {
         IDocument document = getInputDocument();
 
         Point point = getSourceViewer().getSelectedRange();
@@ -315,7 +315,7 @@ public class StoryEditor extends TextEditor {
 
     public void jumpToMethod() {
         try {
-            new StepUtils(getJBehaveProject()).jumpToSelectionDeclaration(getSourceViewer());
+            new StepJumper(getJBehaveProject()).jumpToSelectionDeclaration(getSourceViewer());
         } catch (PartInitException e) {
             Activator.logError("Failed to jump to method", e);
         } catch (JavaModelException e) {

@@ -23,8 +23,8 @@ import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.jface.MarkData;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.step.PotentialStep;
-import org.jbehave.eclipse.step.PotentialStepTransformer;
+import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.step.TransformByPriority;
 import org.jbehave.eclipse.step.StepLocator;
 import org.jbehave.eclipse.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.util.New;
@@ -233,9 +233,9 @@ public class MarkingStoryValidator {
         log.debug("Validating steps");
         
         StepLocator locator = project.getStepLocator();
-        locator.traverseSteps(new Visitor<PotentialStep, Object>() {
+        locator.traverseSteps(new Visitor<StepCandidate, Object>() {
             @Override
-            public void visit(PotentialStep candidate) {
+            public void visit(StepCandidate candidate) {
                 log.debug("Evaluating candidate: <{}>", candidate);
                 for (Part part : steps) {
                     part.evaluateCandidate(candidate);
@@ -247,14 +247,14 @@ public class MarkingStoryValidator {
 
         for (Part part : steps) {
             String key = part.extractStepSentenceAndRemoveTrailingNewlines();
-            ConcurrentLinkedQueue<PotentialStep> candidates = part.getCandidates();
+            ConcurrentLinkedQueue<StepCandidate> candidates = part.getCandidates();
             int count = candidates.size();
             log.debug("#" + count + "result(s) found for >>" + Strings.escapeNL(key) + "<<");
             if (count == 0)
                 part.addErrorMark(Marks.Code.NoMatchingStep, "No step is matching <" + key + ">");
             else if (count > 1) {
                 
-                fj.data.List<Integer> collectedPrios = iterableList(candidates).map(new PotentialStepTransformer());
+                fj.data.List<Integer> collectedPrios = iterableList(candidates).map(new TransformByPriority());
                 int max = collectedPrios.maximum(Ord.intOrd);
                 int countWithMax = collectedPrios.filter(Equal.intEqual.eq(max)).length();
                 if (countWithMax>1) {
@@ -273,7 +273,7 @@ public class MarkingStoryValidator {
     
     class Part {
         private final ConcurrentLinkedQueue<MarkData> marks = New.concurrentLinkedQueue();
-        private final ConcurrentLinkedQueue<PotentialStep> candidates = New.concurrentLinkedQueue();
+        private final ConcurrentLinkedQueue<StepCandidate> candidates = New.concurrentLinkedQueue();
         private final StoryPart storyPart;
 
         private Part(StoryPart storyPart) {
@@ -282,7 +282,7 @@ public class MarkingStoryValidator {
             computeExtractStepSentenceAndRemoveTrailingNewlines();
         }
         
-        public void evaluateCandidate(PotentialStep candidate) {
+        public void evaluateCandidate(StepCandidate candidate) {
             String pattern = extractStepSentenceAndRemoveTrailingNewlines();
             Keyword type = partType();
             log.debug("Candidate evaluated against part {}", storyPart);
@@ -298,12 +298,12 @@ public class MarkingStoryValidator {
             }
         }
         
-        public ConcurrentLinkedQueue<PotentialStep> getCandidates() {
+        public ConcurrentLinkedQueue<StepCandidate> getCandidates() {
             return candidates;
         }
 
-        private void addCandidate(PotentialStep potentialStep) {
-            candidates.add(potentialStep);
+        private void addCandidate(StepCandidate candidate) {
+            candidates.add(candidate);
         }
 
         private Keyword partType() {

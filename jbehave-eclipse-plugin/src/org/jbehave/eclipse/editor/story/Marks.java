@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.eclipse.core.resources.IMarker;
 import org.jbehave.eclipse.jface.JDTUtils;
 import org.jbehave.eclipse.jface.MarkData;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 
 public class Marks {
     public static final String ERROR_CODE = "errorCode";
@@ -48,10 +48,10 @@ public class Marks {
         return Code.lookup(marker.getAttribute(ERROR_CODE, -1), Code.Unknown);
     }
 
-    public static MarkData putStepsAsHtml(MarkData mark, Iterable<PotentialStep> candidates) {
+    public static MarkData putStepsAsHtml(MarkData mark, Iterable<StepCandidate> candidates) {
         StringBuilder builder = new StringBuilder();
         builder.append("<ul>");
-        for(PotentialStep pStep : candidates) {
+        for(StepCandidate pStep : candidates) {
             String qualifiedName = JDTUtils.formatQualifiedName(pStep.method);
             builder
                 .append("<li>")

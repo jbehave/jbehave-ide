@@ -3,7 +3,7 @@ package org.jbehave.eclipse.parser;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.step.StepParser;
+import org.jbehave.eclipse.step.StepSupport;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.jbehave.eclipse.util.CharTree;
 
@@ -40,14 +40,14 @@ public class StoryPart {
      * @return
      */
     public String extractStepSentence() {
-        return StepParser.extractStepSentence(localizedStepSupport, getContent());
+        return StepSupport.extractStepSentence(localizedStepSupport, getContent());
     }
     
     /**
      * @see #isStepPart()
      */
     public String extractStepSentenceAndRemoveTrailingNewlines() {
-        return StepParser.extractStepSentenceAndRemoveTrailingNewlines(localizedStepSupport, getContent());
+        return StepSupport.extractStepSentenceAndRemoveTrailingNewlines(localizedStepSupport, getContent());
     }
     
     /**

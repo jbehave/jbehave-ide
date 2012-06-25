@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.jbehave.eclipse.ImageIds;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.util.TextProvider;
 
 public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider implements TextProvider {
@@ -33,7 +33,7 @@ public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider impl
             cell.setText("/");
             return;
         }
-        PotentialStep pStep = (PotentialStep) element;
+        StepCandidate pStep = (StepCandidate) element;
         defineText(pStep, cell);
         defineImage(pStep, cell);
         
@@ -49,10 +49,10 @@ public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider impl
     }
     
     public String textOf(Object element) {
-        return ((PotentialStep)element).stepPattern;
+        return ((StepCandidate)element).stepPattern;
     }
 
-    private void defineText(PotentialStep pStep, ViewerCell cell) {
+    private void defineText(StepCandidate pStep, ViewerCell cell) {
         StyledString styledString = new StyledString(textOf(pStep));
         
         if(displayDecoration) {
@@ -67,7 +67,7 @@ public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider impl
         cell.setStyleRanges(styledString.getStyleRanges());
     }
 
-    private void defineImage(PotentialStep pStep, ViewerCell cell) {
+    private void defineImage(StepCandidate pStep, ViewerCell cell) {
         String key = null;
         switch (pStep.stepType) {
             case GIVEN:

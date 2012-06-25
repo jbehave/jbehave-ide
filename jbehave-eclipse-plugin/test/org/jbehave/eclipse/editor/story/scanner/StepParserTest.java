@@ -18,7 +18,7 @@ import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.junit.Before;
@@ -87,16 +87,16 @@ public class StepParserTest {
         return localizedSupport;
     }
 
-    private static PotentialStep givenStep(String content) {
-        return new PotentialStep(localizedSupport, "$", null, null, StepType.GIVEN, content, 0);
+    private static StepCandidate givenStep(String content) {
+        return new StepCandidate(localizedSupport, "$", null, null, StepType.GIVEN, content, 0);
     }
     
-    private static PotentialStep whenStep(String content) {
-        return new PotentialStep(localizedSupport, "$", null, null, StepType.WHEN, content, 0);
+    private static StepCandidate whenStep(String content) {
+        return new StepCandidate(localizedSupport, "$", null, null, StepType.WHEN, content, 0);
     }
     
-    private static PotentialStep thenStep(String content) {
-        return new PotentialStep(localizedSupport, "$", null, null, StepType.THEN, content, 0);
+    private static StepCandidate thenStep(String content) {
+        return new StepCandidate(localizedSupport, "$", null, null, StepType.THEN, content, 0);
     }
     
     @Test
@@ -135,7 +135,7 @@ public class StepParserTest {
     }
     @Test
     public void usecase_ex2_light() throws Exception {
-        PotentialStep user = givenStep("a user named $username");
+        StepCandidate user = givenStep("a user named $username");
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx03-light.story"));
         when(locator.findFirstStep("a user named $username")).thenReturn(user);
@@ -159,9 +159,9 @@ public class StepParserTest {
     
     @Test
     public void usecase_ex2() throws Exception {
-        PotentialStep user = givenStep("a user named $username");
-        PotentialStep credits = whenStep("user credits is $amount dollars");
-        PotentialStep clicks = whenStep("user clicks on $button button");
+        StepCandidate user = givenStep("a user named $username");
+        StepCandidate credits = whenStep("user credits is $amount dollars");
+        StepCandidate clicks = whenStep("user clicks on $button button");
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx03.story"));
         when(locator.findFirstStep("a user named $username")).thenReturn(user);
@@ -204,8 +204,8 @@ public class StepParserTest {
     
     @Test
     public void usecase_ex3 () throws Exception {
-        PotentialStep user = givenStep("a user named $username");
-        PotentialStep credits = whenStep("user credits is $amount dollars");
+        StepCandidate user = givenStep("a user named $username");
+        StepCandidate credits = whenStep("user credits is $amount dollars");
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx03.story"));
         when(locator.findFirstStep("a user named $username")).thenReturn(user);
@@ -247,12 +247,12 @@ public class StepParserTest {
     
     @Test
     public void usecase_ex04_exampleTable () throws Exception {
-        final PotentialStep user = givenStep("a new account named 'networkAgent' with the following properties (properties not set will be completed) $exampleTable");
+        final StepCandidate user = givenStep("a new account named 'networkAgent' with the following properties (properties not set will be completed) $exampleTable");
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx04.story"));
-        when(locator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<PotentialStep>() {
+        when(locator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<StepCandidate>() {
             @Override
-            public PotentialStep answer(InvocationOnMock invocation) throws Throwable {
+            public StepCandidate answer(InvocationOnMock invocation) throws Throwable {
                 String searched = (String) invocation.getArguments()[0];
                 if(searched.startsWith("a new account named 'networkAgent' with the following properties"))
                     return user;
@@ -293,12 +293,12 @@ public class StepParserTest {
     
     @Test
     public void usecase_ex05_exampleTable () throws Exception {
-        final PotentialStep user = givenStep("a new account named 'networkAgent' with the following properties (properties not set will be completed) $exampleTable");
+        final StepCandidate user = givenStep("a new account named 'networkAgent' with the following properties (properties not set will be completed) $exampleTable");
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/data/UseCaseEx06-exampletable.story"));
-        when(locator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<PotentialStep>() {
+        when(locator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<StepCandidate>() {
             @Override
-            public PotentialStep answer(InvocationOnMock invocation) throws Throwable {
+            public StepCandidate answer(InvocationOnMock invocation) throws Throwable {
                 String searched = (String) invocation.getArguments()[0];
                 if(searched.startsWith("a new account named 'networkAgent' with the following properties"))
                     return user;
@@ -369,7 +369,7 @@ public class StepParserTest {
     @Test
     @Ignore
     public void usecase_ex5() throws Exception {
-        PotentialStep seeHomePage = thenStep("agent see the application home page");
+        StepCandidate seeHomePage = thenStep("agent see the application home page");
         when(locator.findFirstStep("agent see the application home page")).thenReturn(seeHomePage);
         
         storyAsText = IOUtils.toString(getClass().getResourceAsStream("/domain/i_can_login_using_parameters_table.story"));

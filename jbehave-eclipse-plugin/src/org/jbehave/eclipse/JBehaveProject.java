@@ -31,7 +31,7 @@ import org.jbehave.eclipse.jdt.methodcache.MethodPerPackageFragmentRootCache;
 import org.jbehave.eclipse.preferences.ClassScannerPreferences;
 import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
 import org.jbehave.eclipse.util.C2;
 import org.jbehave.eclipse.util.LocaleUtils;
@@ -50,7 +50,7 @@ public class JBehaveProject {
 
     private IProject project;
     //
-    private MethodPerPackageFragmentRootCache<PotentialStep> cache;
+    private MethodPerPackageFragmentRootCache<StepCandidate> cache;
     //
     private ReadWriteLock rwLock = new ReentrantReadWriteLock();
     //
@@ -68,7 +68,7 @@ public class JBehaveProject {
 
     public JBehaveProject(IProject project) {
         this.project = project;
-        this.cache = new MethodPerPackageFragmentRootCache<PotentialStep>(newCallback());
+        this.cache = new MethodPerPackageFragmentRootCache<StepCandidate>(newCallback());
         this.localizedStepSupport = new LocalizedStepSupport();
         initializeProjectPreferencesAndListener(project);
         initializeClassScannerPreferencesAndListener(project);
@@ -140,9 +140,9 @@ public class JBehaveProject {
         return getLocalizedStepSupport().getLocale();
     }
 
-    private C2<IMethod, Container<PotentialStep>> newCallback() {
-        return new C2<IMethod, Container<PotentialStep>>() {
-            public void op(IMethod method, Container<PotentialStep> container) {
+    private C2<IMethod, Container<StepCandidate>> newCallback() {
+        return new C2<IMethod, Container<StepCandidate>>() {
+            public void op(IMethod method, Container<StepCandidate> container) {
                 try {
                     extractMethodSteps(method, container);
                 } catch (JavaModelException e) {
@@ -167,7 +167,7 @@ public class JBehaveProject {
         return new StepLocator(this);
     }
 
-    public void traverseSteps(Visitor<PotentialStep, ?> visitor) throws JavaModelException {
+    public void traverseSteps(Visitor<StepCandidate, ?> visitor) throws JavaModelException {
         boolean rAcquired = true;
         rwLock.readLock().lock();
         try {
@@ -247,7 +247,7 @@ public class JBehaveProject {
 
     }
 
-    private void extractMethodSteps(IMethod method, Container<PotentialStep> container) throws JavaModelException {
+    private void extractMethodSteps(IMethod method, Container<StepCandidate> container) throws JavaModelException {
         String parameterPrefix = this.parameterPrefix;
         StepType stepType = null;
         for (IAnnotation annotation : method.getAnnotations()) {
@@ -297,7 +297,7 @@ public class JBehaveProject {
                 for (String stepPattern : patterns) {
                     if (stepPattern == null)
                         continue;
-                    container.add(new PotentialStep(//
+                    container.add(new StepCandidate(//
                             getLocalizedStepSupport(),//
                             parameterPrefix,//
                             method, //

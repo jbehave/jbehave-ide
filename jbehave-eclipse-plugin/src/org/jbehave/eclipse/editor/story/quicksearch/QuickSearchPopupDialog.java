@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.PlatformUI;
 import org.jbehave.eclipse.editor.story.PatternViewFilter;
 import org.jbehave.eclipse.editor.story.StoryEditor;
-import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.util.Lists;
 import org.jbehave.eclipse.util.Strings;
 import org.jbehave.eclipse.util.TextProvider;
@@ -292,7 +292,7 @@ public class QuickSearchPopupDialog extends PopupDialog {
     
     private void insertSelectedElement() {
         Object selectedElement = getSelectedElement();
-        editor.insertAsTemplate((PotentialStep)selectedElement);
+        editor.insertAsTemplate((StepCandidate)selectedElement);
         close();
     }
 
