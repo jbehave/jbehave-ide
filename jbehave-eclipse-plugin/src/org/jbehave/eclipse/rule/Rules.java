@@ -5,7 +5,7 @@ import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.SingleLineRule;
-import org.jbehave.util.BidirectionalReader;
+import org.jbehave.eclipse.util.BidirectionalReader;
 
 public class Rules {
     

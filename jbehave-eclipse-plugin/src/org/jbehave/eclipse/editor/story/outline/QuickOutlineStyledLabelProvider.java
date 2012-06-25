@@ -8,7 +8,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.jbehave.eclipse.ImageIds;
 import org.jbehave.eclipse.editor.story.StoryPartition;
-import org.jbehave.util.TextProvider;
+import org.jbehave.eclipse.util.TextProvider;
 
 public class QuickOutlineStyledLabelProvider extends StyledCellLabelProvider implements TextProvider {
     

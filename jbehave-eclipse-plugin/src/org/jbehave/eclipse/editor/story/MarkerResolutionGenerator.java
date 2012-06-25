@@ -8,7 +8,7 @@ import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
 import org.jbehave.eclipse.jface.UIUtils;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
 

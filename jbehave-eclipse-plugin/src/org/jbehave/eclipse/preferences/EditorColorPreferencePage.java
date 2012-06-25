@@ -43,7 +43,7 @@ import org.jbehave.eclipse.textstyle.TextStyleLabelProvider;
 import org.jbehave.eclipse.textstyle.TextStylePreferences;
 import org.jbehave.eclipse.textstyle.TextStyleTreeBuilder;
 import org.jbehave.eclipse.textstyle.TextStyleTreeContentProvider;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class EditorColorPreferencePage extends PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {
 

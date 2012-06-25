@@ -7,7 +7,7 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class TextAttributeProvider extends Observable {
     

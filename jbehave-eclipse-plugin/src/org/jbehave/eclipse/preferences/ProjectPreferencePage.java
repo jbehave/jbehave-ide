@@ -32,7 +32,7 @@ import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.KeywordImageRegistry;
-import org.jbehave.util.LocaleUtils;
+import org.jbehave.eclipse.util.LocaleUtils;
 import org.osgi.service.prefs.BackingStoreException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

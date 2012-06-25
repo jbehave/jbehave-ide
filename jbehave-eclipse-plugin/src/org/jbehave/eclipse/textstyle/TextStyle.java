@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.graphics.RGB;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class TextStyle {
 

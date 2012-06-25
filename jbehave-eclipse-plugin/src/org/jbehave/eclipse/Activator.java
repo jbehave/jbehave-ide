@@ -22,7 +22,7 @@ import org.jbehave.eclipse.console.JBehaveConsoleAppender;
 import org.jbehave.eclipse.editor.story.completion.StoryContextType;
 import org.jbehave.eclipse.preferences.LoggerEntry;
 import org.jbehave.eclipse.preferences.LoggerPreferences;
-import org.jbehave.util.ProcessGroup;
+import org.jbehave.eclipse.util.ProcessGroup;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.prefs.BackingStoreException;

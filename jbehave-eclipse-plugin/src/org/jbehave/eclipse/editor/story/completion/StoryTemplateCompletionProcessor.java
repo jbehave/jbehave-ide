@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.editor.story.completion;
 
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import java.util.List;
 import java.util.Locale;
@@ -25,7 +25,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

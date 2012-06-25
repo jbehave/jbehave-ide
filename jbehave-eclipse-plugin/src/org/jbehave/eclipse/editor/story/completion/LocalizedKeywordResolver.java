@@ -3,7 +3,7 @@ package org.jbehave.eclipse.editor.story.completion;
 import org.eclipse.jface.text.templates.SimpleTemplateVariableResolver;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.LocalizedStepSupport;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
 
 public class LocalizedKeywordResolver extends SimpleTemplateVariableResolver {
 

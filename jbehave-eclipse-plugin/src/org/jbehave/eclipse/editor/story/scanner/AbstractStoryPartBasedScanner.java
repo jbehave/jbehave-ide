@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.editor.story.scanner;
 
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import java.util.List;
 import java.util.Observable;
@@ -15,18 +15,18 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryPartVisitor;
+import org.jbehave.eclipse.parser.Constants.TokenizerCallback;
+import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter.Callback;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.eclipse.util.StoryPartDocumentUtils;
-import org.jbehave.parser.Constants;
-import org.jbehave.parser.ContentWithIgnorableEmitter;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.parser.StoryPartVisitor;
-import org.jbehave.parser.Constants.TokenizerCallback;
-import org.jbehave.parser.ContentWithIgnorableEmitter.Callback;
-import org.jbehave.util.New;
-import org.jbehave.util.Objects;
+import org.jbehave.eclipse.util.New;
+import org.jbehave.eclipse.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

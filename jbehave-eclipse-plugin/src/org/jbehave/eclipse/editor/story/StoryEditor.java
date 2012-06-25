@@ -40,8 +40,6 @@ import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectListener;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
-import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.editor.EditorActionDefinitionIds;
 import org.jbehave.eclipse.editor.EditorMessages;
 import org.jbehave.eclipse.editor.story.actions.JumpToDeclarationAction;
@@ -57,11 +55,13 @@ import org.jbehave.eclipse.jface.ProjectAwareFastPartitioner;
 import org.jbehave.eclipse.jface.TemplateUtils;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.preferences.PreferenceConstants;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepUtils;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.eclipse.textstyle.TextStylePreferences;
-import org.jbehave.eclipse.util.StepUtils;
-import org.jbehave.util.Runnables;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.util.Runnables;
+import org.jbehave.eclipse.util.Visitor;
 
 import fj.Effect;
 

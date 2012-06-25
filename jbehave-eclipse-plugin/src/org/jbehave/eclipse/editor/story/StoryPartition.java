@@ -3,7 +3,7 @@ package org.jbehave.eclipse.editor.story;
 import java.util.List;
 
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public enum StoryPartition {
 

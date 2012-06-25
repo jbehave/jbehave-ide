@@ -10,8 +10,8 @@ import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.util.WeightedCandidateStep;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.WeightedCandidateStep;
 
 public class StepTemplateProposal extends TemplateProposal implements 
         ICompletionProposalExtension4, ICompletionProposalExtension5,

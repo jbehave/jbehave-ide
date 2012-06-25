@@ -2,7 +2,7 @@ package org.jbehave.eclipse;
 
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.steps.StepType;
-import org.jbehave.util.Filter;
+import org.jbehave.eclipse.util.Filter;
 
 public enum Keyword {
     Meta {

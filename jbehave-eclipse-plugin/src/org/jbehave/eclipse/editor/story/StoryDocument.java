@@ -6,9 +6,9 @@ import java.util.Locale;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.parser.StoryParser;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.parser.StoryPartVisitor;
+import org.jbehave.eclipse.parser.StoryParser;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryPartVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

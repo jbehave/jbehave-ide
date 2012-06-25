@@ -3,7 +3,7 @@ package org.jbehave.eclipse.preferences;
 import static org.jbehave.eclipse.preferences.ClassScannerFilterEntry.filter;
 import static org.jbehave.eclipse.preferences.ClassScannerFilterEntry.toPatterns;
 import static org.jbehave.eclipse.preferences.ClassScannerFilterEntry.toSplittedPatterns;
-import static org.jbehave.util.FJ.listCollector;
+import static org.jbehave.eclipse.util.FJ.listCollector;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,8 +15,8 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences.IPreferenceChang
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.preferences.ClassScannerFilterEntry.ApplyOn;
-import org.jbehave.util.Bytes;
-import org.jbehave.util.StringMatcher;
+import org.jbehave.eclipse.util.Bytes;
+import org.jbehave.eclipse.util.StringMatcher;
 import org.osgi.service.prefs.BackingStoreException;
 
 import fj.Effect;

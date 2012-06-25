@@ -4,8 +4,8 @@ import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.parser.StoryPart;
 
 public class ScenarioScanner extends AbstractStoryPartBasedScanner {
     

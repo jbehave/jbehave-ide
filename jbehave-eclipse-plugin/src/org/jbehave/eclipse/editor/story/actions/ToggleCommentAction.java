@@ -14,7 +14,7 @@ import org.eclipse.ui.texteditor.TextEditorAction;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.story.StoryEditor;
-import org.jbehave.util.Strings;
+import org.jbehave.eclipse.util.Strings;
 
 import fj.Effect;
 

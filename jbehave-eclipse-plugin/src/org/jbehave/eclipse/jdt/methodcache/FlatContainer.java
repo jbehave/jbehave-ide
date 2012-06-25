@@ -6,7 +6,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

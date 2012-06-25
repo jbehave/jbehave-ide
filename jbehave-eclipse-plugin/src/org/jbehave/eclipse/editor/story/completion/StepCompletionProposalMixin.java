@@ -12,10 +12,10 @@ import org.eclipse.swt.graphics.Image;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.ImageIds;
-import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.PotentialStep;
-import org.jbehave.eclipse.util.LineParser;
-import org.jbehave.eclipse.util.WeightedCandidateStep;
+import org.jbehave.eclipse.step.StepParser;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.WeightedCandidateStep;
 
 public class StepCompletionProposalMixin {
 
@@ -37,7 +37,7 @@ public class StepCompletionProposalMixin {
         
         String label = trait.getLabel();
         // remove step keyword if any, information is provided through the icon
-        label = LineParser.extractStepSentence(trait.getJBehaveProject(), label);
+        label = StepParser.extractStepSentence(trait.getJBehaveProject(), label);
         
         Matcher matcher = parameterPattern.matcher(label);
         int prev = 0;

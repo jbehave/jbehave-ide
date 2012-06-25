@@ -13,10 +13,10 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.jbehave.core.steps.StepType;
-import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.editor.story.StoryEditor;
 import org.jbehave.eclipse.editor.story.outline.QuickOutlinePopupDialog;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.util.New;
 
 public class QuickOutlinePopupDialogMain {
     public static void main(String[] args) {

@@ -13,8 +13,8 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.jbehave.eclipse.jdt.methodcache.Containers.Factory;
-import org.jbehave.util.New;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.util.New;
+import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

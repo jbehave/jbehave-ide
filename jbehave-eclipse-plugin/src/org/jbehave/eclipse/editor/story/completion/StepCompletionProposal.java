@@ -12,8 +12,8 @@ import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
-import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.util.WeightedCandidateStep;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.WeightedCandidateStep;
 
 public class StepCompletionProposal implements ICompletionProposal,
     ICompletionProposalExtension4,    

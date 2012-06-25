@@ -13,7 +13,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.TextStyle;
-import org.jbehave.util.Strings;
+import org.jbehave.eclipse.util.Strings;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

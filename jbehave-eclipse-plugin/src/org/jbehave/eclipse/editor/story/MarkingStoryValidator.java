@@ -1,7 +1,7 @@
 package org.jbehave.eclipse.editor.story;
 
 import static fj.data.List.iterableList;
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import java.util.Iterator;
 import java.util.List;
@@ -20,17 +20,17 @@ import org.eclipse.jface.text.IDocument;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.jface.MarkData;
-import org.jbehave.eclipse.util.PotentialStepPrioTransformer;
-import org.jbehave.eclipse.util.StepLocator;
-import org.jbehave.eclipse.util.StoryPartDocumentUtils;
-import org.jbehave.parser.Constants;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.util.New;
-import org.jbehave.util.ProcessGroup;
-import org.jbehave.util.Strings;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.PotentialStepTransformer;
+import org.jbehave.eclipse.step.StepLocator;
+import org.jbehave.eclipse.step.StoryPartDocumentUtils;
+import org.jbehave.eclipse.util.New;
+import org.jbehave.eclipse.util.ProcessGroup;
+import org.jbehave.eclipse.util.Strings;
+import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -254,7 +254,7 @@ public class MarkingStoryValidator {
                 part.addErrorMark(Marks.Code.NoMatchingStep, "No step is matching <" + key + ">");
             else if (count > 1) {
                 
-                fj.data.List<Integer> collectedPrios = iterableList(candidates).map(new PotentialStepPrioTransformer());
+                fj.data.List<Integer> collectedPrios = iterableList(candidates).map(new PotentialStepTransformer());
                 int max = collectedPrios.maximum(Ord.intOrd);
                 int countWithMax = collectedPrios.filter(Equal.intEqual.eq(max)).length();
                 if (countWithMax>1) {

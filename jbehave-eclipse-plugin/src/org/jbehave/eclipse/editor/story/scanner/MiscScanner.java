@@ -11,10 +11,10 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.Constants.TokenizerCallback;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.parser.Constants;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.parser.Constants.TokenizerCallback;
 
 public class MiscScanner extends AbstractStoryPartBasedScanner {
     

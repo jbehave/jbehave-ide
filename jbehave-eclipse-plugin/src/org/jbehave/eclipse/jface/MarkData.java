@@ -9,7 +9,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.jbehave.eclipse.Activator;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class MarkData {
     private Integer lineNumber, columnNumber;

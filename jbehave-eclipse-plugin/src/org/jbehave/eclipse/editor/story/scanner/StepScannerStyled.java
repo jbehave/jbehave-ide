@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.editor.story.scanner;
 
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import java.util.List;
 
@@ -8,17 +8,17 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.step.StepParser;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepLocator;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.eclipse.util.LineParser;
-import org.jbehave.eclipse.util.StepLocator;
-import org.jbehave.parser.Constants;
-import org.jbehave.parser.ContentWithIgnorableEmitter;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.util.ParametrizedString;
-import org.jbehave.util.Strings;
-import org.jbehave.util.ParametrizedString.WeightChain;
+import org.jbehave.eclipse.util.ParametrizedString;
+import org.jbehave.eclipse.util.Strings;
+import org.jbehave.eclipse.util.ParametrizedString.WeightChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +78,7 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
         log.debug("Parsing step, offset: {}, length: {}, content: <{}>", 
                 o(initialOffset, stepContent.length(), f(stepContent)));
         int offset = initialOffset;
-        int stepSep = LineParser.stepSentenceIndex(getLocalizedStepSupport(), stepContent);
+        int stepSep = StepParser.stepSentenceIndex(getLocalizedStepSupport(), stepContent);
          
         emit(keywordToken, offset, stepSep);
         offset += stepSep;
@@ -107,7 +107,7 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
             log.debug("Step found with variable {} tokens in chain", chainTokens.size());
 
             for(int i=0;i<chainTokens.size();i++) {
-                org.jbehave.util.ParametrizedString.Token pToken = pString.getToken(i);
+                org.jbehave.eclipse.util.ParametrizedString.Token pToken = pString.getToken(i);
                 String content = chainTokens.get(i);
                 
                 log.debug("Token content - length: {}, content: <{}>",

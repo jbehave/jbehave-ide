@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Status;
 import org.jbehave.eclipse.Activator;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.util.New;
 
 public class LogWriter {
     private static LogWriter logWriter;

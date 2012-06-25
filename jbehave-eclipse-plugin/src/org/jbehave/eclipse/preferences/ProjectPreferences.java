@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.preferences;
 
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.resources.IProject;

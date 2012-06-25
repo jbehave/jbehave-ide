@@ -24,16 +24,16 @@ import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.jface.EditorUtils;
 import org.jbehave.eclipse.jface.TemplateUtils;
-import org.jbehave.eclipse.util.LineParser;
-import org.jbehave.eclipse.util.StoryPartDocumentUtils;
-import org.jbehave.eclipse.util.WeightedCandidateStep;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.util.Lists;
-import org.jbehave.util.New;
-import org.jbehave.util.Strings;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.step.StepParser;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.StoryPartDocumentUtils;
+import org.jbehave.eclipse.step.WeightedCandidateStep;
+import org.jbehave.eclipse.util.Lists;
+import org.jbehave.eclipse.util.New;
+import org.jbehave.eclipse.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,8 +82,8 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             if(StringUtils.isEmpty(lineStart)) {
                 return createKeywordCompletionProposals(jbehaveProject, offset, 0, viewer);
             }
-            else if(LineParser.isTheStartIgnoringCaseOfStep(localizedStepSupport, lineStart) //
-                    && !LineParser.isStepType(localizedStepSupport, lineStart)) {
+            else if(StepParser.isTheStartIgnoringCaseOfStep(localizedStepSupport, lineStart) //
+                    && !StepParser.isStepType(localizedStepSupport, lineStart)) {
                 return createKeywordCompletionProposals(jbehaveProject, lineOffset, lineStart.length(), viewer);
             }
             
@@ -92,7 +92,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             
             String stepStartUsedForSearch = stepStart;
             // special case: one must find the right type of step
-            boolean isAndCase = LineParser.isStepAndType(localizedStepSupport, lineStart); 
+            boolean isAndCase = StepParser.isStepAndType(localizedStepSupport, lineStart); 
             if(isAndCase) {
                 StoryPart part = new StoryPartDocumentUtils(localizedStepSupport).findStoryPartAtOffset(document, offset).get();
                 Keyword kw = part.getPreferredKeyword();
@@ -111,7 +111,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             Collections.sort(candidates);
             logger.debug("Autocompletion found #{}", candidates.size());
             
-            String stepEntry = LineParser.extractStepSentence(localizedStepSupport, stepStart);
+            String stepEntry = StepParser.extractStepSentence(localizedStepSupport, stepStart);
             boolean hasStartOfStep = !StringUtils.isBlank(stepEntry);
             
             Region regionFullLine = new Region(lineOffset, lineStart.length());

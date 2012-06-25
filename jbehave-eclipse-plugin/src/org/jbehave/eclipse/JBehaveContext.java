@@ -2,7 +2,7 @@ package org.jbehave.eclipse;
 
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.i18n.LocalizedKeywords;
-import org.jbehave.util.CharTree;
+import org.jbehave.eclipse.util.CharTree;
 
 public class JBehaveContext {
     

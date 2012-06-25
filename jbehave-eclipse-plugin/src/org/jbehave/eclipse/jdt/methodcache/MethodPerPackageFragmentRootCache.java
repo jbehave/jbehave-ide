@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.jdt.methodcache;
 
-import static org.jbehave.util.Bytes.areDifferents;
+import static org.jbehave.eclipse.util.Bytes.areDifferents;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,9 +16,9 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.jbehave.eclipse.jdt.JavaScanner;
 import org.jbehave.eclipse.jdt.JavaVisitorAdapter;
-import org.jbehave.util.C2;
-import org.jbehave.util.ProcessGroup;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.util.C2;
+import org.jbehave.eclipse.util.ProcessGroup;
+import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

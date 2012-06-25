@@ -1,7 +1,7 @@
 package org.jbehave.eclipse.rule;
 
 import org.eclipse.jface.text.rules.ICharacterScanner;
-import org.jbehave.util.BidirectionalStream;
+import org.jbehave.eclipse.util.BidirectionalStream;
 
 public class CharacterStreamAdapter implements BidirectionalStream {
     

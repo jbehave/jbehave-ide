@@ -26,10 +26,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.jbehave.eclipse.editor.story.PatternViewFilter;
 import org.jbehave.eclipse.editor.story.StoryEditor;
-import org.jbehave.eclipse.ui.PatternViewFilter;
-import org.jbehave.util.Strings;
-import org.jbehave.util.TextProvider;
+import org.jbehave.eclipse.util.Strings;
+import org.jbehave.eclipse.util.TextProvider;
 
 public class QuickOutlinePopupDialog extends PopupDialog {
 

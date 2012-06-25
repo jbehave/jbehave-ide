@@ -1,6 +1,6 @@
 package org.jbehave.eclipse;
 
-import static org.jbehave.util.Objects.o;
+import static org.jbehave.eclipse.util.Objects.o;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +30,15 @@ import org.jbehave.eclipse.jdt.methodcache.Containers;
 import org.jbehave.eclipse.jdt.methodcache.MethodPerPackageFragmentRootCache;
 import org.jbehave.eclipse.preferences.ClassScannerPreferences;
 import org.jbehave.eclipse.preferences.ProjectPreferences;
-import org.jbehave.eclipse.util.StepLocator;
-import org.jbehave.util.C2;
-import org.jbehave.util.LocaleUtils;
-import org.jbehave.util.New;
-import org.jbehave.util.ProcessGroup;
-import org.jbehave.util.StringEnhancer;
-import org.jbehave.util.Visitor;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.PotentialStep;
+import org.jbehave.eclipse.step.StepLocator;
+import org.jbehave.eclipse.util.C2;
+import org.jbehave.eclipse.util.LocaleUtils;
+import org.jbehave.eclipse.util.New;
+import org.jbehave.eclipse.util.ProcessGroup;
+import org.jbehave.eclipse.util.StringEnhancer;
+import org.jbehave.eclipse.util.Visitor;
 import org.osgi.service.prefs.BackingStoreException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -3,11 +3,11 @@ package org.jbehave.eclipse.editor.story.outline;
 import java.util.List;
 
 import org.eclipse.jface.text.IDocument;
-import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.eclipse.util.StoryPartDocumentUtils;
-import org.jbehave.parser.StoryPart;
-import org.jbehave.parser.StoryPartVisitor;
-import org.jbehave.util.New;
+import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryPartVisitor;
+import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.step.StoryPartDocumentUtils;
+import org.jbehave.eclipse.util.New;
 
 public class OutlineModelBuilder extends StoryPartVisitor {
     

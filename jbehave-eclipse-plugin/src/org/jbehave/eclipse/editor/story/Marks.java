@@ -2,9 +2,9 @@ package org.jbehave.eclipse.editor.story;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.eclipse.core.resources.IMarker;
-import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.jface.JDTUtils;
 import org.jbehave.eclipse.jface.MarkData;
+import org.jbehave.eclipse.step.PotentialStep;
 
 public class Marks {
     public static final String ERROR_CODE = "errorCode";

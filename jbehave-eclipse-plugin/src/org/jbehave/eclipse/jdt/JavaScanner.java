@@ -13,9 +13,9 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.jbehave.util.FJ;
-import org.jbehave.util.ProcessGroup;
-import org.jbehave.util.StringMatcher;
+import org.jbehave.eclipse.util.FJ;
+import org.jbehave.eclipse.util.ProcessGroup;
+import org.jbehave.eclipse.util.StringMatcher;
 
 import fj.F;
 
