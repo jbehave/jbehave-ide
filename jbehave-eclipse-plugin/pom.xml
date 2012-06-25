@@ -11,6 +11,7 @@
 		<functionaljava.version>3.0</functionaljava.version>
 		<guava.version>10.0.1</guava.version>
 		<tycho.version>0.15.0</tycho.version>
+		<eclipse.plugins.directory>/Applications/Eclipse\ JEE\ 3.7/plugins/</eclipse.plugins.directory>
 	</properties>
 
 	<dependencies>
@@ -77,7 +78,28 @@
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <id>install-eclipse-plugin</id>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                 <echo>Installing ${project.build.finalName} in ${eclipse.plugins.directory}</echo>
+                 <copy todir="${eclipse.plugins.directory}" overwrite="true" failonerror="false"
+                	file="${project.build.directory}/${project.build.finalName}.jar">
+                </copy>
+               </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 		</plugins>
 	</build>
 

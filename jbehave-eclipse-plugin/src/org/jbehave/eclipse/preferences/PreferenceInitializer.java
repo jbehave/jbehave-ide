@@ -19,11 +19,6 @@ import ch.qos.logback.classic.Level;
  */
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer#initializeDefaultPreferences()
-     */
     public void initializeDefaultPreferences() {
         initializeDefaultThemesAndColorPreferences();
         initializeDefaultProjectPreferences();
@@ -40,7 +35,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
         TextStylePreferences.storeAsDefault(lightTheme, store);
 
         store.setDefault(PreferenceConstants.THEMES, darkTheme.getPath() + "," + lightTheme.getPath());
-        store.setDefault(PreferenceConstants.THEME, darkTheme.getPath());
+        store.setDefault(PreferenceConstants.THEME, lightTheme.getPath());
         store.setDefault(PreferenceConstants.CURRENT_LINE_ENABLED, true);
         PreferenceConverter.setDefault(store, PreferenceConstants.CUSTOM_CURRENT_LINE_COLOR, new RGB(70, 70, 70));
     }
@@ -59,10 +54,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
                 "org.codehaus.plexus*", //
                 "fj*", //
                 "org.xmlpull.*", // 
-                "com.thoughtworks.xstream*, com.thoughtworks.paranamer*", // xstream
-                "org.hamcrest*, org.mockito*, org.objenesis*", // mockito
+                "com.thoughtworks.xstream*, com.thoughtworks.paranamer*", // 
+                "org.hamcrest*, org.mockito*, org.objenesis*", // 
                 "org.apache.*", //
-                "org.jbehave.*", //
                 "freemarker*");
         
         try {
@@ -86,7 +80,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
     protected void initializeDefaultProjectPreferences() {
         ProjectPreferences projectPreferences = new ProjectPreferences(DefaultScope.INSTANCE);
         projectPreferences.setStoryLanguage("en");
-        projectPreferences.setAvailableStoryLanguages("de", "en", "fr", "fr_FR_Traditional", "it", "pt", "tr", "zh_TW");
+        projectPreferences.setAvailableStoryLanguages("de", "en", "fr", "it", "pt", "tr", "zh_TW");
         projectPreferences.setParameterPrefix("$");
         try {
             projectPreferences.store();
@@ -95,8 +89,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
         }
     }
 
-    private static void addEntries(ClassScannerPreferences prefs, ApplyOn applyOn, boolean exclude, String... patternsSeq) {
-        for(String patterns : patternsSeq)
+    private void addEntries(ClassScannerPreferences prefs, ApplyOn applyOn, boolean exclude, String... patternsSeq) {
+        for(String patterns : patternsSeq){
             prefs.addEntry(patterns, applyOn, exclude);
+        }
     }
 }
