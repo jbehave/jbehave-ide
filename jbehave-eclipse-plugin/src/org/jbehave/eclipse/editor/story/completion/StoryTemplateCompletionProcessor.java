@@ -24,7 +24,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.support.JBKeyword;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.util.New;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -118,7 +118,7 @@ public class StoryTemplateCompletionProcessor extends TemplateCompletionProcesso
     }
 
     private static String formatTemplateToHTML(String content) {
-        for (JBKeyword keyword : JBKeyword.values()) {
+        for (Keyword keyword : Keyword.values()) {
             String asString = keyword.asString();
             if (asString.endsWith(":"))
                 asString = asString.substring(0, asString.length() - 1);

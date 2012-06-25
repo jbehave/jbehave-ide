@@ -1,10 +1,11 @@
-package org.jbehave.support;
+package org.jbehave.eclipse.editor.story;
 
 import java.util.List;
 
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.util.New;
 
-public enum JBPartition {
+public enum StoryPartition {
 
     Step,
     Narrative,
@@ -14,18 +15,18 @@ public enum JBPartition {
     Misc,
     Undefined;
     
-    public static boolean arePartitionsEqual(JBKeyword keyword1, JBKeyword keyword2) {
+    public static boolean arePartitionsEqual(Keyword keyword1, Keyword keyword2) {
         return partitionOf(keyword1)==partitionOf(keyword2);
     }
     
     public static List<String> names () {
         List<String> types = New.arrayList();
-        for(JBPartition partition : JBPartition.values())
+        for(StoryPartition partition : StoryPartition.values())
             types.add(partition.name());
         return types;
     }
     
-    public static JBPartition partitionOf(JBKeyword keyword) {
+    public static StoryPartition partitionOf(Keyword keyword) {
         if(keyword==null)
             return Undefined;
         switch(keyword) {

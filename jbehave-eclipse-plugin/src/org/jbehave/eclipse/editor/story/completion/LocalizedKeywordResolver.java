@@ -2,14 +2,14 @@ package org.jbehave.eclipse.editor.story.completion;
 
 import org.eclipse.jface.text.templates.SimpleTemplateVariableResolver;
 import org.eclipse.jface.text.templates.TemplateContext;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.support.JBKeyword;
 
 public class LocalizedKeywordResolver extends SimpleTemplateVariableResolver {
 
-    private final JBKeyword keyword;
+    private final Keyword keyword;
 
-    public LocalizedKeywordResolver(JBKeyword keyword) {
+    public LocalizedKeywordResolver(Keyword keyword) {
         super(keyword.name()/* type */, keyword.asString() /* descriptions */);
         this.keyword = keyword;
     }

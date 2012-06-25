@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
@@ -15,7 +16,6 @@ import org.jbehave.eclipse.util.StepLocator;
 import org.jbehave.parser.Constants;
 import org.jbehave.parser.ContentWithIgnorableEmitter;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.ParametrizedString;
 import org.jbehave.util.Strings;
 import org.jbehave.util.ParametrizedString.WeightChain;
@@ -62,7 +62,7 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
     
     @Override
     protected boolean isPartAccepted(StoryPart part) {
-        JBKeyword keyword = part.getPreferredKeyword();
+        Keyword keyword = part.getPreferredKeyword();
         if(keyword!=null && keyword.isStep()) {
             return true;
         }

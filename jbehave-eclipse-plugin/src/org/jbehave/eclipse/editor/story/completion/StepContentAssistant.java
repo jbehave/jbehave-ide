@@ -8,8 +8,8 @@ import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.swt.widgets.Shell;
+import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.editor.story.TokenConstants;
-import org.jbehave.support.JBPartition;
 
 public class StepContentAssistant extends ContentAssistant {
     
@@ -45,7 +45,7 @@ public class StepContentAssistant extends ContentAssistant {
     
     public StepContentAssistant() {
         IContentAssistProcessor stepProcessor = new StepContentAssistProcessor(); 
-        setContentAssistProcessor(stepProcessor, JBPartition.Step.name());
+        setContentAssistProcessor(stepProcessor, StoryPartition.Step.name());
         setContentAssistProcessor(stepProcessor, (String)TokenConstants.IGNORED.getData());
         setContentAssistProcessor(stepProcessor, IDocument.DEFAULT_CONTENT_TYPE);
         enableAutoActivation(true);

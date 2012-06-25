@@ -2,8 +2,8 @@ package org.jbehave.parser;
 
 import java.util.List;
 
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.LocalizedStepSupport;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.CharIterator;
 import org.jbehave.util.CharIterators;
 import org.jbehave.util.CharTree;
@@ -34,7 +34,7 @@ public class StoryParser {
     }
 
     public void parse(CharIterator it, int baseOffset, StoryPartVisitor visitor) {
-        CharTree<JBKeyword> kwTree = localizedStepSupport.sharedKeywordCharTree();
+        CharTree<Keyword> kwTree = localizedStepSupport.sharedKeywordCharTree();
         int offset = baseOffset;
         Line line = new Line();
         Block block = new Block();
@@ -70,7 +70,7 @@ public class StoryParser {
     private class Block {
         private StringBuilder buffer = new StringBuilder();
         private int offset;
-        private JBKeyword keyword;
+        private Keyword keyword;
         public void reset(int offset) {
             this.offset = offset;
             this.buffer.setLength(0);
@@ -79,9 +79,9 @@ public class StoryParser {
             if(buffer.length()>0) {
                 String content = buffer.toString();
                 StoryPart part = new StoryPart(localizedStepSupport, offset, content);
-                JBKeyword partKeyword = part.extractKeyword();
+                Keyword partKeyword = part.extractKeyword();
                 if(partKeyword!=null && partKeyword.isStep()) {
-                    if(partKeyword==JBKeyword.And) {
+                    if(partKeyword==Keyword.And) {
                         part.setPreferredKeyword(keyword);
                     }
                     else {
@@ -106,8 +106,8 @@ public class StoryParser {
             this.offset = offset;
             this.buffer.setLength(0);
         }
-        public boolean startsWithBreakingKeyword (CharTree<JBKeyword> kwTree, Block block) {
-            JBKeyword kw = kwTree.lookup(buffer);
+        public boolean startsWithBreakingKeyword (CharTree<Keyword> kwTree, Block block) {
+            Keyword kw = kwTree.lookup(buffer);
             if(kw==null)
                 return false;
             switch(kw) {

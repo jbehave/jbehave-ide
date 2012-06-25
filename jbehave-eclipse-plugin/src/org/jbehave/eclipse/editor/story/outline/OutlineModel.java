@@ -3,21 +3,21 @@ package org.jbehave.eclipse.editor.story.outline;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jbehave.support.JBKeyword;
-import org.jbehave.support.JBPartition;
+import org.jbehave.eclipse.Keyword;
+import org.jbehave.eclipse.editor.story.StoryPartition;
 
 public class OutlineModel {
 
-    private final JBPartition partition;
-    private JBKeyword keyword;
+    private final StoryPartition partition;
+    private Keyword keyword;
     private String content;
     private int offset, length;
     private List<OutlineModel> children = new ArrayList<OutlineModel>();
     
-    public OutlineModel(JBKeyword keyword, String content, int offset, int length) {
+    public OutlineModel(Keyword keyword, String content, int offset, int length) {
         super();
         this.keyword = keyword;
-        this.partition = JBPartition.partitionOf(keyword);
+        this.partition = StoryPartition.partitionOf(keyword);
         this.content = extractSingleLine(content);
         this.offset = offset;
         this.length = length;
@@ -32,7 +32,7 @@ public class OutlineModel {
         return null;
     }
     
-    public JBKeyword getKeyword() {
+    public Keyword getKeyword() {
         return keyword;
     }
 
@@ -64,7 +64,7 @@ public class OutlineModel {
         children.add(model);
     }
 
-    public JBPartition getPartition() {
+    public StoryPartition getPartition() {
         return partition;
     }
     

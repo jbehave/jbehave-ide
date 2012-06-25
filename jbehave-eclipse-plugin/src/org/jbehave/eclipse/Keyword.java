@@ -1,10 +1,10 @@
-package org.jbehave.support;
+package org.jbehave.eclipse;
 
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.util.Filter;
 
-public enum JBKeyword {
+public enum Keyword {
     Meta {
         @Override
         public String asString(Keywords keywords) {
@@ -139,9 +139,9 @@ public enum JBKeyword {
         return this==Ignorable;
     }
 
-    public static JBKeyword lookup(StringBuilder builder, Keywords keywords) {
+    public static Keyword lookup(StringBuilder builder, Keywords keywords) {
         int len = builder.length();
-        for(JBKeyword jk : values()) {
+        for(Keyword jk : values()) {
             String asString = jk.asString(keywords);
             if(asString.length()!=builder.length()) {
                 continue;
@@ -159,16 +159,16 @@ public enum JBKeyword {
         return null;
     }
     
-    public static Filter<JBKeyword> stepFilter() {
-        return new Filter<JBKeyword>() {
+    public static Filter<Keyword> stepFilter() {
+        return new Filter<Keyword>() {
             @Override
-            public boolean isAccepted(JBKeyword keyword) {
+            public boolean isAccepted(Keyword keyword) {
                 return isStep(keyword);
             }
         };
     }
 
-    public static boolean isStep(JBKeyword keyword) {
+    public static boolean isStep(Keyword keyword) {
         if(keyword==null)
             return false;
         switch(keyword) {
@@ -195,7 +195,7 @@ public enum JBKeyword {
         }
     }
     
-    public static boolean isNarrative(JBKeyword keyword) {
+    public static boolean isNarrative(Keyword keyword) {
         if(keyword==null)
             return false;
         switch(keyword) {
@@ -209,7 +209,7 @@ public enum JBKeyword {
         }
     }
     
-    public static boolean isExampleTable(JBKeyword keyword) {
+    public static boolean isExampleTable(Keyword keyword) {
         if(keyword==null)
             return false;
         switch(keyword) {

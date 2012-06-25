@@ -2,24 +2,24 @@ package org.jbehave.util;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.jbehave.support.JBKeyword.Given;
-import static org.jbehave.support.JBKeyword.InOrderTo;
-import static org.jbehave.support.JBKeyword.Narrative;
+import static org.jbehave.eclipse.Keyword.Given;
+import static org.jbehave.eclipse.Keyword.InOrderTo;
+import static org.jbehave.eclipse.Keyword.Narrative;
 
 import org.jbehave.core.i18n.LocalizedKeywords;
-import org.jbehave.support.JBKeyword;
+import org.jbehave.eclipse.Keyword;
 import org.junit.Before;
 import org.junit.Test;
 
 public class CharTreeTest {
     
-    private CharTree<JBKeyword> cn;
+    private CharTree<Keyword> cn;
 
     @Before
     public void setUp () {
         LocalizedKeywords keywords = new LocalizedKeywords();
-        cn = new CharTree<JBKeyword>('/', null);
-        for(JBKeyword kw : JBKeyword.values())
+        cn = new CharTree<Keyword>('/', null);
+        for(Keyword kw : Keyword.values())
             cn.push(kw.asString(keywords), kw);
         
     }
@@ -32,7 +32,7 @@ public class CharTreeTest {
         assertEquals(InOrderTo, cn.lookup("In order to be more communicative"));
     }
     
-    private void assertEquals(JBKeyword expected, JBKeyword actual) {
+    private void assertEquals(Keyword expected, Keyword actual) {
         assertThat(actual, equalTo(expected));
     }
 

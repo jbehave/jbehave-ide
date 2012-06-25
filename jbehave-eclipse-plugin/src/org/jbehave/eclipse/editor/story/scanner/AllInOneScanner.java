@@ -7,10 +7,10 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,7 +79,7 @@ public class AllInOneScanner extends AbstractStoryPartBasedScanner {
     
     @Override
     protected void emitPart(StoryPart part) {
-        JBKeyword keyword = part.getPreferredKeyword();
+        Keyword keyword = part.getPreferredKeyword();
         if(keyword==null) {
             logger.warn("Weird case: no keywork for part. Content: {}", part);
             emitCommentAware(getErrorToken(), part.getOffset(), part.getContent());

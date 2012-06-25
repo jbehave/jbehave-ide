@@ -2,13 +2,13 @@ package org.jbehave.eclipse.editor.story.scanner;
 
 import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.Keyword;
+import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.parser.Constants;
 import org.jbehave.parser.ContentWithIgnorableEmitter;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
-import org.jbehave.support.JBPartition;
 
 public class ExampleTableScanner extends AbstractStoryPartBasedScanner {
     
@@ -30,8 +30,8 @@ public class ExampleTableScanner extends AbstractStoryPartBasedScanner {
     
     @Override
     protected boolean isPartAccepted(StoryPart part) {
-        JBKeyword keyword = part.getPreferredKeyword();
-        if(JBPartition.ExampleTable==JBPartition.partitionOf(keyword)) {
+        Keyword keyword = part.getPreferredKeyword();
+        if(StoryPartition.ExampleTable==StoryPartition.partitionOf(keyword)) {
             return true;
         }
         return false;

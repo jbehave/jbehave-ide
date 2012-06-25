@@ -19,6 +19,7 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.IDocument;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.PotentialStep;
 import org.jbehave.eclipse.jface.MarkData;
 import org.jbehave.eclipse.util.PotentialStepPrioTransformer;
@@ -26,7 +27,6 @@ import org.jbehave.eclipse.util.StepLocator;
 import org.jbehave.eclipse.util.StoryPartDocumentUtils;
 import org.jbehave.parser.Constants;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.New;
 import org.jbehave.util.ProcessGroup;
 import org.jbehave.util.Strings;
@@ -134,7 +134,7 @@ public class MarkingStoryValidator {
         Iterator<Part> iterator = parts.iterator();
         while(iterator.hasNext()) {
             Part part = iterator.next();
-            JBKeyword keyword = part.storyPart.getPreferredKeyword();
+            Keyword keyword = part.storyPart.getPreferredKeyword();
             if(keyword==null) {
                 continue;
             }
@@ -184,10 +184,10 @@ public class MarkingStoryValidator {
                     }
                 }
             }
-            else if( keyword != JBKeyword.Ignorable
-                  && keyword != JBKeyword.Meta
-                  && keyword != JBKeyword.MetaProperty
-                  && keyword != JBKeyword.GivenStories) {
+            else if( keyword != Keyword.Ignorable
+                  && keyword != Keyword.Meta
+                  && keyword != Keyword.MetaProperty
+                  && keyword != Keyword.GivenStories) {
                 nonNarrativeOrIgnorable = true;
             }
         }
@@ -226,7 +226,7 @@ public class MarkingStoryValidator {
     private void checkSteps(final fj.data.List<Part> parts) throws JavaModelException {
         final fj.data.List<Part> steps = parts.filter(new F<Part,Boolean>() {
             public Boolean f(Part part) {
-                return JBKeyword.isStep(part.partType());
+                return Keyword.isStep(part.partType());
             };
         });
         
@@ -284,7 +284,7 @@ public class MarkingStoryValidator {
         
         public void evaluateCandidate(PotentialStep candidate) {
             String pattern = extractStepSentenceAndRemoveTrailingNewlines();
-            JBKeyword type = partType();
+            Keyword type = partType();
             log.debug("Candidate evaluated against part {}", storyPart);
             boolean patternMatch = candidate.matches(pattern);
             boolean typeMatch = type.isSameAs(candidate.stepType);
@@ -306,7 +306,7 @@ public class MarkingStoryValidator {
             candidates.add(potentialStep);
         }
 
-        private JBKeyword partType() {
+        private Keyword partType() {
             return storyPart.getPreferredKeyword();
         }
 
@@ -349,7 +349,7 @@ public class MarkingStoryValidator {
                 for (MarkData mark : marks) {
                     IMarker marker = file.createMarker(MARKER_ID);
                     marker.setAttributes(mark.createAttributes(file, document));
-                    JBKeyword keyword = storyPart.getPreferredKeyword();
+                    Keyword keyword = storyPart.getPreferredKeyword();
                     if(keyword!=null)
                         marker.setAttribute("Keyword", keyword.name());
                 }

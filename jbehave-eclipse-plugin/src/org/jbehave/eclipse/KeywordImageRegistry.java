@@ -2,7 +2,6 @@ package org.jbehave.eclipse;
 
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
-import org.jbehave.support.JBKeyword;
 
 public class KeywordImageRegistry {
     private ImageRegistry imageRegistry;
@@ -10,7 +9,7 @@ public class KeywordImageRegistry {
         this.imageRegistry = imageRegistry;
     }
     
-    public Image getImageFor(JBKeyword keyword) {
+    public Image getImageFor(Keyword keyword) {
         switch(keyword) {
             case Given:
                 return getImageRegistry().get(ImageIds.STEP_GIVEN);

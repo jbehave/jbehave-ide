@@ -2,10 +2,10 @@ package org.jbehave.eclipse.editor.story.scanner;
 
 import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
 
 public class ScenarioScanner extends AbstractStoryPartBasedScanner {
     
@@ -25,8 +25,8 @@ public class ScenarioScanner extends AbstractStoryPartBasedScanner {
     
     @Override
     protected boolean isPartAccepted(StoryPart part) {
-        JBKeyword keyword = part.getPreferredKeyword();
-        if(keyword==JBKeyword.Scenario || keyword.isComment()) {
+        Keyword keyword = part.getPreferredKeyword();
+        if(keyword==Keyword.Scenario || keyword.isComment()) {
             return true;
         }
         return false;

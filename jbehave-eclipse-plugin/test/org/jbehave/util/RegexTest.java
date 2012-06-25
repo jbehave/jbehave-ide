@@ -7,7 +7,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jbehave.support.JBKeyword;
+import org.jbehave.eclipse.Keyword;
 import org.junit.Test;
 
 public class RegexTest {
@@ -33,7 +33,7 @@ public class RegexTest {
     @Test
     public void usecaseEx2 () {
         String content = "As a developer\nI want to develop efficiently";
-        for(JBKeyword keyword : JBKeyword.values()) {
+        for(Keyword keyword : Keyword.values()) {
             String asString = keyword.asString();
             if(asString.endsWith(":"))
                 asString = asString.substring(0,asString.length()-1);

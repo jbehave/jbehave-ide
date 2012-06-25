@@ -25,7 +25,6 @@ import org.jbehave.eclipse.editor.story.scanner.SingleTokenScanner;
 import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.support.JBPartition;
 
 public class StoryConfiguration extends SourceViewerConfiguration {
 
@@ -50,7 +49,7 @@ public class StoryConfiguration extends SourceViewerConfiguration {
      * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getConfiguredContentTypes(org.eclipse.jface.text.source.ISourceViewer)
      */
     public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
-        List<String> types = JBPartition.names();
+        List<String> types = StoryPartition.names();
         types.add(IDocument.DEFAULT_CONTENT_TYPE);
         return types.toArray(new String[types.size()]);
     }
@@ -155,28 +154,28 @@ public class StoryConfiguration extends SourceViewerConfiguration {
             reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
     
             dr = new DefaultDamagerRepairer(getStepScanner());
-            reconciler.setDamager(dr, JBPartition.Step.name());
-            reconciler.setRepairer(dr, JBPartition.Step.name());
+            reconciler.setDamager(dr, StoryPartition.Step.name());
+            reconciler.setRepairer(dr, StoryPartition.Step.name());
     
             dr = new DefaultDamagerRepairer(getCommentScanner());
-            reconciler.setDamager(dr, JBPartition.Comment.name());
-            reconciler.setRepairer(dr, JBPartition.Comment.name());
+            reconciler.setDamager(dr, StoryPartition.Comment.name());
+            reconciler.setRepairer(dr, StoryPartition.Comment.name());
     
             dr = new DefaultDamagerRepairer(getScenarioScanner());
-            reconciler.setDamager(dr, JBPartition.Scenario.name());
-            reconciler.setRepairer(dr, JBPartition.Scenario.name());
+            reconciler.setDamager(dr, StoryPartition.Scenario.name());
+            reconciler.setRepairer(dr, StoryPartition.Scenario.name());
             
             dr = new DefaultDamagerRepairer(getNarrativeScanner());
-            reconciler.setDamager(dr, JBPartition.Narrative.name());
-            reconciler.setRepairer(dr, JBPartition.Narrative.name());
+            reconciler.setDamager(dr, StoryPartition.Narrative.name());
+            reconciler.setRepairer(dr, StoryPartition.Narrative.name());
             
             dr = new DefaultDamagerRepairer(getExampleTableScanner());
-            reconciler.setDamager(dr, JBPartition.ExampleTable.name());
-            reconciler.setRepairer(dr, JBPartition.ExampleTable.name());
+            reconciler.setDamager(dr, StoryPartition.ExampleTable.name());
+            reconciler.setRepairer(dr, StoryPartition.ExampleTable.name());
             
             dr = new DefaultDamagerRepairer(getMiscScanner());
-            reconciler.setDamager(dr, JBPartition.Misc.name());
-            reconciler.setRepairer(dr, JBPartition.Misc.name());
+            reconciler.setDamager(dr, StoryPartition.Misc.name());
+            reconciler.setRepairer(dr, StoryPartition.Misc.name());
         }
         
         return reconciler;

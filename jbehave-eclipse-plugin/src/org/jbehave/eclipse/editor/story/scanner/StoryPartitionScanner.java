@@ -7,10 +7,10 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.util.StoryPartDocumentUtils;
 import org.jbehave.parser.StoryPart;
 import org.jbehave.parser.StoryPartVisitor;
-import org.jbehave.support.JBPartition;
 import org.jbehave.util.New;
 
 public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPartitionTokenScanner {
@@ -77,7 +77,7 @@ public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPart
     }
     
     private void push(StoryPart part) {
-        JBPartition partition = JBPartition.partitionOf(part.getPreferredKeyword());
+        StoryPartition partition = StoryPartition.partitionOf(part.getPreferredKeyword());
         Partition p = new Partition(
                 partition,
                 part.getOffset(),
@@ -95,10 +95,10 @@ public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPart
     }
     
     private class Partition {
-        private JBPartition keyword;
+        private StoryPartition keyword;
         private int offset;
         private int length;
-        public Partition(JBPartition keyword, int offset, int length) {
+        public Partition(StoryPartition keyword, int offset, int length) {
             this.keyword = keyword;
             this.offset = offset;
             this.length = length;

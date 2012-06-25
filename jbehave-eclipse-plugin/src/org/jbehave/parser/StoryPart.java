@@ -2,16 +2,16 @@ package org.jbehave.parser;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.util.LineParser;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.CharTree;
 
 public class StoryPart {
     private final LocalizedStepSupport localizedStepSupport;
     private final int offset;
     private final String content;
-    private JBKeyword preferredKeyword;
+    private Keyword preferredKeyword;
     
     public StoryPart(LocalizedStepSupport localizedStepSupport, int offset, String content) {
         super();
@@ -54,25 +54,25 @@ public class StoryPart {
      * @return
      * @see #extractKeyword(CharTree)
      */
-    public JBKeyword getPreferredKeyword() {
+    public Keyword getPreferredKeyword() {
         return getPreferredKeyword(defaultTree());
     }
     
-    public void setPreferredKeyword(JBKeyword keyword) {
+    public void setPreferredKeyword(Keyword keyword) {
         this.preferredKeyword = keyword;
     }
     
-    public JBKeyword getPreferredKeyword(CharTree<JBKeyword> kwTree) {
+    public Keyword getPreferredKeyword(CharTree<Keyword> kwTree) {
         if(preferredKeyword==null)
             preferredKeyword = extractKeyword(kwTree);
         return preferredKeyword;
     }
     
-    public JBKeyword extractKeyword() {
+    public Keyword extractKeyword() {
         return extractKeyword(defaultTree());
     }
     
-    public JBKeyword extractKeyword(CharTree<JBKeyword> kwTree) {
+    public Keyword extractKeyword(CharTree<Keyword> kwTree) {
         return kwTree.lookup(getContent());
     }
     
@@ -80,11 +80,11 @@ public class StoryPart {
         return startsWithKeyword(defaultTree());
     }
 
-    public boolean startsWithKeyword (CharTree<JBKeyword> kwTree) {
+    public boolean startsWithKeyword (CharTree<Keyword> kwTree) {
         return (getPreferredKeyword(kwTree)!=null);
     }
     
-    private CharTree<JBKeyword> defaultTree() {
+    private CharTree<Keyword> defaultTree() {
         return localizedStepSupport.sharedKeywordCharTree();
     }
 
@@ -109,7 +109,7 @@ public class StoryPart {
     }
 
     public boolean isStepPart() {
-        JBKeyword keyword = getPreferredKeyword();
+        Keyword keyword = getPreferredKeyword();
         return keyword!=null && keyword.isStep();
     }
 

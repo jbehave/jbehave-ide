@@ -7,7 +7,7 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.jbehave.eclipse.ImageIds;
-import org.jbehave.support.JBPartition;
+import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.util.TextProvider;
 
 public class QuickOutlineStyledLabelProvider extends StyledCellLabelProvider implements TextProvider {
@@ -61,7 +61,7 @@ public class QuickOutlineStyledLabelProvider extends StyledCellLabelProvider imp
     private void defineImage(OutlineModel model, ViewerCell cell) {
         String key = null;
         
-        JBPartition partition = model.getPartition();
+        StoryPartition partition = model.getPartition();
         switch(partition) {
             case Narrative:
                 key = ImageIds.NARRATIVE;

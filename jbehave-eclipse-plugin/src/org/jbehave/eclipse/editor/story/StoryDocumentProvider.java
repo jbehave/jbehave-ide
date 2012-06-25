@@ -16,7 +16,6 @@ import org.jbehave.eclipse.editor.story.scanner.AllInOneScanner;
 import org.jbehave.eclipse.editor.story.scanner.StoryPartitionScanner;
 import org.jbehave.eclipse.jface.ProjectAwareFastPartitioner;
 import org.jbehave.eclipse.jface.UIUtils;
-import org.jbehave.support.JBPartition;
 import org.jbehave.util.Strings;
 
 public class StoryDocumentProvider extends FileDocumentProvider {
@@ -57,7 +56,7 @@ public class StoryDocumentProvider extends FileDocumentProvider {
                     Strings.toArray(names), jbehaveProject.getProject());
         }
         else {
-            names.addAll(JBPartition.names());
+            names.addAll(StoryPartition.names());
             names.add((String)TokenConstants.IGNORED.getData());
             return new ProjectAwareFastPartitioner(
                     new StoryPartitionScanner(jbehaveProject),

@@ -1,4 +1,4 @@
-package org.jbehave.support;
+package org.jbehave.eclipse;
 
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.i18n.LocalizedKeywords;
@@ -13,7 +13,7 @@ public class JBehaveContext {
         return context;
     }
     
-    private CharTree<JBKeyword> keywordTree;
+    private CharTree<Keyword> keywordTree;
     private Keywords keywords;
     
     public Keywords getKeywords() {
@@ -22,11 +22,11 @@ public class JBehaveContext {
         return keywords;
     }
     
-    public CharTree<JBKeyword> getKeywordTree() {
+    public CharTree<Keyword> getKeywordTree() {
         if(keywordTree==null) {
             Keywords kws = getKeywords();
-            keywordTree = new CharTree<JBKeyword>('/', null);
-            for(JBKeyword kw : JBKeyword.values()) {
+            keywordTree = new CharTree<Keyword>('/', null);
+            for(Keyword kw : Keyword.values()) {
                 keywordTree.push(kw.asString(kws), kw);
             }
         }

@@ -30,8 +30,8 @@ import org.eclipse.ui.dialogs.PropertyPage;
 import org.jbehave.core.configuration.Keywords;
 import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.eclipse.Activator;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.KeywordImageRegistry;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.LocaleUtils;
 import org.osgi.service.prefs.BackingStoreException;
 import org.slf4j.Logger;
@@ -122,7 +122,7 @@ public class ProjectPreferencePage extends PropertyPage implements org.eclipse.u
         localizedKeywords.setColumnProperties(new String[] {"English", "Selected" });
         localizedKeywords.setContentProvider(ArrayContentProvider.getInstance());
         localizedKeywords.setLabelProvider(new KeywordTableLabelProvider(Activator.getDefault().getKeywordImageRegistry()));
-        localizedKeywords.setInput(JBKeyword.values());
+        localizedKeywords.setInput(Keyword.values());
         table = localizedKeywords.getTable();
         table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
         table.setSize(371, 289);
@@ -276,7 +276,7 @@ public class ProjectPreferencePage extends PropertyPage implements org.eclipse.u
         @Override
         public Image getColumnImage(Object element, int columnIndex) {
             if(columnIndex==0) {
-                return keywordImageRegistry.getImageFor((JBKeyword)element);
+                return keywordImageRegistry.getImageFor((Keyword)element);
             }
             return null;
         }
@@ -286,7 +286,7 @@ public class ProjectPreferencePage extends PropertyPage implements org.eclipse.u
          */
         @Override
         public String getColumnText(Object element, int columnIndex) {
-            return ((JBKeyword)element).asString(keywordsFor(columnIndex));
+            return ((Keyword)element).asString(keywordsFor(columnIndex));
         }
     }
 

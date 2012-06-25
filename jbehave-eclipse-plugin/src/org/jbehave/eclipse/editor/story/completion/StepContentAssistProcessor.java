@@ -23,6 +23,7 @@ import org.eclipse.jface.text.templates.TemplateContextType;
 import org.jbehave.core.i18n.LocalizedKeywords;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
+import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.LocalizedStepSupport;
 import org.jbehave.eclipse.jface.EditorUtils;
 import org.jbehave.eclipse.jface.TemplateUtils;
@@ -30,7 +31,6 @@ import org.jbehave.eclipse.util.LineParser;
 import org.jbehave.eclipse.util.StoryPartDocumentUtils;
 import org.jbehave.eclipse.util.WeightedCandidateStep;
 import org.jbehave.parser.StoryPart;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.Lists;
 import org.jbehave.util.New;
 import org.jbehave.util.Strings;
@@ -95,8 +95,8 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             boolean isAndCase = LineParser.isStepAndType(localizedStepSupport, lineStart); 
             if(isAndCase) {
                 StoryPart part = new StoryPartDocumentUtils(localizedStepSupport).findStoryPartAtOffset(document, offset).get();
-                JBKeyword kw = part.getPreferredKeyword();
-                if(kw == JBKeyword.And) {
+                Keyword kw = part.getPreferredKeyword();
+                if(kw == Keyword.And) {
                     logger.debug("Autocompletion unable to disambiguate 'And' case: previous story part is probably not a step");
                     return null;
                 }
@@ -198,21 +198,21 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
         LocalizedStepSupport localizedStepSupport = jbehaveProject.getLocalizedStepSupport();
         LocalizedKeywords localizedKeywords = localizedStepSupport.getLocalizedKeywords();
 
-        JBKeyword[] keywords = new JBKeyword[] {
-                JBKeyword.Given,
-                JBKeyword.And,
-                JBKeyword.When,
-                JBKeyword.Then,
-                JBKeyword.Ignorable,
-                JBKeyword.Scenario,
-                JBKeyword.GivenStories,
-                JBKeyword.Narrative,
-                JBKeyword.InOrderTo,
-                JBKeyword.AsA,
-                JBKeyword.IWantTo,
-                JBKeyword.ExamplesTable
+        Keyword[] keywords = new Keyword[] {
+                Keyword.Given,
+                Keyword.And,
+                Keyword.When,
+                Keyword.Then,
+                Keyword.Ignorable,
+                Keyword.Scenario,
+                Keyword.GivenStories,
+                Keyword.Narrative,
+                Keyword.InOrderTo,
+                Keyword.AsA,
+                Keyword.IWantTo,
+                Keyword.ExamplesTable
                 };
-        for(JBKeyword keyword : keywords) {
+        for(Keyword keyword : keywords) {
             String kw = keyword.asString(localizedKeywords);
             proposals.add(new CompletionProposal(kw, offset, length, kw.length()));
         };

@@ -3,7 +3,7 @@ package org.jbehave.eclipse.editor.story.completion;
 import org.eclipse.jface.text.templates.GlobalTemplateVariables;
 import org.eclipse.jface.text.templates.TemplateContextType;
 import org.jbehave.eclipse.Activator;
-import org.jbehave.support.JBKeyword;
+import org.jbehave.eclipse.Keyword;
 
 public class StoryContextType extends TemplateContextType {
 
@@ -26,7 +26,7 @@ public class StoryContextType extends TemplateContextType {
         addResolver(new GlobalTemplateVariables.Year());
         addResolver(new GlobalTemplateVariables.Time());
         addResolver(new GlobalTemplateVariables.User());
-        for(JBKeyword keyword : JBKeyword.values()) {
+        for(Keyword keyword : Keyword.values()) {
             addResolver(new LocalizedKeywordResolver(keyword));
         }
     }

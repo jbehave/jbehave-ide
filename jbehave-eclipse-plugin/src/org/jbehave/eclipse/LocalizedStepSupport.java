@@ -3,12 +3,11 @@ package org.jbehave.eclipse;
 import java.util.Locale;
 
 import org.jbehave.core.i18n.LocalizedKeywords;
-import org.jbehave.support.JBKeyword;
 import org.jbehave.util.CharTree;
 
 public class LocalizedStepSupport {
 
-    private CharTree<JBKeyword> kwTree;
+    private CharTree<Keyword> kwTree;
 
     private Locale storyLocale;
 
@@ -24,7 +23,7 @@ public class LocalizedStepSupport {
         return storyLocale;
     }
 
-    public CharTree<JBKeyword> sharedKeywordCharTree() {
+    public CharTree<Keyword> sharedKeywordCharTree() {
         if (kwTree == null)
             kwTree = createKeywordCharTree();
         return kwTree;
@@ -36,10 +35,10 @@ public class LocalizedStepSupport {
         return localizedKeywords;
     }
 
-    protected CharTree<JBKeyword> createKeywordCharTree() {
+    protected CharTree<Keyword> createKeywordCharTree() {
         LocalizedKeywords keywords = getLocalizedKeywords();
-        CharTree<JBKeyword> cn = new CharTree<JBKeyword>('/', null);
-        for (JBKeyword kw : JBKeyword.values()) {
+        CharTree<Keyword> cn = new CharTree<Keyword>('/', null);
+        for (Keyword kw : Keyword.values()) {
             String asString = kw.asString(keywords);
             cn.push(asString, kw);
         }
