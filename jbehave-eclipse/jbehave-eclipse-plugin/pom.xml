@@ -69,7 +69,7 @@
 					<overWriteReleases>false</overWriteReleases>
 					<overWriteSnapshots>false</overWriteSnapshots>
 					<overWriteIfNewer>true</overWriteIfNewer>
-					<excludeGroupIds>p2.eclipse-plugin</excludeGroupIds>					
+					<excludeGroupIds>p2.eclipse-plugin</excludeGroupIds>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -78,37 +78,56 @@
 				<version>${tycho.version}</version>
 				<extensions>true</extensions>
 			</plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-antrun-plugin</artifactId>
-        <version>1.7</version>
-        <executions>
-          <execution>
-            <id>install-eclipse-plugin</id>
-            <phase>install</phase>
-            <goals>
-              <goal>run</goal>
-            </goals>
-            <configuration>
-              <tasks>
-                 <echo>Installing ${project.build.finalName} in ${eclipse.plugins.directory}</echo>
-                 <copy todir="${eclipse.plugins.directory}" overwrite="true" failonerror="false"
-                	file="${project.build.directory}/${project.build.finalName}.jar">
-                </copy>
-               </tasks>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>install-eclipse-plugin</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<echo>Installing ${project.build.finalName} in
+									${eclipse.plugins.directory}</echo>
+								<copy todir="${eclipse.plugins.directory}" overwrite="true"
+									failonerror="false"
+									file="${project.build.directory}/${project.build.finalName}.jar">
+								</copy>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
 	<repositories>
 		<repository>
-			<id>indigo</id>
+			<id>eclipse</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/indigo</url>
+			<url>http://download.eclipse.org/releases/${eclipse.release}</url>
 		</repository>
 	</repositories>
 
+	<profiles>
+		<profile>
+			<id>juno</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<eclipse.release>juno</eclipse.release>
+			</properties>
+		</profile>
+		<profile>
+			<id>indigo</id>
+			<properties>
+				<eclipse.release>indigo</eclipse.release>
+			</properties>
+		</profile>
+	</profiles>
 </project>
