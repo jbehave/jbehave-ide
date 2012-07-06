@@ -38,7 +38,7 @@ public class PluginPreferencePage extends PropertyPage implements IWorkbenchPref
         
         Label lblLogo = new Label(container, SWT.NONE);
         lblLogo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-        lblLogo.setImage(ResourceManager.getPluginImage("jbehave-eclipse-plugin", "icons/jbehave-plugin-logo.png"));
+        lblLogo.setImage(ResourceManager.getPluginImage("org.jbehave.eclipse", "icons/jbehave-plugin-logo.png"));
         
         Label lblTitle = new Label(container, SWT.NONE);
         lblTitle.setText(bundle.getString("pluginPreferencePage.title"));

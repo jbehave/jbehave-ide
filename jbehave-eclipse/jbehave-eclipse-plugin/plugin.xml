@@ -96,7 +96,7 @@
 	
 	<extension point="org.eclipse.ui.ide.markerResolution"> 
 		<markerResolutionGenerator 
-			markerType="jbehave-eclipse-plugin.storyMarker" 
+			markerType="org.jbehave.eclipse.storyMarker" 
 			class="org.jbehave.eclipse.editor.story.MarkerResolutionGenerator"> 
 		</markerResolutionGenerator>
 	</extension>

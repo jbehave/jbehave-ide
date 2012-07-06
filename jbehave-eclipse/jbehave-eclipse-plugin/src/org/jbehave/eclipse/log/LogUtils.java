@@ -13,7 +13,7 @@ public class LogUtils {
 
     public static Log getLog(IProject project) throws CoreException {
         IFolder folder = project.getFolder(".jbehave");
-        IFile file = folder.getFile("jbehave-eclipse-plugin.log");
+        IFile file = folder.getFile("org.jbehave.eclipse.log");
         
         //at this point, no resources have been created
         if (!project.exists()) 
