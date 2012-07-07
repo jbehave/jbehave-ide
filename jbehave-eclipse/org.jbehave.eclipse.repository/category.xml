@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/org.jbehave.eclipse.feature_1.0.0.qualifier.jar" id="org.jbehave.eclipse.feature" version="1.0.0.qualifier">
-      <category name="jbehave_category_id"/>
+      <category name="org.jbehave.eclipse.category"/>
    </feature>
-   <category-def name="jbehave_category_id" label="JBehave Category">
+   <category-def name="org.jbehave.eclipse.category" label="JBehave">
       <description>
       	JBehave Support for Eclipse
       </description>

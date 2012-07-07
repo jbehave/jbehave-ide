@@ -15,18 +15,10 @@
   <name>JBehave Eclipse Repository</name>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-ssh-external</artifactId>
-        <version>2.2</version>
-      </extension>
-    </extensions>
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-p2-director-plugin</artifactId>
-        <version>${tycho.version}</version>
         <executions>
           <execution>
             <id>materialize-products</id>

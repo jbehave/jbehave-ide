@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.jbehave.eclipse.feature"
-      label="JBehave Eclipse Feature"
+      label="%featureName"
       version="1.0.0.qualifier">
 
-  <description>
+   <description>
       %description
    </description>
 
@@ -15,7 +15,7 @@
    <license url="%licenseURL">
       %license
    </license>
-   
+
    <plugin
          id="org.jbehave.eclipse"
          download-size="0"

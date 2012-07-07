@@ -14,9 +14,9 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>JBehave Support for Eclipse</name>
-  <description>JBehave Eclipse provides tight integration for JBehave into the IDE</description>
-  <url>http://jbehave.org/eclipse</url>
+  <name>JBehave Eclipse</name>
+  <description>JBehave Eclipse provides integration for JBehave with the Eclipse IDE</description>
+  <url>http://jbehave.org/ide/eclipse</url>
   <inceptionYear>2003</inceptionYear>
 
   <prerequisites>
@@ -25,9 +25,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho.version>0.15.0</tycho.version>
-    <!-- eclipse version to built against -->
     <eclipse.release>juno</eclipse.release>
+    <tycho.version>0.15.0</tycho.version>
+    <tycho.test.jvmArgs></tycho.test.jvmArgs>
   </properties>
 
   <licenses>
@@ -49,10 +49,34 @@
       <plugins>
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-maven-plugin</artifactId>
+          <version>${tycho.version}</version>
+          <extensions>true</extensions>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
           <artifactId>tycho-packaging-plugin</artifactId>
           <version>${tycho.version}</version>
           <configuration>
             <format>yyyyMMdd-HHmm</format>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-director-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho.version}</version>
+          <configuration>
+            <pomDependencies>consider</pomDependencies>
           </configuration>
         </plugin>
         <plugin>
@@ -68,46 +92,16 @@
             <forkedProcessTimeoutInSeconds>7200</forkedProcessTimeoutInSeconds>
           </configuration>
         </plugin>
-        <plugin>
-          <groupId>org.eclipse.tycho</groupId>
-          <artifactId>tycho-p2-plugin</artifactId>
-          <version>${tycho.version}</version>
-        </plugin>
       </plugins>
     </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-maven-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <extensions>true</extensions>
       </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho.version}</version>
-        <configuration>
-          <pomDependencies>consider</pomDependencies>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-director-plugin</artifactId>
-        <version>${tycho.version}</version>
-        <executions>
-          <execution>
-            <id>materialize-products</id>
-            <goals>
-              <goal>materialize-products</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>archive-products</id>
-            <goals>
-              <goal>archive-products</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
@@ -142,7 +136,6 @@
       </releases>
     </pluginRepository>
   </pluginRepositories>
-
 
   <profiles>
     <profile>
