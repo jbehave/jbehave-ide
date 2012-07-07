@@ -9,7 +9,7 @@ Story Editor:
 * Story syntax highlighting
 * Step hyperlink detector and implementation jump
 * Basic step auto-completion
-* Story's steps validation:
+* Step validation:
   * Detects unimplemented steps, ie invalid step syntax
   * Detects ambiguous steps, ie entry that is match by several implementation
 
@@ -20,19 +20,18 @@ Preference page:
 * Console (and logger level) settings
 
 Download
-========================
+========
 
-Installation
+Updates Site
 ------------
 
-Simply drop the jar in your eclipse `plugins/` directory and restart your ide.
-
+http://jbehave.org/reference/ide/eclipse/updates/
 
 RELEASE NOTES
 =============
 
 Inspiration
-========================
+===========
 
 * [JBEHAVE-233](http://jira.codehaus.org/browse/JBEHAVE-233)
 * [GivWenZen](https://bitbucket.org/szczepiq/givwenzenclipse/wiki/Home)
