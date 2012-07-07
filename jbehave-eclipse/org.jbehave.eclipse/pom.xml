@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.jbehave.ide</groupId>
+    <groupId>org.jbehave.eclipse</groupId>
     <artifactId>jbehave-eclipse</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
