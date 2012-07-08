@@ -116,8 +116,8 @@ public class StepScannerStyled extends AbstractStoryPartBasedScanner {
                 if(pToken.isIdentifier) {
                     
                     log.debug("Token is an identifier <{}>", f(content));
-                    
-                    if(content.startsWith("$")) {
+
+                    if(content.startsWith(jbehaveProject.getProjectPreferences().getParameterPrefix())) {
                         emit(emitter, parameterToken, offset, content.length());
                     }
                     else {

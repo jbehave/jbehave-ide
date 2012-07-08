@@ -89,7 +89,7 @@ public class ParametrizedStep {
         }
         @Override
         public String toString() {
-            return "<<"+(isIdentifier?"$":"")+value()+">>";
+            return "<<"+(isIdentifier?parameterPrefix:"")+value()+">>";
         }
         public boolean regionMatches(int toffset, String other, int ooffset, int len) {
             return content.regionMatches(offset + toffset, other, ooffset, len);
@@ -329,7 +329,7 @@ public class ParametrizedStep {
         for(int i = tokenIndex; i< getTokenCount(); i++) {
             token = getToken(i);
             if(token.isIdentifier)
-                builder.append("$");
+                builder.append(parameterPrefix);
             builder.append(token.value());
         }
         return builder.toString();

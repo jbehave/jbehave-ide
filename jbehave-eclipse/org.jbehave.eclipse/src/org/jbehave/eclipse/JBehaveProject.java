@@ -162,8 +162,12 @@ public class JBehaveProject {
     public IProject getProject() {
         return project;
     }
+    
+    public ProjectPreferences getProjectPreferences() {
+		return projectPreferences;
+	}
 
-    public StepLocator getStepLocator() {
+	public StepLocator getStepLocator() {
         return new StepLocator(this);
     }
 
