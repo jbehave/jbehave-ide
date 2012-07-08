@@ -10,10 +10,10 @@ fi
 ARTIFACT="jbehave-eclipse"
 QUALIFIER="updates"
 REFERENCE="/var/www/jbehave.org/reference"
-GROUP_ID="org.jbehave.ide"
+GROUP_ID="org.jbehave.eclipse"
 ARTIFACT_ID="org.jbehave.eclipse.repository"
-CLASSIFIER="macosx.cocoa.x86_64"
-PATH="ide/eclipse"
+CLASSIFIER=""
+PATH="eclipse"
 
 ARTIFACT_FULL="$GROUP_ID:$ARTIFACT_ID:$VERSION:zip:$CLASSIFIER"
 VERSIONED_ARTIFACT="uploads/$ARTIFACT-$VERSION"
