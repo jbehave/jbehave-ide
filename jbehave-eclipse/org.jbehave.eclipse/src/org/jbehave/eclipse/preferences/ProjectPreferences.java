@@ -100,6 +100,9 @@ public class ProjectPreferences {
     }
     
     public String getParameterPrefix() {
+    	if ( parameterPrefix == null ){
+    		return DEFAULT_PARAMETER_PREFIX;
+    	}
         return parameterPrefix;
     }
     

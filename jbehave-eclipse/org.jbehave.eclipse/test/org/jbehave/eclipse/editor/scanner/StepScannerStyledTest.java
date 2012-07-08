@@ -58,7 +58,7 @@ public class StepScannerStyledTest {
         jbehaveProject = mock(JBehaveProject.class);
         when(jbehaveProject.getLocalizedStepSupport()).thenReturn(localizedStepSupport);
         when(jbehaveProject.getStepLocator()).thenReturn(new StepLocator(jbehaveProject));
-        when(jbehaveProject.getProjectPreferences()).thenReturn(projectPreferences());
+        when(jbehaveProject.getProjectPreferences()).thenReturn(new ProjectPreferences());
         doAnswer(new Answer() {
             @SuppressWarnings("unchecked")
             @Override
@@ -81,17 +81,7 @@ public class StepScannerStyledTest {
         candidate = new StepCandidate(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
     }
 
-	private ProjectPreferences projectPreferences() {
-		ProjectPreferences projectPreferences = new ProjectPreferences();
-        try {
-			projectPreferences.load();
-		} catch (BackingStoreException e) {
-			e.printStackTrace();
-		}
-		return projectPreferences;
-	}
-    
-    @Test
+	@Test
     public void useCase_ex1() {
         when(stepLocator.findFirstStep(Mockito.anyString())).thenAnswer(new Answer<StepCandidate>() {
             @Override

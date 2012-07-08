@@ -17,6 +17,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
@@ -79,6 +80,7 @@ public class StepParserTest {
         jbehaveProject = mock(JBehaveProject.class);
         when(jbehaveProject.getLocalizedStepSupport()).thenReturn(localizedSupport);
         when(jbehaveProject.getStepLocator()).thenReturn(locator);
+        when(jbehaveProject.getProjectPreferences()).thenReturn(new ProjectPreferences());
     }
 
     private static LocalizedStepSupport createLocalizedStepSupport() {
