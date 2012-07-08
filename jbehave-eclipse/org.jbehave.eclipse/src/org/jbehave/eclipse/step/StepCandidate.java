@@ -73,12 +73,12 @@ public class StepCandidate {
 	public String typeWord() {
 		switch (stepType) {
 		case WHEN:
-			return localizedSupport.lWhen(false);
+			return localizedSupport.when(false);
 		case THEN:
-			return localizedSupport.lThen(false);
+			return localizedSupport.then(false);
 		case GIVEN:
 		default:
-			return localizedSupport.lGiven(false);
+			return localizedSupport.given(false);
 		}
 	}
 

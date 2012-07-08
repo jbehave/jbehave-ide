@@ -10,7 +10,7 @@ import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.textstyle.TextStyle;
 
-public class ExampleTableScanner extends AbstractStoryPartBasedScanner {
+public class ExampleTableScanner extends AbstractStoryScanner {
     
     private IToken keywordToken;
 
@@ -40,7 +40,7 @@ public class ExampleTableScanner extends AbstractStoryPartBasedScanner {
     @Override
     protected void emitPart(StoryPart part) {
         String content = part.getContent();
-        String kwString = getLocalizedStepSupport().lExamplesTable(false);
+        String kwString = getLocalizedStepSupport().examplesTable(false);
         int offset = part.getOffset();
         
         if(content.startsWith(kwString)) {

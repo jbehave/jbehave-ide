@@ -18,6 +18,7 @@ import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
 import org.jbehave.eclipse.jface.TextAttributeProvider;
+import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
@@ -27,6 +28,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class StepScannerStyledTest {
     private static final String STEP1 = "an account named '$name' with the following properties:$properties";
@@ -56,7 +58,7 @@ public class StepScannerStyledTest {
         jbehaveProject = mock(JBehaveProject.class);
         when(jbehaveProject.getLocalizedStepSupport()).thenReturn(localizedStepSupport);
         when(jbehaveProject.getStepLocator()).thenReturn(new StepLocator(jbehaveProject));
-        
+        when(jbehaveProject.getProjectPreferences()).thenReturn(projectPreferences());
         doAnswer(new Answer() {
             @SuppressWarnings("unchecked")
             @Override
@@ -78,6 +80,16 @@ public class StepScannerStyledTest {
         IAnnotation annotation = null;
         candidate = new StepCandidate(localizedStepSupport, "$", method, annotation, StepType.GIVEN, STEP1, 0);
     }
+
+	private ProjectPreferences projectPreferences() {
+		ProjectPreferences projectPreferences = new ProjectPreferences();
+        try {
+			projectPreferences.load();
+		} catch (BackingStoreException e) {
+			e.printStackTrace();
+		}
+		return projectPreferences;
+	}
     
     @Test
     public void useCase_ex1() {

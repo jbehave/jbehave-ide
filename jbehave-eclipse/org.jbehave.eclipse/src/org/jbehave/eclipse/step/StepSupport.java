@@ -11,40 +11,40 @@ public class StepSupport {
     
     public static boolean isTheStartIgnoringCaseOfStep(LocalizedStepSupport localizedStepSupport, String line) {
         return enhanceString(line).isTheStartIgnoringCaseOfOneOf(//
-                localizedStepSupport.lGiven(true), //
-                localizedStepSupport.lWhen(true), //
-                localizedStepSupport.lThen(true), //
-                localizedStepSupport.lAnd(true));
+                localizedStepSupport.given(true), //
+                localizedStepSupport.when(true), //
+                localizedStepSupport.then(true), //
+                localizedStepSupport.and(true));
     }
 
     public static boolean isStepIgnoringCase(LocalizedStepSupport localizedStepSupport, String line) {
         return enhanceString(line).startsIgnoringCaseWithOneOf(//
-                localizedStepSupport.lGiven(true), //
-                localizedStepSupport.lWhen(true), //
-                localizedStepSupport.lThen(true), //
-                localizedStepSupport.lAnd(true));
+                localizedStepSupport.given(true), //
+                localizedStepSupport.when(true), //
+                localizedStepSupport.then(true), //
+                localizedStepSupport.and(true));
     }
     
     public static boolean isStepType(LocalizedStepSupport localizedStepSupport, String line) {
         return enhanceString(line).equalsToOneOf(//
-                localizedStepSupport.lGiven(true), //
-                localizedStepSupport.lWhen(true), //
-                localizedStepSupport.lThen(true), //
-                localizedStepSupport.lAnd(true));
+                localizedStepSupport.given(true), //
+                localizedStepSupport.when(true), //
+                localizedStepSupport.then(true), //
+                localizedStepSupport.and(true));
     }
     
     public static boolean isStepAndType(LocalizedStepSupport localizedStepSupport, String line) {
-        return enhanceString(line).startsIgnoringCaseWithOneOf(localizedStepSupport.lAnd(true));
+        return enhanceString(line).startsIgnoringCaseWithOneOf(localizedStepSupport.and(true));
     }
 
     
     public static int stepSentenceIndex(LocalizedStepSupport localizedStepSupport, String line) {
         StringEnhancer enhanced = enhanceString(line);
         for(String prefix : s(//
-                localizedStepSupport.lGiven(true), //
-                localizedStepSupport.lWhen(true), //
-                localizedStepSupport.lThen(true), //
-                localizedStepSupport.lAnd(true))) {
+                localizedStepSupport.given(true), //
+                localizedStepSupport.when(true), //
+                localizedStepSupport.then(true), //
+                localizedStepSupport.and(true))) {
             if(enhanced.startsIgnoringCaseWith(prefix))
                 return prefix.length();
         }
@@ -69,11 +69,11 @@ public class StepSupport {
 
     public static String stepType(LocalizedStepSupport localizedStepSupport, String stepLine) {
         StringEnhancer enhanced = enhanceString(stepLine);
-        if(enhanced.startsIgnoringCaseWith(localizedStepSupport.lWhen(true)))
+        if(enhanced.startsIgnoringCaseWith(localizedStepSupport.when(true)))
             return StepType.WHEN.name();
-        else if(enhanced.startsIgnoringCaseWith(localizedStepSupport.lGiven(true)))
+        else if(enhanced.startsIgnoringCaseWith(localizedStepSupport.given(true)))
             return StepType.GIVEN.name();
-        else if(enhanced.startsIgnoringCaseWith(localizedStepSupport.lThen(true)))
+        else if(enhanced.startsIgnoringCaseWith(localizedStepSupport.then(true)))
             return StepType.THEN.name();
         return null;
     }

@@ -16,7 +16,7 @@
 
   <name>JBehave Eclipse</name>
   <description>JBehave Eclipse provides integration for JBehave with the Eclipse IDE</description>
-  <url>http://jbehave.org/ide/eclipse</url>
+  <url>http://jbehave.org</url>
   <inceptionYear>2003</inceptionYear>
 
   <prerequisites>

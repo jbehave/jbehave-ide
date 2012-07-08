@@ -8,98 +8,102 @@ import org.jbehave.eclipse.util.CharTree;
 
 public class LocalizedStepSupport {
 
-    private CharTree<Keyword> kwTree;
+	private CharTree<Keyword> keywordTree;
 
-    private Locale storyLocale;
+	private Locale storyLocale;
 
-    private LocalizedKeywords localizedKeywords;
+	private LocalizedKeywords localizedKeywords;
 
-    public void setStoryLocale(Locale storyLocale) {
-        this.storyLocale = storyLocale;
-        localizedKeywords = null;
-        kwTree = null;
-    }
+	public void setStoryLocale(Locale storyLocale) {
+		this.storyLocale = storyLocale;
+		localizedKeywords = null;
+		keywordTree = null;
+	}
 
-    public Locale getLocale() {
-        return storyLocale;
-    }
+	public Locale getLocale() {
+		return storyLocale;
+	}
 
-    public CharTree<Keyword> sharedKeywordCharTree() {
-        if (kwTree == null)
-            kwTree = createKeywordCharTree();
-        return kwTree;
-    }
+	public CharTree<Keyword> getKeywordTree() {
+		if (keywordTree == null) {
+			keywordTree = createKeywordTree();
+		}
+		return keywordTree;
+	}
 
-    public LocalizedKeywords getLocalizedKeywords() {
-        if (localizedKeywords == null)
-            localizedKeywords = new LocalizedKeywords(storyLocale);
-        return localizedKeywords;
-    }
+	public LocalizedKeywords getLocalizedKeywords() {
+		if (localizedKeywords == null) {
+			localizedKeywords = new LocalizedKeywords(storyLocale);
+		}
+		return localizedKeywords;
+	}
 
-    protected CharTree<Keyword> createKeywordCharTree() {
-        LocalizedKeywords keywords = getLocalizedKeywords();
-        CharTree<Keyword> cn = new CharTree<Keyword>('/', null);
-        for (Keyword kw : Keyword.values()) {
-            String asString = kw.asString(keywords);
-            cn.push(asString, kw);
-        }
-        return cn;
-    }
+	protected CharTree<Keyword> createKeywordTree() {
+		LocalizedKeywords keywords = getLocalizedKeywords();
+		CharTree<Keyword> tree = new CharTree<Keyword>('/', null);
+		for (Keyword keyword : Keyword.values()) {
+			String asString = keyword.asString(keywords);
+			tree.push(asString, keyword);
+		}
+		return tree;
+	}
 
-    public String lGiven(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().given(), withTrailingSpace);
-    }
+	public String given(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().given(), withTrailingSpace);
+	}
 
-    public String lAnd(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().and(), withTrailingSpace);
-    }
+	public String and(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().and(), withTrailingSpace);
+	}
 
-    public String lAsA(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().asA(), withTrailingSpace);
-    }
+	public String asA(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().asA(), withTrailingSpace);
+	}
 
-    public String lExamplesTable(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().examplesTable(), withTrailingSpace);
-    }
+	public String examplesTable(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().examplesTable(),
+				withTrailingSpace);
+	}
 
-    public String lGivenStories(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().givenStories(), withTrailingSpace);
-    }
+	public String givenStories(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().givenStories(),
+				withTrailingSpace);
+	}
 
-    public String lIgnorable(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().ignorable(), withTrailingSpace);
-    }
+	public String ignorable(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().ignorable(), withTrailingSpace);
+	}
 
-    public String lInOrderTo(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().inOrderTo(), withTrailingSpace);
-    }
+	public String inOrderTo(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().inOrderTo(), withTrailingSpace);
+	}
 
-    public String lIWantTo(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().iWantTo(), withTrailingSpace);
-    }
+	public String iWantTo(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().iWantTo(), withTrailingSpace);
+	}
 
-    public String lMeta(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().meta(), withTrailingSpace);
-    }
+	public String meta(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().meta(), withTrailingSpace);
+	}
 
-    public String lNarrative(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().narrative(), withTrailingSpace);
-    }
+	public String narrative(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().narrative(), withTrailingSpace);
+	}
 
-    public String lScenario(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().scenario(), withTrailingSpace);
-    }
+	public String scenario(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().scenario(), withTrailingSpace);
+	}
 
-    public String lThen(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().then(), withTrailingSpace);
-    }
+	public String then(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().then(), withTrailingSpace);
+	}
 
-    public String lWhen(boolean withTrailingSpace) {
-        return plusSpace(getLocalizedKeywords().when(), withTrailingSpace);
-    }
+	public String when(boolean withTrailingSpace) {
+		return plusSpace(getLocalizedKeywords().when(), withTrailingSpace);
+	}
 
-    private static String plusSpace(String aString, boolean wantSpace) {
-        return wantSpace ? aString + " " : aString;
-    }
+	private static String plusSpace(String aString, boolean withTrailingSpace) {
+		return withTrailingSpace ? aString + " " : aString;
+	}
 
 }

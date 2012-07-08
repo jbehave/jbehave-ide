@@ -14,7 +14,7 @@ import org.jbehave.eclipse.textstyle.TextStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AllInOneScanner extends AbstractStoryPartBasedScanner {
+public class AllInOneScanner extends AbstractStoryScanner {
     
     private Logger logger = LoggerFactory.getLogger(AllInOneScanner.class);
     
@@ -120,7 +120,7 @@ public class AllInOneScanner extends AbstractStoryPartBasedScanner {
         }
     }
 
-    private void emitPart(AbstractStoryPartBasedScanner scanner, StoryPart part) {
+    private void emitPart(AbstractStoryScanner scanner, StoryPart part) {
         scanner.setRange(document, 0, document.getLength());
         scanner.emitPart(part);
         addFragments(scanner.getFragments());

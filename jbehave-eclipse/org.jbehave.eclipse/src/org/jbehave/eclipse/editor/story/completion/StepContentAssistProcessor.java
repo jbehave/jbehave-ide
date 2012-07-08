@@ -100,7 +100,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
                     logger.debug("Autocompletion unable to disambiguate 'And' case: previous story part is probably not a step");
                     return null;
                 }
-                int indexOf = localizedStepSupport.lAnd(false).length();
+                int indexOf = localizedStepSupport.and(false).length();
                 stepStartUsedForSearch = kw.asString(localizedStepSupport.getLocalizedKeywords()) + lineStart.substring(indexOf);
             }
             
@@ -137,7 +137,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
                 else {
                     complete = pStep.stepCandidate.fullStep();
                     if(isAndCase) {
-                        complete = localizedStepSupport.lAnd(false) + " " + pStep.stepCandidate.stepPattern;
+                        complete = localizedStepSupport.and(false) + " " + pStep.stepCandidate.stepPattern;
                     }
                     templateContext = contextFullLine;
                     replacementRegion = regionComplete;

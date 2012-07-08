@@ -3,46 +3,45 @@ package org.jbehave.eclipse;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.swt.graphics.Image;
 
-public class KeywordImageRegistry {
-    private ImageRegistry imageRegistry;
-    public KeywordImageRegistry(ImageRegistry imageRegistry) {
+public class KeywordImages {
+    
+	private ImageRegistry imageRegistry;
+
+    public KeywordImages(ImageRegistry imageRegistry) {
         this.imageRegistry = imageRegistry;
     }
     
     public Image getImageFor(Keyword keyword) {
         switch(keyword) {
             case Given:
-                return getImageRegistry().get(ImageIds.STEP_GIVEN);
+                return imageRegistry.get(ImageIds.STEP_GIVEN);
             case When:
-                return getImageRegistry().get(ImageIds.STEP_WHEN);
+                return imageRegistry.get(ImageIds.STEP_WHEN);
             case Then:
-                return getImageRegistry().get(ImageIds.STEP_THEN);
+                return imageRegistry.get(ImageIds.STEP_THEN);
             case And:
-                return getImageRegistry().get(ImageIds.STEP_AND); 
+                return imageRegistry.get(ImageIds.STEP_AND); 
             case GivenStories:
             case Meta:
             case MetaProperty:
-                return getImageRegistry().get(ImageIds.META); 
+                return imageRegistry.get(ImageIds.META); 
             case AsA:
             case InOrderTo:
             case IWantTo:
             case Narrative:
-                return getImageRegistry().get(ImageIds.NARRATIVE);
+                return imageRegistry.get(ImageIds.NARRATIVE);
             case ExamplesTable:
             case ExamplesTableHeaderSeparator:
             case ExamplesTableIgnorableSeparator:
             case ExamplesTableRow:
             case ExamplesTableValueSeparator:
-                return getImageRegistry().get(ImageIds.EXAMPLE_TABLE);
+                return imageRegistry.get(ImageIds.EXAMPLE_TABLE);
             case Scenario:
-                return getImageRegistry().get(ImageIds.SCENARIO);
+                return imageRegistry.get(ImageIds.SCENARIO);
             case Ignorable:
-                return getImageRegistry().get(ImageIds.IGNORABLE);
+                return imageRegistry.get(ImageIds.IGNORABLE);
         }
         return null;
     }
 
-    private ImageRegistry getImageRegistry() {
-        return imageRegistry;
-    }
 }

@@ -40,10 +40,10 @@ public class NarrativeScannerPrev extends RuleBasedScanner {
         IToken keyword = new Token(textAttribute);
         
         IRule[] rules = new IRule[] {
-                lineStartsWithRule(localizedStepSupport.lNarrative(false), " ", keyword), //
-                lineStartsWithRule(localizedStepSupport.lInOrderTo(false), " ", keyword), //
-                lineStartsWithRule(localizedStepSupport.lAsA(false), " ", keyword), //
-                lineStartsWithRule(localizedStepSupport.lIWantTo(false), " ", keyword) //
+                lineStartsWithRule(localizedStepSupport.narrative(false), " ", keyword), //
+                lineStartsWithRule(localizedStepSupport.inOrderTo(false), " ", keyword), //
+                lineStartsWithRule(localizedStepSupport.asA(false), " ", keyword), //
+                lineStartsWithRule(localizedStepSupport.iWantTo(false), " ", keyword) //
         };
         setRules(rules);
     }

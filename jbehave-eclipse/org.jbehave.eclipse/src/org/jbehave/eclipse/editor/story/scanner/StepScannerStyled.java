@@ -33,7 +33,7 @@ import org.slf4j.LoggerFactory;
  * of the last found token.
  * </p>
  */
-public class StepScannerStyled extends AbstractStoryPartBasedScanner {
+public class StepScannerStyled extends AbstractStoryScanner {
     
     private Logger log = LoggerFactory.getLogger(StepScannerStyled.class);
 

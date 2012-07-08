@@ -49,16 +49,12 @@ public class JBehaveProject {
     private static Logger log = LoggerFactory.getLogger(JBehaveProject.class);
 
     private IProject project;
-    //
     private MethodPerPackageFragmentRootCache<StepCandidate> cache;
-    //
-    private ReadWriteLock rwLock = new ReentrantReadWriteLock();
-    //
+    private LocalizedStepSupport localizedStepSupport;
     private ProjectPreferences projectPreferences;
     private ClassScannerPreferences classScannerPreferences;
     //
-    private LocalizedStepSupport localizedStepSupport;
-    //
+    private ReadWriteLock rwLock = new ReentrantReadWriteLock();
     private AtomicInteger comod = new AtomicInteger();
     private volatile int rebuildTick = -1;
     //
@@ -297,10 +293,11 @@ public class JBehaveProject {
             }
 
             if (!patterns.isEmpty()) {
-                log.debug("StepLocator analysing method: " + Containers.pathOf(method) + " found: " + patterns);
+                log.debug("Analysing method: " + Containers.pathOf(method) + " found: " + patterns);
                 for (String stepPattern : patterns) {
-                    if (stepPattern == null)
+                    if (stepPattern == null){
                         continue;
+                    }
                     container.add(new StepCandidate(//
                             getLocalizedStepSupport(),//
                             parameterPrefix,//

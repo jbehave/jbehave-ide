@@ -16,7 +16,7 @@ import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.parser.Constants.TokenizerCallback;
 import org.jbehave.eclipse.textstyle.TextStyle;
 
-public class MiscScanner extends AbstractStoryPartBasedScanner {
+public class MiscScanner extends AbstractStoryScanner {
     
     private IToken keywordToken;
     private IToken metaPropertyToken;

@@ -31,19 +31,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
- * 
- * {@link ITokenScanner} javadoc: <br/>
- * 
  * <p>
  * A token scanner scans a range of a document and reports about the token it finds. 
  * <b>A scanner has state</b>. When asked, the scanner returns the offset and the length 
  * of the last found token.
  * </p>
  */
-public abstract class AbstractStoryPartBasedScanner implements ITokenScanner {
+public abstract class AbstractStoryScanner implements ITokenScanner {
     
-    private Logger log = LoggerFactory.getLogger(AbstractStoryPartBasedScanner.class);
+    private Logger log = LoggerFactory.getLogger(AbstractStoryScanner.class);
     
     protected final TextAttributeProvider textAttributeProvider;
     protected final JBehaveProject jbehaveProject;
@@ -59,7 +55,7 @@ public abstract class AbstractStoryPartBasedScanner implements ITokenScanner {
     protected IDocument document;
     protected Region range;
 
-    public AbstractStoryPartBasedScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
+    public AbstractStoryScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
         this.jbehaveProject = jbehaveProject;
         this.textAttributeProvider = textAttributeProvider;
         textAttributeProvider.addObserver(new Observer() {
@@ -98,31 +94,16 @@ public abstract class AbstractStoryPartBasedScanner implements ITokenScanner {
         return defaultToken;
     }
     
-    /*
-     * Returns the length of the last token read by this scanner.
-     * 
-     * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenLength()
-     */
     @Override
     public int getTokenLength() {
         return fragments.get(cursor).getLength();
     }
     
-    /*
-     * Returns the offset of the last token read by this scanner.
-     * 
-     * @see org.eclipse.jface.text.rules.ITokenScanner#getTokenOffset()
-     */
     @Override
     public int getTokenOffset() {
         return fragments.get(cursor).getOffset();
     }
     
-    /*
-     * Returns the next token in the document.
-     * 
-     * @see org.eclipse.jface.text.rules.ITokenScanner#nextToken()
-     */
     @Override
     public IToken nextToken() {
         if(cursor==-1) {
@@ -213,7 +194,7 @@ public abstract class AbstractStoryPartBasedScanner implements ITokenScanner {
             emitterCallback = new Callback<IToken>() {
                 @Override
                 public void emit(IToken arg, int offset, int length) {
-                    AbstractStoryPartBasedScanner.this.emit(arg, offset, length);
+                    AbstractStoryScanner.this.emit(arg, offset, length);
                 }
                 @Override
                 public void emitIgnorable(int offset, int length) {

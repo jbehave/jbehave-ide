@@ -8,7 +8,7 @@ import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.jbehave.eclipse.textstyle.TextStyle;
 
-public class NarrativeScanner extends AbstractStoryPartBasedScanner {
+public class NarrativeScanner extends AbstractStoryScanner {
     
     private IToken keywordToken;
 
@@ -36,10 +36,10 @@ public class NarrativeScanner extends AbstractStoryPartBasedScanner {
     @Override
     protected void emitPart(StoryPart part) {
         LocalizedStepSupport localizedStepSupport = getLocalizedStepSupport();
-        if(handleKeyword(part, localizedStepSupport.lNarrative(false)) //
-                || handleKeyword(part, localizedStepSupport.lAsA(false)) //
-                || handleKeyword(part, localizedStepSupport.lInOrderTo(false)) //
-                || handleKeyword(part, localizedStepSupport.lIWantTo(false))) {
+        if(handleKeyword(part, localizedStepSupport.narrative(false)) //
+                || handleKeyword(part, localizedStepSupport.asA(false)) //
+                || handleKeyword(part, localizedStepSupport.inOrderTo(false)) //
+                || handleKeyword(part, localizedStepSupport.iWantTo(false))) {
             // done!
         }
         else {

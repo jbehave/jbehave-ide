@@ -58,16 +58,9 @@ public class Activator extends AbstractUIPlugin {
     /** Key to store custom templates. */
     private static final String CUSTOM_TEMPLATES_KEY = "org.jbehave.customtemplates"; //$NON-NLS-1$
 	
-	/**
-	 * The constructor
-	 */
 	public Activator() {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
-	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		Bundle bundle = context.getBundle();
@@ -172,17 +165,13 @@ public class Activator extends AbstractUIPlugin {
         return rfAppender;
     }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
-	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 	}
 	
-	public KeywordImageRegistry getKeywordImageRegistry() {
-	    return new KeywordImageRegistry(getImageRegistry());
+	public KeywordImages getKeywordImages() {
+	    return new KeywordImages(getImageRegistry());
 	}
 	
 	@Override
