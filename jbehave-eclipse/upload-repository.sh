@@ -3,11 +3,11 @@
 VERSION=$1
 
 if [ "$VERSION" == "" ] ; then
-  echo "usage: upload-eclipse.sh <version>"
+  echo "usage: upload-repository.sh <version>"
   exit;
 fi
 
-ARTIFACT="jbehave-eclipse"
+ARTIFACT="jbehave-repository"
 QUALIFIER="updates"
 REFERENCE="/var/www/jbehave.org/reference"
 GROUP_ID="org.jbehave.eclipse"

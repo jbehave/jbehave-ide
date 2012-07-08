@@ -47,18 +47,10 @@ public class PluginPreferencePage extends PropertyPage implements IWorkbenchPref
         String versionPattern = bundle.getString("pluginPreferencePage.version");
         lblVersion.setText(MessageFormat.format(versionPattern, Activator.getDefault().getVersion()));
         
-        Link lblPluginSite = new Link(container, SWT.NONE);
-        lblPluginSite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-        lblPluginSite.setText(bundle.getString("pluginPreferencePage.pluginLink"));
-        
         Link lblJbehaveSite = new Link(container, SWT.NONE);
         lblJbehaveSite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
         lblJbehaveSite.setText(bundle.getString("pluginPreferencePage.jbehaveLink"));
         
-        Link lblIntroductionPage = new Link(container, SWT.NONE);
-        lblIntroductionPage.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-        lblIntroductionPage.setText(bundle.getString("pluginPreferencePage.prez"));
-
         return container;
     }
 
