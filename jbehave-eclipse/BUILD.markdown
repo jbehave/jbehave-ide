@@ -22,7 +22,7 @@ Building the JBehave Eclipse requires:
 
   ./upload-eclipse.sh
      
-   The repository will be available as Updates site on http://jbehave.org/reference/ide/eclipse/updates/  
+   The repository will be available as Updates site on http://jbehave.org/reference/eclipse/updates/  
      
 # To launch the plugin in an runtime workspace
 
