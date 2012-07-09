@@ -22,11 +22,10 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.editor.step.StepLocator;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.editor.step.TransformByPriority;
 import org.jbehave.eclipse.editor.text.MarkData;
-import org.jbehave.eclipse.parser.Constants;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.RegexUtils;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.ProcessGroup;
 import org.jbehave.eclipse.util.Strings;
@@ -43,7 +42,6 @@ public class MarkingStoryValidator {
     
     private static Logger log = LoggerFactory.getLogger(MarkingStoryValidator.class);
 
-
     private IFile file;
     private IDocument document;
     private JBehaveProject project;
@@ -51,7 +49,6 @@ public class MarkingStoryValidator {
     private boolean applyMarkAsynchronously;
 
     public MarkingStoryValidator(JBehaveProject project, IFile file, IDocument document) {
-        super();
         this.project = project;
         this.file = file;
         this.document = document;
@@ -66,19 +63,18 @@ public class MarkingStoryValidator {
     }
 
     public void validate(Runnable afterApplyCallback) {
-        List<StoryPart> parts = new StoryPartDocumentUtils(project.getLocalizedStepSupport()).getStoryParts(document);
-        analyzeParts(parts, afterApplyCallback);
+        analyze(new StoryDocumentUtils(project.getLocalizedStepSupport()).getStoryElements(document), afterApplyCallback);
     }
 
-    private void analyzeParts(final List<StoryPart> storyParts, final Runnable afterApplyCallback) {
-        final fj.data.List<Part> parts = iterableList(storyParts).map(new F<StoryPart,Part>() {
+    private void analyze(final List<StoryElement> storyElements, final Runnable afterApplyCallback) {
+        final fj.data.List<Part> parts = iterableList(storyElements).map(new F<StoryElement,Part>() {
             @Override
-            public Part f(StoryPart storyPart) {
-                return new Part(storyPart);
+            public Part f(StoryElement storyElement) {
+                return new Part(storyElement);
             }
         });
         
-        Activator.logInfo("Validating parts " + storyParts);
+        Activator.logInfo("Validating " + storyElements);
         
         ProcessGroup<?> group = Activator.getDefault().newProcessGroup();
         group.spawn(checkStepsAsRunnable(parts));
@@ -134,7 +130,7 @@ public class MarkingStoryValidator {
         Iterator<Part> iterator = parts.iterator();
         while(iterator.hasNext()) {
             Part part = iterator.next();
-            Keyword keyword = part.storyPart.getPreferredKeyword();
+            Keyword keyword = part.storyElement.getPreferredKeyword();
             if(keyword==null) {
                 continue;
             }
@@ -276,18 +272,18 @@ public class MarkingStoryValidator {
     class Part {
         private final ConcurrentLinkedQueue<MarkData> marks = New.concurrentLinkedQueue();
         private final ConcurrentLinkedQueue<StepCandidate> candidates = New.concurrentLinkedQueue();
-        private final StoryPart storyPart;
+        private final StoryElement storyElement;
 
-        private Part(StoryPart storyPart) {
+        private Part(StoryElement storyElement) {
             super();
-            this.storyPart = storyPart;
+            this.storyElement = storyElement;
             computeExtractStepSentenceAndRemoveTrailingNewlines();
         }
         
         public void evaluateCandidate(StepCandidate candidate) {
             String pattern = extractStepSentenceAndRemoveTrailingNewlines();
             Keyword type = partType();
-            log.debug("Candidate evaluated against part {}", storyPart);
+            log.debug("Candidate evaluated against part {}", storyElement);
             boolean patternMatch = candidate.matches(pattern);
             boolean typeMatch = type.isSameAs(candidate.stepType);
             if (patternMatch && typeMatch) {
@@ -309,7 +305,7 @@ public class MarkingStoryValidator {
         }
 
         private Keyword partType() {
-            return storyPart.getPreferredKeyword();
+            return storyElement.getPreferredKeyword();
         }
 
         private String extractStepSentenceAndRemoveTrailingNewlines;
@@ -318,9 +314,9 @@ public class MarkingStoryValidator {
         }
         
         private void computeExtractStepSentenceAndRemoveTrailingNewlines() {
-            String stepSentence = storyPart.extractStepSentence();
+            String stepSentence = storyElement.extractStepSentence();
             // remove any comment that can still be within the step
-            String cleaned = Constants.removeComment(stepSentence);
+            String cleaned = RegexUtils.removeComment(stepSentence);
             extractStepSentenceAndRemoveTrailingNewlines = Strings.removeTrailingNewlines(cleaned);
         }
 
@@ -336,8 +332,8 @@ public class MarkingStoryValidator {
             MarkData markData = new MarkData()//
                     .severity(severity)//
                     .message(message)//
-                    .offsetStart(storyPart.getOffsetStart())//
-                    .offsetEnd(storyPart.getOffsetEnd());
+                    .offsetStart(storyElement.getOffsetStart())//
+                    .offsetEnd(storyElement.getOffsetEnd());
             Marks.putCode(markData, code);
             marks.add(markData);
             return markData;
@@ -351,7 +347,7 @@ public class MarkingStoryValidator {
                 for (MarkData mark : marks) {
                     IMarker marker = file.createMarker(MARKER_ID);
                     marker.setAttributes(mark.createAttributes(file, document));
-                    Keyword keyword = storyPart.getPreferredKeyword();
+                    Keyword keyword = storyElement.getPreferredKeyword();
                     if(keyword!=null)
                         marker.setAttribute("Keyword", keyword.name());
                 }
@@ -361,7 +357,7 @@ public class MarkingStoryValidator {
         }
 
         public String text() {
-            return storyPart.getContent();
+            return storyElement.getContent();
         }
 
         public String textWithoutTrailingNewlines() {
@@ -370,7 +366,7 @@ public class MarkingStoryValidator {
 
         @Override
         public String toString() {
-            return "Part [offset=" + storyPart.getOffset() + ", length=" + storyPart.getLength() + ", keyword=" + storyPart.getPreferredKeyword() + ", marks="
+            return "Part [offset=" + storyElement.getOffset() + ", length=" + storyElement.getLength() + ", keyword=" + storyElement.getPreferredKeyword() + ", marks="
                     + marks + ", text=" + textWithoutTrailingNewlines() + "]";
         }
 

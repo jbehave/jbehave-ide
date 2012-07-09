@@ -5,7 +5,7 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 
 public class ScenarioScanner extends AbstractStoryScanner {
 
@@ -25,8 +25,8 @@ public class ScenarioScanner extends AbstractStoryScanner {
 	}
 
 	@Override
-	protected boolean isPartAccepted(StoryPart part) {
-		Keyword keyword = part.getPreferredKeyword();
+	protected boolean isAccepted(StoryElement element) {
+		Keyword keyword = element.getPreferredKeyword();
 		if (keyword == Keyword.Scenario || keyword.isComment()) {
 			return true;
 		}
@@ -34,10 +34,10 @@ public class ScenarioScanner extends AbstractStoryScanner {
 	}
 
 	@Override
-	protected void emitPart(StoryPart part) {
-		String content = part.getContent();
+	protected void emit(StoryElement element) {
+		String content = element.getContent();
 		String kwString = getLocalizedStepSupport().scenario(false);
-		int offset = part.getOffset();
+		int offset = element.getOffset();
 
 		if (content.startsWith(kwString)) {
 			emit(keywordToken, offset, kwString.length());

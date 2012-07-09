@@ -10,14 +10,15 @@ import java.util.regex.Pattern;
 
 import org.jbehave.core.parsers.RegexPrefixCapturingPatternParser;
 import org.jbehave.core.parsers.StepMatcher;
+import org.jbehave.core.parsers.StepPatternParser;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.util.New;
 import org.junit.Before;
 import org.junit.Test;
 
-public class StepParameterTest {
+public class StepPatternParserTest {
 
-    private RegexPrefixCapturingPatternParser parser;
+    private StepPatternParser parser;
 
     @Before
     public void setUp() {
@@ -25,7 +26,7 @@ public class StepParameterTest {
     }
 
     @Test
-    public void usecase() {
+    public void canMatchStep() {
         StepMatcher matcher = parser.parseStep(StepType.WHEN, "a user clicks on $buttonId button");
         assertThat(matcher.parameterNames(), equalTo(new String[] { "buttonId" }));
 
@@ -36,10 +37,6 @@ public class StepParameterTest {
     @Test
     public void parseStepPattern() {
         parseStepPattern("a user clicks on $buttonId button");
-    }
-    
-    @Test
-    public void parseStepPattern2() {
         parseStepPattern("a user clicks on $buttonId");
     }
     
@@ -86,9 +83,6 @@ public class StepParameterTest {
             return content.substring(offset, offset + length);
         }
 
-        /* (non-Javadoc)
-         * @see java.lang.Object#toString()
-         */
         @Override
         public String toString() {
             return "Token [offset=" + offset + ", length=" + length + ", isIdentifier=" + isIdentifier + ", whitespaceIfAny='" + whitespaceIfAny + "']";

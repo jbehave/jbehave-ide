@@ -6,7 +6,7 @@ import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 
 public class NarrativeScanner extends AbstractStoryScanner {
     
@@ -25,8 +25,8 @@ public class NarrativeScanner extends AbstractStoryScanner {
     }
     
     @Override
-    protected boolean isPartAccepted(StoryPart part) {
-        Keyword keyword = part.getPreferredKeyword();
+    protected boolean isAccepted(StoryElement element) {
+        Keyword keyword = element.getPreferredKeyword();
         if(keyword.isNarrative()) {
             return true;
         }
@@ -34,27 +34,27 @@ public class NarrativeScanner extends AbstractStoryScanner {
     }
 
     @Override
-    protected void emitPart(StoryPart part) {
+    protected void emit(StoryElement element) {
         LocalizedStepSupport localizedStepSupport = getLocalizedStepSupport();
-        if(handleKeyword(part, localizedStepSupport.narrative(false)) //
-                || handleKeyword(part, localizedStepSupport.asA(false)) //
-                || handleKeyword(part, localizedStepSupport.inOrderTo(false)) //
-                || handleKeyword(part, localizedStepSupport.iWantTo(false))) {
+        if(handleKeyword(element, localizedStepSupport.narrative(false)) //
+                || handleKeyword(element, localizedStepSupport.asA(false)) //
+                || handleKeyword(element, localizedStepSupport.inOrderTo(false)) //
+                || handleKeyword(element, localizedStepSupport.iWantTo(false))) {
             // done!
         }
         else {
-            emitCommentAware(getDefaultToken(), part.getOffset(), part.getContent());
+            emitCommentAware(getDefaultToken(), element.getOffset(), element.getContent());
         }
     }
     
-    private boolean handleKeyword(StoryPart part, String kwString) {
-        String content = part.getContent();
-        int offset = part.getOffset();
+    private boolean handleKeyword(StoryElement element, String keyword) {
+        String content = element.getContent();
+        int offset = element.getOffset();
         
-        if(content.startsWith(kwString)) {
-            emit(keywordToken, offset, kwString.length());
-            offset += kwString.length();
-            emitCommentAware(getDefaultToken(), offset, content.substring(kwString.length()));
+        if(content.startsWith(keyword)) {
+            emit(keywordToken, offset, keyword.length());
+            offset += keyword.length();
+            emitCommentAware(getDefaultToken(), offset, content.substring(keyword.length()));
             return true;
         }
         return false;

@@ -9,9 +9,8 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.step.StepJumper;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
-import org.jbehave.eclipse.parser.Constants;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.RegexUtils;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.util.Ref;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,20 +36,20 @@ public class StepHyperLinkDetector implements IHyperlinkDetector {
         final JBehaveProject jbehaveProject = storyDocument.getJBehaveProject();
         LocalizedStepSupport localizedStepSupport = jbehaveProject.getLocalizedStepSupport();
 
-        final Ref<StoryPart> found = new StoryPartDocumentUtils(localizedStepSupport).findStoryPartAtRegion(document,
+        final Ref<StoryElement> found = new StoryDocumentUtils(localizedStepSupport).findStoryElementAtRegion(document,
                 region);
         if (found.isNull()) {
             logger.debug("No story part found in region offset: {}, length: {}", region.getOffset(), region.getLength());
             return NONE;
         }
 
-        final StoryPart part = found.get();
-        if (!part.isStepPart()) {
+        final StoryElement part = found.get();
+        if (!part.isStep()) {
             logger.debug("Part found is not a step part got: {}", part.extractKeyword());
             return NONE;
         }
         final String step = part.extractStepSentence();
-        final String partCleaned = Constants.removeTrailingComment(part.getContent());
+        final String partCleaned = RegexUtils.removeTrailingComment(part.getContent());
         IHyperlink link = new IHyperlink() {
 
             @Override

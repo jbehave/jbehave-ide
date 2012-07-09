@@ -36,15 +36,15 @@ public class StepLocator {
 	 * 
 	 */
 	public Iterable<WeightedStep> findCandidatesStartingWith(
-			final String stepLine) {
-		log.debug("Attempt to find candidates starting with <{}>", stepLine);
+			final String step) {
+		log.debug("Finding candidates starting with <{}>", step);
 		try {
 			LocalizedStepSupport localizedStepSupport = project
 					.getLocalizedStepSupport();
 			final String searchedType = StepSupport.stepType(
-					localizedStepSupport, stepLine);
-			final String stepEntry = StepSupport.extractStepSentence(
-					localizedStepSupport, stepLine);
+					localizedStepSupport, step);
+			final String stepWithoutKeyword = StepSupport.stepWithoutKeyword(
+					localizedStepSupport, step);
 
 			Visitor<StepCandidate, WeightedStep> findOne = new Visitor<StepCandidate, WeightedStep>() {
 				@Override
@@ -54,12 +54,12 @@ public class StepLocator {
 						return;
 					}
 
-					if (StringUtils.isBlank(stepEntry) && sameType) {
+					if (StringUtils.isBlank(stepWithoutKeyword) && sameType) {
 						add(new WeightedStep(candidate, 0.1f));
 						return;
 					}
 
-					float weight = candidate.weightOf(stepEntry);
+					float weight = candidate.weightOf(stepWithoutKeyword);
 					if (weight > 0) {
 						add(new WeightedStep(candidate, weight));
 					} else {
@@ -69,15 +69,15 @@ public class StepLocator {
 				}
 			};
 			traverseSteps(findOne);
-			ConcurrentLinkedQueue<WeightedStep> founds = findOne.getFounds();
-			log.debug("Candidates starting with <{}> found: #{}", stepLine,
-					founds.size());
-			return founds;
+			ConcurrentLinkedQueue<WeightedStep> elements = findOne.getElementsFound();
+			log.debug("Candidates starting with <{}> found: #{}", step,
+					elements.size());
+			return elements;
 		} catch (JavaModelException e) {
-			log.error("Failed to find candidates for step <" + stepLine + ">",
+			log.error("Failed to find candidates for step <" + step + ">",
 					e);
 			Activator.logError("Failed to find candidates for step <"
-					+ stepLine + ">", e);
+					+ step + ">", e);
 		}
 		return null;
 	}
@@ -105,7 +105,7 @@ public class StepLocator {
 			};
 			traverseSteps(matchingStepVisitor);
 			StepCandidate found = getFirstStepWithHighestPrio(matchingStepVisitor
-					.getFounds());
+					.getElementsFound());
 			if (found == null) {
 				log.debug("No candidate found matching <{}>", step);
 				return null;

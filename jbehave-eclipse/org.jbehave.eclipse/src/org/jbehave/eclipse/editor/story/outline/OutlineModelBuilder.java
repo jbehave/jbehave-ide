@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.eclipse.jface.text.IDocument;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
-import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.parser.StoryPartVisitor;
+import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
+import org.jbehave.eclipse.parser.StoryElement;
+import org.jbehave.eclipse.parser.StoryVisitor;
 import org.jbehave.eclipse.util.New;
 
-public class OutlineModelBuilder extends StoryPartVisitor {
+public class OutlineModelBuilder extends StoryVisitor {
     
     private final LocalizedStepSupport jbehaveProject;
     private final IDocument document;
@@ -22,7 +22,7 @@ public class OutlineModelBuilder extends StoryPartVisitor {
     
     public List<OutlineModel> build () {
         models = New.arrayList();
-        new StoryPartDocumentUtils(jbehaveProject).traverseStoryParts(document, this);
+        new StoryDocumentUtils(jbehaveProject).traverseStory(document, this);
         return models;
     }
     
@@ -32,12 +32,12 @@ public class OutlineModelBuilder extends StoryPartVisitor {
     }
 
     @Override
-    public void visit(StoryPart part) {
+    public void visit(StoryElement element) {
         OutlineModel model = new OutlineModel(
-                part.getPreferredKeyword(), 
-                part.getContent(), 
-                part.getOffset(), 
-                part.getLength());
+                element.getPreferredKeyword(), 
+                element.getContent(), 
+                element.getOffset(), 
+                element.getLength());
         
         if(!acceptModel(model)) {
             return;

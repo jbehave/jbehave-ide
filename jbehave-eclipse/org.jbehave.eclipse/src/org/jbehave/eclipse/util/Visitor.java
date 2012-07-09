@@ -4,7 +4,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public abstract class Visitor<T,R> {
     private boolean isDone;
-    private ConcurrentLinkedQueue<R> founds = New.concurrentLinkedQueue();
+    private ConcurrentLinkedQueue<R> elements = New.concurrentLinkedQueue();
     
     public abstract void visit(T value);
     
@@ -17,16 +17,16 @@ public abstract class Visitor<T,R> {
     }
     
     public void add(R found) {
-        this.founds.add(found);
+        this.elements.add(found);
     }
     
     public R getFirst() {
-        if(founds.isEmpty())
+        if(elements.isEmpty())
             return null;
-        return founds.peek();
+        return elements.peek();
     }
     
-    public ConcurrentLinkedQueue<R> getFounds() {
-        return founds;
+    public ConcurrentLinkedQueue<R> getElementsFound() {
+        return elements;
     }
 }

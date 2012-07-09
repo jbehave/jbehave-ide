@@ -14,9 +14,9 @@ import org.jbehave.eclipse.editor.step.StepLocator;
 import org.jbehave.eclipse.editor.step.StepSupport;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +58,7 @@ public class StepScannerStyled extends AbstractStoryScanner {
 	}
 
 	@Override
-	protected boolean isPartAccepted(StoryPart part) {
+	protected boolean isAccepted(StoryElement part) {
 		Keyword keyword = part.getPreferredKeyword();
 		if (keyword != null && keyword.isStep()) {
 			return true;
@@ -67,15 +67,15 @@ public class StepScannerStyled extends AbstractStoryScanner {
 	}
 
 	@Override
-	protected void emitPart(StoryPart part) {
-		parseStep(part.getContent(), part.getOffset());
+	protected void emit(StoryElement element) {
+		parseStep(element.getContent(), element.getOffset());
 	}
 
 	private void parseStep(String stepContent, final int initialOffset) {
 		log.debug("Parsing step, offset: {}, length: {}, content: <{}>",
 				o(initialOffset, stepContent.length(), f(stepContent)));
 		int offset = initialOffset;
-		int stepSep = StepSupport.stepSentenceIndex(getLocalizedStepSupport(),
+		int stepSep = StepSupport.stepKeywordIndex(getLocalizedStepSupport(),
 				stepContent);
 
 		emit(keywordToken, offset, stepSep);
@@ -85,7 +85,7 @@ public class StepScannerStyled extends AbstractStoryScanner {
 		// corresponding token in place
 		String rawAfterKeyword = stepContent.substring(stepSep);
 		ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(
-				Constants.commentLineMatcher, rawAfterKeyword);
+				RegexUtils.COMMENT_PATTERN, rawAfterKeyword);
 
 		String cleanedAfterKeyword = emitter.contentWithoutIgnorables();
 		String cleanedStepSentence = Strings
@@ -123,7 +123,7 @@ public class StepScannerStyled extends AbstractStoryScanner {
 							.getProjectPreferences().getParameterPrefix())) {
 						emit(emitter, parameterToken, offset, content.length());
 					} else {
-						if (Constants.containsExampleTable(content)) {
+						if (RegexUtils.containsExampleTable(content)) {
 							emitTable(emitter, getDefaultToken(), offset,
 									content);
 						} else {

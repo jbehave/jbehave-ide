@@ -39,7 +39,7 @@ public class QuickOutlinePopupDialogMain {
         steps.add(new StepCandidate(null, "$", null, null,StepType.THEN, "the card should be returned", 0));
 
         final StoryEditor editor = mock(StoryEditor.class);
-        when(editor.getPotentialSteps()).thenReturn(steps);
+        when(editor.getStepCandidates()).thenReturn(steps);
         
         final Display display = new Display();
         final Shell shell = new Shell(display, SWT.DIALOG_TRIM);

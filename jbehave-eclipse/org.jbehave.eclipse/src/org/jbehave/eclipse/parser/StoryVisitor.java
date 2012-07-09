@@ -1,10 +1,10 @@
 package org.jbehave.eclipse.parser;
 
-public abstract class StoryPartVisitor {
+public abstract class StoryVisitor {
     
     private boolean isDone = false;
 
-    public abstract void visit(StoryPart part);
+    public abstract void visit(StoryElement element);
     
     public boolean isDone() {
         return isDone;

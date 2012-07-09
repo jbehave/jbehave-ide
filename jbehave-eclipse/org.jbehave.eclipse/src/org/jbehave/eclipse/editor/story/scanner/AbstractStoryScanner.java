@@ -16,14 +16,14 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
+import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
-import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.parser.StoryPartVisitor;
-import org.jbehave.eclipse.parser.Constants.TokenizerCallback;
+import org.jbehave.eclipse.parser.StoryElement;
+import org.jbehave.eclipse.parser.StoryVisitor;
+import org.jbehave.eclipse.parser.RegexUtils.TokenizerCallback;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter.Callback;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.Objects;
@@ -117,18 +117,19 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
     
     protected void evaluateFragments() {
         final Object self = this;
-        StoryPartVisitor visitor = new StoryPartVisitor() {
+        StoryVisitor visitor = new StoryVisitor() {
             @Override
-            public void visit(StoryPart part) {
-                if(part.intersects(range.getOffset(), range.getLength())) {
-                    if(isPartAccepted(part))
-                        emitPart(part); //part are given in the absolute position
-                    else
-                        log.warn("Part rejected... ({}@{}): {}", Objects.o(self.getClass(), System.identityHashCode(self), part));
+            public void visit(StoryElement element) {
+                if(element.intersects(range.getOffset(), range.getLength())) {
+                    if(isAccepted(element)){
+                        emit(element); // element is given an absolute position
+                    } else {
+                        log.warn("Element rejected... ({}@{}): {}", Objects.o(self.getClass(), System.identityHashCode(self), element));
+                    }
                 }
             }
         };
-        new StoryPartDocumentUtils(getLocalizedStepSupport()).traverseStoryParts(document, visitor);
+        new StoryDocumentUtils(getLocalizedStepSupport()).traverseStory(document, visitor);
         
         consolidateFragments();
     }
@@ -176,13 +177,13 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
         return jbehaveProject.getLocalizedStepSupport();
     }
     
-    protected abstract boolean isPartAccepted(StoryPart part);
+    protected abstract boolean isAccepted(StoryElement element);
 
     protected static String f(String string) {
         return string.replace("\n", "\\n");
     }
     
-    protected abstract void emitPart(StoryPart part);
+    protected abstract void emit(StoryElement element);
     
     protected void emit(ContentWithIgnorableEmitter emitter, IToken token, int offset, int length) {
         emitter.emitNext(offset, length, emitterCallback(), token);
@@ -272,7 +273,7 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
     }
     
     protected void emitTable(final ContentWithIgnorableEmitter emitter, final IToken defaultToken, final int offset, String content) {
-        Constants.splitLine(content, new TokenizerCallback() {
+        RegexUtils.splitLine(content, new TokenizerCallback() {
             @Override
             public void token(int startOffset, int endOffset, String line, boolean isDelimiter) {
                 if(isDelimiter)
@@ -286,7 +287,7 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
     }
     
     protected void emitCommentAware(final IToken defaultToken, final int offset, String content) {
-        Constants.splitLine(content, new TokenizerCallback() {
+        RegexUtils.splitLine(content, new TokenizerCallback() {
             @Override
             public void token(int startOffset, int endOffset, String line, boolean isDelimiter) {
                 if(line.trim().startsWith("!--"))

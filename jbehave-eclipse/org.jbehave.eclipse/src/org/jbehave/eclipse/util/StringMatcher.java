@@ -51,7 +51,7 @@ public class StringMatcher {
 
     private static void compileGlobTo(List<Pattern> dst, String... globs) {
         for(int i=0;i<globs.length;i++) {
-            dst.add(Strings.convertGlobToPattern(globs[i]));
+            dst.add(Strings.convertToPattern(globs[i]));
         }
     }
     

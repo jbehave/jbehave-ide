@@ -3,7 +3,7 @@ When user credits is 12 dollars
 And user clicks on enter button
 And user clicks on enter button
 
-Scenario: user can logi 
+Scenario: user can login
 And account named 'az' is logged
 
 

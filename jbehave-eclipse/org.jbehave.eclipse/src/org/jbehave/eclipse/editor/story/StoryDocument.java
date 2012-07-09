@@ -6,9 +6,9 @@ import java.util.Locale;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.parser.StoryParser;
-import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.parser.StoryPartVisitor;
+import org.jbehave.eclipse.parser.VisitingStoryParser;
+import org.jbehave.eclipse.parser.StoryElement;
+import org.jbehave.eclipse.parser.StoryVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,12 +16,11 @@ public class StoryDocument extends Document {
 
 	private Logger logger = LoggerFactory.getLogger(StoryDocument.class);
 
-	private volatile List<StoryPart> parts;
+	private volatile List<StoryElement> elements;
 	private JBehaveProject jbehaveProject;
 	private Locale lastLocale;
 
 	public StoryDocument() {
-		super();
 	}
 
 	public void setJBehaveProject(JBehaveProject project) {
@@ -33,37 +32,38 @@ public class StoryDocument extends Document {
 	}
 
 	protected void fireDocumentChanged(DocumentEvent event) {
-		invalidateStoryParts();
+		invalidateStoryElements();
 		// ... continue processing
 		super.fireDocumentChanged(event);
 	}
 
-	private synchronized void invalidateStoryParts() {
-		parts = null;
-	}
-
-	private synchronized List<StoryPart> getOrGenerateStoryParts() {
-		logger.debug(
-				"Retrieving story parts from document (previous locale {} current locale {})",
-				lastLocale, jbehaveProject.getLocale());
-
-		if (lastLocale == null
-				|| !lastLocale.equals(jbehaveProject.getLocale())) {
-			invalidateStoryParts();
-			lastLocale = jbehaveProject.getLocale();
-		}
-		if (parts == null) {
-			parts = new StoryParser(jbehaveProject.getLocalizedStepSupport())
-					.parse(get());
-		}
-		return parts;
-	}
-
-	public void traverseStoryParts(StoryPartVisitor visitor) {
-		for (StoryPart part : getOrGenerateStoryParts()) {
+	public void traverseStory(StoryVisitor visitor) {
+		for (StoryElement part : storyElements()) {
 			visitor.visit(part);
 			if (visitor.isDone())
 				return;
 		}
 	}
+
+	private synchronized void invalidateStoryElements() {
+		elements = null;
+	}
+
+	private synchronized List<StoryElement> storyElements() {
+		logger.debug(
+				"Retrieving story elements from document (previous locale {} current locale {})",
+				lastLocale, jbehaveProject.getLocale());
+
+		if (lastLocale == null
+				|| !lastLocale.equals(jbehaveProject.getLocale())) {
+			invalidateStoryElements();
+			lastLocale = jbehaveProject.getLocale();
+		}
+		if (elements == null) {
+			elements = new VisitingStoryParser(jbehaveProject.getLocalizedStepSupport())
+					.parse(get());
+		}
+		return elements;
+	}
+
 }

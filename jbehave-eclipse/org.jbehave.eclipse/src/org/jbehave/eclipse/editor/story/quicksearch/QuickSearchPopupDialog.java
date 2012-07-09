@@ -157,7 +157,7 @@ public class QuickSearchPopupDialog extends PopupDialog {
         // fTreeViewer.setComparator(fTreeViewerDefaultComparator);
         treeViewer.setAutoExpandLevel(1);
         treeViewer.setUseHashlookup(true);
-        treeViewer.setInput(Lists.toList(editor.getPotentialSteps()));
+        treeViewer.setInput(Lists.toList(editor.getStepCandidates()));
     }
     
     /**
@@ -316,7 +316,7 @@ public class QuickSearchPopupDialog extends PopupDialog {
         if (pattern.length() == 0) {
             namePattern = null;
         } else {
-            namePattern = Strings.convertGlobToPattern(pattern);
+            namePattern = Strings.convertToPattern(pattern);
         }
 
         // Update the name pattern filter on the tree viewer

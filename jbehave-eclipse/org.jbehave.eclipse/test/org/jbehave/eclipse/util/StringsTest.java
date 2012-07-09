@@ -29,19 +29,19 @@ public class StringsTest {
     @Test
     public void getSubLineUntilOffset() throws IOException {
         String text = IOUtils.toString(getClass().getResourceAsStream("/data/tfdm_update-1.story"));
-        String line = Strings.getSubLineUntilOffset(text, 25);
+        String line = Strings.substringUntilOffset(text, 25);
         assertThat(line, equalTo("Given an inactive direct "));
     }
     
     @Test
     public void removeLeftSpaces() {
-        assertThat(Strings.removeLeftSpaces("   a  "), equalTo("a  "));
-        assertThat(Strings.removeLeftSpaces("   abc"), equalTo("abc"));
-        assertThat(Strings.removeLeftSpaces("   a c"), equalTo("a c"));
-        assertThat(Strings.removeLeftSpaces("      "), equalTo(""));
-        assertThat(Strings.removeLeftSpaces(""), equalTo(""));
-        assertThat(Strings.removeLeftSpaces(null), equalTo(null));
-        assertThat(Strings.removeLeftSpaces("  \n"), equalTo("\n"));
+        assertThat(Strings.removeLeadingSpaces("   a  "), equalTo("a  "));
+        assertThat(Strings.removeLeadingSpaces("   abc"), equalTo("abc"));
+        assertThat(Strings.removeLeadingSpaces("   a c"), equalTo("a c"));
+        assertThat(Strings.removeLeadingSpaces("      "), equalTo(""));
+        assertThat(Strings.removeLeadingSpaces(""), equalTo(""));
+        assertThat(Strings.removeLeadingSpaces(null), equalTo(null));
+        assertThat(Strings.removeLeadingSpaces("  \n"), equalTo("\n"));
         
     }
 

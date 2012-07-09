@@ -8,29 +8,29 @@ import org.jbehave.eclipse.util.CharIterator;
 import org.jbehave.eclipse.util.CharIterators;
 import org.jbehave.eclipse.util.CharTree;
 
-public class StoryParser {
+public class VisitingStoryParser {
 
 	private final LocalizedStepSupport localizedStepSupport;
 
-	public StoryParser(LocalizedStepSupport localizedStepSupport) {
+	public VisitingStoryParser(LocalizedStepSupport localizedStepSupport) {
 		this.localizedStepSupport = localizedStepSupport;
 	}
 
-	public List<StoryPart> parse(CharSequence content) {
-		StoryPartCollector collector = new StoryPartCollector();
+	public List<StoryElement> parse(CharSequence content) {
+		VisitingCollector collector = new VisitingCollector();
 		parse(content, collector);
-		return collector.getParts();
+		return collector.getElements();
 	}
 
-	public void parse(CharSequence content, StoryPartVisitor visitor) {
+	public void parse(CharSequence content, StoryVisitor visitor) {
 		parse(CharIterators.createFrom(content), 0, visitor);
 	}
 
-	public void parse(CharIterator it, StoryPartVisitor visitor) {
+	public void parse(CharIterator it, StoryVisitor visitor) {
 		parse(it, 0, visitor);
 	}
 
-	public void parse(CharIterator it, int baseOffset, StoryPartVisitor visitor) {
+	public void parse(CharIterator it, int baseOffset, StoryVisitor visitor) {
 		CharTree<Keyword> tree = localizedStepSupport.getKeywordTree();
 		int offset = baseOffset;
 		Line line = new Line();
@@ -74,22 +74,22 @@ public class StoryParser {
 			this.buffer.setLength(0);
 		}
 
-		public void emitTo(StoryPartVisitor visitor) {
+		public void emitTo(StoryVisitor visitor) {
 			if (buffer.length() > 0) {
 				String content = buffer.toString();
-				StoryPart part = new StoryPart(localizedStepSupport, offset,
+				StoryElement element = new StoryElement(localizedStepSupport, offset,
 						content);
-				Keyword partKeyword = part.extractKeyword();
-				if (partKeyword != null && partKeyword.isStep()) {
-					if (partKeyword == Keyword.And) {
-						part.setPreferredKeyword(keyword);
+				Keyword extractedKeyword = element.extractKeyword();
+				if (extractedKeyword != null && extractedKeyword.isStep()) {
+					if (extractedKeyword == Keyword.And) {
+						element.setPreferredKeyword(keyword);
 					} else {
-						keyword = partKeyword;
+						keyword = extractedKeyword;
 					}
 				} else {
 					keyword = null;
 				}
-				visitor.visit(part);
+				visitor.visit(element);
 			}
 		}
 	}

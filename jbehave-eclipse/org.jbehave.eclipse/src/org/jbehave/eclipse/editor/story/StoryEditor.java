@@ -84,7 +84,6 @@ public class StoryEditor extends TextEditor {
     private StoryConfiguration storyConfiguration;
 
     public StoryEditor() {
-        super();
         colorManager = new ColorManager();
         textAttributeProvider = new TextAttributeProvider(colorManager);
         textAttributeProvider.changeTheme(getTheme());
@@ -265,7 +264,7 @@ public class StoryEditor extends TextEditor {
 
     }
 
-    public Iterable<StepCandidate> getPotentialSteps() {
+    public Iterable<StepCandidate> getStepCandidates() {
         Visitor<StepCandidate, StepCandidate> collector = new Visitor<StepCandidate, StepCandidate>() {
             @Override
             public void visit(StepCandidate step) {
@@ -277,12 +276,11 @@ public class StoryEditor extends TextEditor {
         } catch (JavaModelException e) {
             Activator.logError("Failed to collect StepCandidate", e);
         }
-        return collector.getFounds();
+        return collector.getElementsFound();
     }
 
     public JBehaveProject getJBehaveProject() {
-        final IProject project = getInputFile().getProject();
-        return JBehaveProjectRegistry.get().getOrCreateProject(project);
+        return JBehaveProjectRegistry.get().getOrCreateProject(getInputFile().getProject());
     }
 
     public void insert(StepCandidate pStep) {
@@ -290,11 +288,11 @@ public class StoryEditor extends TextEditor {
         try {
             getInputDocument().replace(point.x, 0, pStep.fullStep() + "\n");
         } catch (BadLocationException e) {
-            Activator.logError("Failed to insert potential step", e);
+            Activator.logError("Failed to insert step candidate", e);
         }
     }
 
-    public void insertAsTemplate(StepCandidate pStep) {
+    public void insertAsTemplate(StepCandidate candidate) {
         IDocument document = getInputDocument();
 
         Point point = getSourceViewer().getSelectedRange();
@@ -306,8 +304,8 @@ public class StoryEditor extends TextEditor {
         TemplateContext templateContext = new DocumentTemplateContext(contextType, document,
                 replacementRegion.getOffset(), replacementRegion.getLength());
 
-        String templateText = TemplateUtils.templatizeVariables(pStep.fullStep()) + "\n";
-        Template template = new Template(pStep.stepPattern, pStep.fullStep(), StoryContextType.STORY_CONTEXT_TYPE_ID,
+        String templateText = TemplateUtils.templatizeVariables(candidate.fullStep()) + "\n";
+        Template template = new Template(candidate.stepPattern, candidate.fullStep(), StoryContextType.STORY_CONTEXT_TYPE_ID,
                 templateText, false);
         new TemplateProposal(template, templateContext, replacementRegion, null, 0).apply(getSourceViewer(), (char) 0,
                 SWT.CONTROL, replacementRegion.getOffset());

@@ -10,7 +10,7 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,16 +73,16 @@ public class AllInOneScanner extends AbstractStoryScanner {
     }
 
     @Override
-    protected boolean isPartAccepted(StoryPart part) {
+    protected boolean isAccepted(StoryElement element) {
         return true;
     }
     
     @Override
-    protected void emitPart(StoryPart part) {
-        Keyword keyword = part.getPreferredKeyword();
+    protected void emit(StoryElement element) {
+        Keyword keyword = element.getPreferredKeyword();
         if(keyword==null) {
-			logger.debug("No keyword found for story part: {}", part);
-            emitCommentAware(getErrorToken(), part.getOffset(), part.getContent());
+			logger.debug("No keyword found for story element: {}", element);
+            emitCommentAware(getErrorToken(), element.getOffset(), element.getContent());
             return;
         }
         switch(keyword) {
@@ -90,39 +90,39 @@ public class AllInOneScanner extends AbstractStoryScanner {
             case When:
             case Then:
             case And:
-                emitPart(stepScannerStyled, part);
+                emit(stepScannerStyled, element);
                 break;
             case ExamplesTable:
             case ExamplesTableHeaderSeparator:
             case ExamplesTableIgnorableSeparator:
             case ExamplesTableRow:
             case ExamplesTableValueSeparator:
-                emitPart(exampleTableScanner, part);
+                emit(exampleTableScanner, element);
                 break;
             case Narrative:
             case AsA:
             case InOrderTo:
             case IWantTo:
-                emitPart(narrativeScanner, part);
+                emit(narrativeScanner, element);
                 break;
             case GivenStories:
             case Meta:
             case MetaProperty:
-                emitPart(miscScanner, part);
+                emit(miscScanner, element);
                 break;
             case Scenario:
-                emitPart(scenarioScanner, part);
+                emit(scenarioScanner, element);
                 break;
             case Ignorable:
             default:
-                emitCommentAware(getDefaultToken(), part.getOffset(), part.getContent());
+                emitCommentAware(getDefaultToken(), element.getOffset(), element.getContent());
                 break;
         }
     }
 
-    private void emitPart(AbstractStoryScanner scanner, StoryPart part) {
+    private void emit(AbstractStoryScanner scanner, StoryElement element) {
         scanner.setRange(document, 0, document.getLength());
-        scanner.emitPart(part);
+        scanner.emit(element);
         addFragments(scanner.getFragments());
     }
 }

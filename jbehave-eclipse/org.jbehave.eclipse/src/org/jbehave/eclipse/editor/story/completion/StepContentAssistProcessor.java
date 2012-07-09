@@ -27,10 +27,10 @@ import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.EditorUtils;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.step.StepSupport;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.editor.step.WeightedStep;
+import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
 import org.jbehave.eclipse.editor.text.TemplateUtils;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.util.Lists;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.Strings;
@@ -66,7 +66,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
                 index = (offset - 1) - partitionOffset;
                 partitionText = document.get(partitionOffset, partitionLength);
                 if(isWithinLine) {
-                    lineStart = Strings.getSubLineUntilOffset(partitionText, index+1);
+                    lineStart = Strings.substringUntilOffset(partitionText, index+1);
                 }
                 
                 // keep partition infos for logging, but search line content by an other way
@@ -94,7 +94,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             // special case: one must find the right type of step
             boolean isAndCase = StepSupport.isStepAndType(localizedStepSupport, lineStart); 
             if(isAndCase) {
-                StoryPart part = new StoryPartDocumentUtils(localizedStepSupport).findStoryPartAtOffset(document, offset).get();
+                StoryElement part = new StoryDocumentUtils(localizedStepSupport).findStoryElementAtOffset(document, offset).get();
                 Keyword kw = part.getPreferredKeyword();
                 if(kw == Keyword.And) {
                     logger.debug("Autocompletion unable to disambiguate 'And' case: previous story part is probably not a step");
@@ -111,7 +111,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             Collections.sort(candidates);
             logger.debug("Autocompletion found #{}", candidates.size());
             
-            String stepEntry = StepSupport.extractStepSentence(localizedStepSupport, stepStart);
+            String stepEntry = StepSupport.stepWithoutKeyword(localizedStepSupport, stepStart);
             boolean hasStartOfStep = !StringUtils.isBlank(stepEntry);
             
             Region regionFullLine = new Region(lineOffset, lineStart.length());

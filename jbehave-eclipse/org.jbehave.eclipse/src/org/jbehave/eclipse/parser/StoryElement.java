@@ -7,14 +7,14 @@ import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.step.StepSupport;
 import org.jbehave.eclipse.util.CharTree;
 
-public class StoryPart {
+public class StoryElement {
 
 	private final LocalizedStepSupport localizedStepSupport;
 	private final int offset;
 	private final String content;
 	private Keyword preferredKeyword;
 
-	public StoryPart(LocalizedStepSupport localizedStepSupport, int offset,
+	public StoryElement(LocalizedStepSupport localizedStepSupport, int offset,
 			String content) {
 		this.localizedStepSupport = localizedStepSupport;
 		this.offset = offset;
@@ -30,7 +30,7 @@ public class StoryPart {
 	}
 
 	public String getContentWithoutComment() {
-		return Constants.removeComment(content);
+		return RegexUtils.removeComment(content);
 	}
 
 	public String getContent() {
@@ -38,15 +38,15 @@ public class StoryPart {
 	}
 
 	public String extractStepSentence() {
-		return StepSupport.extractStepSentence(localizedStepSupport,
+		return StepSupport.stepWithoutKeyword(localizedStepSupport,
 				getContent());
 	}
 
 	/**
-	 * @see #isStepPart()
+	 * @see #isStep()
 	 */
 	public String extractStepSentenceAndRemoveTrailingNewlines() {
-		return StepSupport.extractStepSentenceAndRemoveTrailingNewlines(
+		return StepSupport.stepWithoutKeywordAndTrailingNewlines(
 				localizedStepSupport, getContent());
 	}
 
@@ -72,16 +72,16 @@ public class StoryPart {
 		return extractKeyword(defaultTree());
 	}
 
-	public Keyword extractKeyword(CharTree<Keyword> kwTree) {
-		return kwTree.lookup(getContent());
+	public Keyword extractKeyword(CharTree<Keyword> tree) {
+		return tree.lookup(getContent());
 	}
 
 	public boolean startsWithKeyword() {
 		return startsWithKeyword(defaultTree());
 	}
 
-	public boolean startsWithKeyword(CharTree<Keyword> kwTree) {
-		return (getPreferredKeyword(kwTree) != null);
+	public boolean startsWithKeyword(CharTree<Keyword> tree) {
+		return (getPreferredKeyword(tree) != null);
 	}
 
 	private CharTree<Keyword> defaultTree() {
@@ -109,7 +109,7 @@ public class StoryPart {
 		return omin <= tmax && tmin <= omax;
 	}
 
-	public boolean isStepPart() {
+	public boolean isStep() {
 		Keyword keyword = getPreferredKeyword();
 		return keyword != null && keyword.isStep();
 	}

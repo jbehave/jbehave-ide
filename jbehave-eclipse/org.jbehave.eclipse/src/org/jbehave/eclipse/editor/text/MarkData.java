@@ -13,6 +13,7 @@ import org.jbehave.eclipse.editor.EditorUtils;
 import org.jbehave.eclipse.util.New;
 
 public class MarkData {
+	
     private Integer lineNumber, columnNumber;
     private Integer offsetStart, offsetEnd;
     public String message;
@@ -23,10 +24,12 @@ public class MarkData {
         this.message = message;
         return this;
     }
+    
     public MarkData offsetStart(int offsetStart) {
         this.offsetStart = offsetStart;
         return this;
     }
+    
     public MarkData offsetEnd(int offsetEnd) {
         this.offsetEnd = offsetEnd;
         return this;

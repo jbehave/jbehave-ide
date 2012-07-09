@@ -6,9 +6,9 @@ import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 
 public class ExampleTableScanner extends AbstractStoryScanner {
     
@@ -29,8 +29,8 @@ public class ExampleTableScanner extends AbstractStoryScanner {
     }
     
     @Override
-    protected boolean isPartAccepted(StoryPart part) {
-        Keyword keyword = part.getPreferredKeyword();
+    protected boolean isAccepted(StoryElement element) {
+        Keyword keyword = element.getPreferredKeyword();
         if(StoryPartition.ExampleTable==StoryPartition.partitionOf(keyword)) {
             return true;
         }
@@ -38,22 +38,22 @@ public class ExampleTableScanner extends AbstractStoryScanner {
     }
 
     @Override
-    protected void emitPart(StoryPart part) {
-        String content = part.getContent();
+    protected void emit(StoryElement element) {
+        String content = element.getContent();
         String kwString = getLocalizedStepSupport().examplesTable(false);
-        int offset = part.getOffset();
+        int offset = element.getOffset();
         
         if(content.startsWith(kwString)) {
             emit(keywordToken, offset, kwString.length());
             offset += kwString.length();
             
             String rawAfterKeyword = content.substring(kwString.length());
-            ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(Constants.commentLineMatcher, rawAfterKeyword);
+            ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(RegexUtils.COMMENT_PATTERN, rawAfterKeyword);
             String cleanedAfterKeyword = emitter.contentWithoutIgnorables();
             emitTable(emitter, getDefaultToken(), offset, cleanedAfterKeyword);
         }
         else {
-            ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(Constants.commentLineMatcher, content);
+            ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(RegexUtils.COMMENT_PATTERN, content);
             String cleanedContent = emitter.contentWithoutIgnorables();
             emit(emitter, getDefaultToken(), offset, cleanedContent.length());
         }

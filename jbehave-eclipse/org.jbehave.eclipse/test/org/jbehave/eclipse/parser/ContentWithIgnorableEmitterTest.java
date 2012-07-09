@@ -14,9 +14,9 @@ import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.step.ParametrizedStep;
 import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.editor.step.ParametrizedStep.WeightChain;
-import org.jbehave.eclipse.parser.Constants;
+import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,7 +48,7 @@ public class ContentWithIgnorableEmitterTest {
             "</I>" +
             "<C>" + NL + "!-- Other comment" + NL + "</C>";
     
-    private StoryPart storyPart;
+    private StoryElement storyElement;
     private StepCandidate candidate;
     private ParametrizedStep parametrizedStep;
     private Collector collector;
@@ -70,10 +70,10 @@ public class ContentWithIgnorableEmitterTest {
     
     @Test
     public void useCase_exampleTableWithComment_case1 () {
-        storyPart = new StoryPart(localizedStepSupport, 17, GIVEN1);
-        String rawContent = storyPart.getContent();
+        storyElement = new StoryElement(localizedStepSupport, 17, GIVEN1);
+        String rawContent = storyElement.getContent();
         
-        ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(Constants.commentLineMatcher, rawContent);
+        ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(RegexUtils.COMMENT_PATTERN, rawContent);
         String input = emitter.contentWithoutIgnorables();
         
         int offset = 0;
@@ -100,10 +100,10 @@ public class ContentWithIgnorableEmitterTest {
 
     @Test
     public void useCase_exampleTableWithComment_case2 () {
-        storyPart = new StoryPart(localizedStepSupport, 17, GIVEN2);
-        String rawContent = storyPart.getContent();
+        storyElement = new StoryElement(localizedStepSupport, 17, GIVEN2);
+        String rawContent = storyElement.getContent();
         
-        ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(Constants.commentLineMatcher, rawContent);
+        ContentWithIgnorableEmitter emitter = new ContentWithIgnorableEmitter(RegexUtils.COMMENT_PATTERN, rawContent);
         String input = emitter.contentWithoutIgnorables();
         
         int offset = 0;

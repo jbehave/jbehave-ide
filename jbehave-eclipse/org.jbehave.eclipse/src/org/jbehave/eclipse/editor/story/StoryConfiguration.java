@@ -45,26 +45,17 @@ public class StoryConfiguration extends SourceViewerConfiguration {
         this.textAttributeProvider = textAttributeProvider;
     }
     
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getConfiguredContentTypes(org.eclipse.jface.text.source.ISourceViewer)
-     */
     public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
         List<String> types = StoryPartition.names();
         types.add(IDocument.DEFAULT_CONTENT_TYPE);
         return types.toArray(new String[types.size()]);
     }
     
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)
-     */
     @Override
     public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
         return new StepContentAssistant();
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getHyperlinkDetectors(org.eclipse.jface.text.source.ISourceViewer)
-     */
     public IHyperlinkDetector[] getHyperlinkDetectors(final ISourceViewer sourceViewer) {
         return new IHyperlinkDetector[] { new StepHyperLinkDetector() };
     }

@@ -12,9 +12,9 @@ import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
-import org.jbehave.eclipse.parser.Constants;
-import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.parser.Constants.TokenizerCallback;
+import org.jbehave.eclipse.parser.RegexUtils;
+import org.jbehave.eclipse.parser.StoryElement;
+import org.jbehave.eclipse.parser.RegexUtils.TokenizerCallback;
 
 public class MiscScanner extends AbstractStoryScanner {
     
@@ -35,20 +35,20 @@ public class MiscScanner extends AbstractStoryScanner {
     }
     
     @Override
-    protected boolean isPartAccepted(StoryPart part) {
-        Keyword keyword = part.getPreferredKeyword();
+    protected boolean isAccepted(StoryElement element) {
+        Keyword keyword = element.getPreferredKeyword();
         if(StoryPartition.Misc==StoryPartition.partitionOf(keyword)) {
             return true;
         }
         return false;
     }
     
-    private boolean handle(StoryPart part, Keyword kw, IToken token, Chain chain) {
-        String content = part.getContent();
+    private boolean handle(StoryElement element, Keyword kw, IToken token, Chain chain) {
+        String content = element.getContent();
         String kwString = kw.asString(getLocalizedStepSupport().getLocalizedKeywords());
         if(content.startsWith(kwString)) {
             int length = kwString.length();
-            int offset = part.getOffset();
+            int offset = element.getOffset();
             emit(token, offset, length);
             offset += length;
             
@@ -59,14 +59,14 @@ public class MiscScanner extends AbstractStoryScanner {
     }
 
     @Override
-    protected void emitPart(StoryPart part) {
+    protected void emit(StoryElement element) {
         Chain commentAwareChain = commentAwareChain(getDefaultToken());
-        if(handle(part, GivenStories, keywordToken, commentAwareChain)
-                || handle(part, Meta, keywordToken, metaChain())) {
+        if(handle(element, GivenStories, keywordToken, commentAwareChain)
+                || handle(element, Meta, keywordToken, metaChain())) {
             // nothing more to do?
         }
         else {
-            emitCommentAware(getDefaultToken(), part.getOffset(), part.getContent());
+            emitCommentAware(getDefaultToken(), element.getOffset(), element.getContent());
         }
     }
 
@@ -82,7 +82,7 @@ public class MiscScanner extends AbstractStoryScanner {
     private static Pattern metaProperty = Pattern.compile("\\s*@\\s*[^\\s]+");
 
     protected void parseMetaProperties(final int offset, String content) {
-        Constants.splitLine(content, new TokenizerCallback() {
+        RegexUtils.splitLine(content, new TokenizerCallback() {
             @Override
             public void token(int startOffset, int endOffset, String line, boolean isDelimiter) {
                 if(isDelimiter) {

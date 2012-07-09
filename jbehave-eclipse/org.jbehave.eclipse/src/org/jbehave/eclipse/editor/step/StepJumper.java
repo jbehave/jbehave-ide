@@ -11,8 +11,9 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
 import org.jbehave.eclipse.UIUtils;
 import org.jbehave.eclipse.editor.EditorUtils;
-import org.jbehave.eclipse.parser.Constants;
-import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
+import org.jbehave.eclipse.parser.RegexUtils;
+import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.util.Ref;
 import org.jbehave.eclipse.util.Strings;
 
@@ -21,7 +22,6 @@ public class StepJumper {
 	private JBehaveProject jbehaveProject;
 
 	public StepJumper(JBehaveProject jbehaveProject) {
-		super();
 		this.jbehaveProject = jbehaveProject;
 	}
 
@@ -30,17 +30,17 @@ public class StepJumper {
 
 		Point point = viewer.getSelectedRange();
 
-		final Ref<StoryPart> found = new StoryPartDocumentUtils(
+		final Ref<StoryElement> found = new StoryDocumentUtils(
 				jbehaveProject.getLocalizedStepSupport())
-				.findStoryPartAtOffset(viewer.getDocument(), point.x);
+				.findStoryElementAtOffset(viewer.getDocument(), point.x);
 		if (found.isNull()) {
 			return false;
 		}
 
-		final StoryPart part = found.get();
-		if (!part.isStepPart())
+		final StoryElement element = found.get();
+		if (!element.isStep())
 			return false;
-		final String step = part.extractStepSentenceAndRemoveTrailingNewlines();
+		final String step = element.extractStepSentenceAndRemoveTrailingNewlines();
 
 		return jumpToDeclaration(viewer, step);
 	}
@@ -55,7 +55,7 @@ public class StepJumper {
 		}
 
 		// step can contain comment, make sure there are removed:
-		String cleanedStep = Constants.removeComment(step);
+		String cleanedStep = RegexUtils.removeComment(step);
 		// comment removed: there can be trailing new lines...
 		cleanedStep = Strings.removeTrailingNewlines(cleanedStep);
 

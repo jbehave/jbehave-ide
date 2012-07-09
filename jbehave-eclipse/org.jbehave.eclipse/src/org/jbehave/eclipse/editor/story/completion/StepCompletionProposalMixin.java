@@ -37,7 +37,7 @@ public class StepCompletionProposalMixin {
         
         String label = trait.getLabel();
         // remove step keyword if any, information is provided through the icon
-        label = StepSupport.extractStepSentence(trait.getLocalizedStepSupport(), label);
+        label = StepSupport.stepWithoutKeyword(trait.getLocalizedStepSupport(), label);
         
         Matcher matcher = parameterPattern.matcher(label);
         int prev = 0;

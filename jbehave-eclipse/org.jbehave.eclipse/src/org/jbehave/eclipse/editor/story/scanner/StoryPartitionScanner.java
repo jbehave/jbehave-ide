@@ -7,10 +7,10 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
-import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
+import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
 import org.jbehave.eclipse.editor.story.StoryPartition;
-import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.parser.StoryPartVisitor;
+import org.jbehave.eclipse.parser.StoryElement;
+import org.jbehave.eclipse.parser.StoryVisitor;
 import org.jbehave.eclipse.util.New;
 
 public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPartitionTokenScanner {
@@ -67,16 +67,16 @@ public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPart
         partitions = New.arrayList();
         cursor = 0;
         
-        StoryPartVisitor visitor = new StoryPartVisitor() {
+        StoryVisitor visitor = new StoryVisitor() {
             @Override
-            public void visit(StoryPart part) {
+            public void visit(StoryElement part) {
                 push(part);
             }
         };
-        new StoryPartDocumentUtils(localizedStepSupport).traverseStoryParts(document, visitor);
+        new StoryDocumentUtils(localizedStepSupport).traverseStory(document, visitor);
     }
     
-    private void push(StoryPart part) {
+    private void push(StoryElement part) {
         StoryPartition partition = StoryPartition.partitionOf(part.getPreferredKeyword());
         Partition p = new Partition(
                 partition,
