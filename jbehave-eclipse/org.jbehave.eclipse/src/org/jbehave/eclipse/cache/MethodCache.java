@@ -26,6 +26,10 @@ import fj.Effect;
 public class MethodCache<E> extends
         JavaVisitorAdapter<MethodCache.Bucket<E>> {
 
+	public interface Callback<T1, T2> {
+	    void op(T1 value1, T2 value2);
+	}
+
     private static AtomicInteger buildTickGenerator = new AtomicInteger();
     
     private Logger log = LoggerFactory.getLogger(MethodCache.class);
