@@ -6,7 +6,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITypedRegion;
 import org.jbehave.eclipse.Activator;
-import org.jbehave.eclipse.text.ProjectAwareFastPartitioner;
+import org.jbehave.eclipse.editor.text.ProjectAwareFastPartitioner;
 
 public class EditorUtils {
 

@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.text;
+package org.jbehave.eclipse.editor.text;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.text;
+package org.jbehave.eclipse.editor.text;
 
 import java.util.Map;
 import java.util.Observable;
@@ -6,7 +6,7 @@ import java.util.Observable;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.jbehave.eclipse.text.style.TextStyle;
+import org.jbehave.eclipse.editor.text.style.TextStyle;
 import org.jbehave.eclipse.util.New;
 
 public class TextAttributeProvider extends Observable {

@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringEscapeUtils;
 import org.eclipse.core.resources.IMarker;
 import org.jbehave.eclipse.editor.JDTUtils;
 import org.jbehave.eclipse.editor.step.StepCandidate;
-import org.jbehave.eclipse.text.MarkData;
+import org.jbehave.eclipse.editor.text.MarkData;
 
 public class Marks {
     public static final String ERROR_CODE = "errorCode";

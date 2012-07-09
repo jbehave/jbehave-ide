@@ -1,6 +1,6 @@
-package org.jbehave.eclipse.text.style;
+package org.jbehave.eclipse.editor.text.style;
 
-import static org.jbehave.eclipse.text.style.TextStyle.*;
+import static org.jbehave.eclipse.editor.text.style.TextStyle.*;
 
 import java.util.Map;
 

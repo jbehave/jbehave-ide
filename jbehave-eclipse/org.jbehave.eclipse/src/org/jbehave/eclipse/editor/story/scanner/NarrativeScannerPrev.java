@@ -12,8 +12,8 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
-import org.jbehave.eclipse.text.TextAttributeProvider;
-import org.jbehave.eclipse.text.style.TextStyle;
+import org.jbehave.eclipse.editor.text.TextAttributeProvider;
+import org.jbehave.eclipse.editor.text.style.TextStyle;
 
 public class NarrativeScannerPrev extends RuleBasedScanner {
 

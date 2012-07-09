@@ -6,10 +6,10 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.RGB;
 import org.jbehave.eclipse.Activator;
+import org.jbehave.eclipse.editor.text.style.TextStyle;
+import org.jbehave.eclipse.editor.text.style.TextStylePreferences;
+import org.jbehave.eclipse.editor.text.style.TextStyleTheme;
 import org.jbehave.eclipse.preferences.ClassScannerFilterEntry.ApplyOn;
-import org.jbehave.eclipse.text.style.TextStyle;
-import org.jbehave.eclipse.text.style.TextStylePreferences;
-import org.jbehave.eclipse.text.style.TextStyleTheme;
 import org.osgi.service.prefs.BackingStoreException;
 
 import ch.qos.logback.classic.Level;

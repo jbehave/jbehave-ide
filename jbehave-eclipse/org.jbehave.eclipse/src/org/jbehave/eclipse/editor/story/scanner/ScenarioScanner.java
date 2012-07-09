@@ -3,9 +3,9 @@ package org.jbehave.eclipse.editor.story.scanner;
 import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
+import org.jbehave.eclipse.editor.text.TextAttributeProvider;
+import org.jbehave.eclipse.editor.text.style.TextStyle;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.text.TextAttributeProvider;
-import org.jbehave.eclipse.text.style.TextStyle;
 
 public class ScenarioScanner extends AbstractStoryScanner {
 

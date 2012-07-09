@@ -23,8 +23,8 @@ import org.jbehave.eclipse.editor.story.scanner.NarrativeScanner;
 import org.jbehave.eclipse.editor.story.scanner.ScenarioScanner;
 import org.jbehave.eclipse.editor.story.scanner.SingleTokenScanner;
 import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
-import org.jbehave.eclipse.text.TextAttributeProvider;
-import org.jbehave.eclipse.text.style.TextStyle;
+import org.jbehave.eclipse.editor.text.TextAttributeProvider;
+import org.jbehave.eclipse.editor.text.style.TextStyle;
 
 public class StoryConfiguration extends SourceViewerConfiguration {
 

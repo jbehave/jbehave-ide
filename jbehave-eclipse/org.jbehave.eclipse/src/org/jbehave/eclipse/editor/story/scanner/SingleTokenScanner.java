@@ -6,7 +6,7 @@ import java.util.Observer;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
-import org.jbehave.eclipse.text.TextAttributeProvider;
+import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 
 public class SingleTokenScanner extends RuleBasedScanner {
 

@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.text;
+package org.jbehave.eclipse.editor.text;
 
 import org.junit.Test;
 
