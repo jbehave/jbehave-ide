@@ -287,11 +287,12 @@ public class MarkingStoryValidator {
             boolean patternMatch = candidate.matches(pattern);
             boolean typeMatch = type.isSameAs(candidate.stepType);
             if (patternMatch && typeMatch) {
-                log.debug("Candidate accepted");
                 addCandidate(candidate);
+                log.debug("<{} {}> accepts <{} {}>", o(type, pattern, //
+                        candidate.stepType, candidate.stepPattern));
             }
             else {
-                log.debug("{}: <{}> rejects {}: <{}>", o(type, pattern, //
+                log.debug("<{} {}> rejects <{} {}>", o(type, pattern, //
                         candidate.stepType, candidate.stepPattern));
             }
         }

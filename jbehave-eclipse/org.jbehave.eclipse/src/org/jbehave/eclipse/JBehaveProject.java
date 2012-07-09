@@ -242,7 +242,7 @@ public class JBehaveProject {
                 return Status.OK_STATUS;
             }
         };
-        job.setUser(true);
+        job.setUser(false);
         job.schedule();
 
     }

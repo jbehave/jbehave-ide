@@ -116,7 +116,7 @@ public class StoryElement {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(ToStringStyle.SHORT_PREFIX_STYLE)
+		return new ToStringBuilder(ToStringStyle.SIMPLE_STYLE)
 				.append("locale", localizedStepSupport.getLocale())
 				.append("content", content.replace("\n", "\\n")).toString();
 	}

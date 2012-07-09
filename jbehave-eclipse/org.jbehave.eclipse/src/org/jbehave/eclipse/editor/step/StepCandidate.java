@@ -1,8 +1,5 @@
 package org.jbehave.eclipse.editor.step;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.IMethod;
@@ -13,10 +10,6 @@ import org.jbehave.core.parsers.StepMatcher;
 import org.jbehave.core.parsers.StepPatternParser;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.JBehaveProject;
-
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
 
 /**
  * A StepCandidate is associated to a JDT IMethod and IAnnotation that can be
@@ -32,6 +25,7 @@ public class StepCandidate {
 	public final String stepPattern;
 	public final Integer priority;
 	private ParametrizedStep parametrizedStep;
+	private StepPatternParser stepParser;
 
 	public StepCandidate(LocalizedStepSupport localizedSupport,
 			String parameterPrefix, IMethod method, IAnnotation annotation,
@@ -42,6 +36,7 @@ public class StepCandidate {
 		this.annotation = annotation;
 		this.stepType = stepType;
 		this.stepPattern = stepPattern;
+		this.stepParser = new RegexPrefixCapturingPatternParser(parameterPrefix);
 		this.priority = (priority == null) ? Integer.valueOf(0) : priority
 				.intValue();
 	}
@@ -112,28 +107,8 @@ public class StepCandidate {
 		return builder.toString();
 	}
 
-	private static StepPatternParser stepParser = new RegexPrefixCapturingPatternParser();
-	private static Cache<String, StepMatcher> matcherCache = CacheBuilder
-			.newBuilder().concurrencyLevel(4).weakKeys().maximumSize(50)
-			.expireAfterWrite(10 * 60, TimeUnit.SECONDS)
-			.build(new CacheLoader<String, StepMatcher>() {
-				public StepMatcher load(String key) throws Exception {
-					int indexOf = key.indexOf('/');
-					StepType stepType = StepType.valueOf(key.substring(0,
-							indexOf));
-					String stepPattern = key.substring(indexOf + 1);
-					return stepParser.parseStep(stepType, stepPattern);
-				}
-			});
-
 	private StepMatcher getMatcher(StepType stepType, String stepPattern) {
-		try {
-			String key = stepType.name() + "/" + stepPattern;
-			return matcherCache.get(key);
-		} catch (ExecutionException e) {
-			// rely on parse
-			return stepParser.parseStep(stepType, stepPattern);
-		}
+		return stepParser.parseStep(stepType, stepPattern);
 	}
 
 }
