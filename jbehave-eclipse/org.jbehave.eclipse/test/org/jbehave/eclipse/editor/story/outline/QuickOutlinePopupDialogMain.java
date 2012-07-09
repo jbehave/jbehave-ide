@@ -13,9 +13,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.jbehave.core.steps.StepType;
+import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.editor.story.StoryEditor;
 import org.jbehave.eclipse.editor.story.outline.QuickOutlinePopupDialog;
-import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.util.New;
 
 public class QuickOutlinePopupDialogMain {

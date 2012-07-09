@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.step;
+package org.jbehave.eclipse.editor.step;
 
 import static org.jbehave.eclipse.util.StringEnhancer.enhanceString;
 import static org.jbehave.eclipse.util.Strings.s;

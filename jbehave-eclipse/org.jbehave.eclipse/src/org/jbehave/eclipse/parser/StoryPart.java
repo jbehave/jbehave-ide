@@ -3,12 +3,12 @@ package org.jbehave.eclipse.parser;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.step.StepSupport;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.StepSupport;
 import org.jbehave.eclipse.util.CharTree;
 
 public class StoryPart {
-	
+
 	private final LocalizedStepSupport localizedStepSupport;
 	private final int offset;
 	private final String content;

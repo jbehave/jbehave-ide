@@ -2,7 +2,7 @@ package org.jbehave.eclipse.editor.story;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.eclipse.core.resources.IMarker;
-import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.text.JDTUtils;
 import org.jbehave.eclipse.text.MarkData;
 

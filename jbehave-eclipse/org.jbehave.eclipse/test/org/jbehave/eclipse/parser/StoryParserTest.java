@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.parser.StoryParser;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -3,7 +3,7 @@ package org.jbehave.eclipse.parser;
 import java.util.List;
 
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.util.CharIterator;
 import org.jbehave.eclipse.util.CharIterators;
 import org.jbehave.eclipse.util.CharTree;

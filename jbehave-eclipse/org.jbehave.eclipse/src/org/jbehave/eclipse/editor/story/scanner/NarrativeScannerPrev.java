@@ -11,7 +11,7 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.text.TextAttributeProvider;
 import org.jbehave.eclipse.text.style.TextStyle;
 

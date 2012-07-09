@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-import org.jbehave.eclipse.step.StepCandidate;
+import org.jbehave.eclipse.editor.step.StepCandidate;
 
 public class QuickSearchTreeContentProvider implements ITreeContentProvider {
 

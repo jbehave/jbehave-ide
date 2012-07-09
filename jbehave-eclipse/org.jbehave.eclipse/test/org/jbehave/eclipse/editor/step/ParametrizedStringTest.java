@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.step;
+package org.jbehave.eclipse.editor.step;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -8,9 +8,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jbehave.eclipse.step.ParametrizedStep;
-import org.jbehave.eclipse.step.ParametrizedStep.Token;
-import org.jbehave.eclipse.step.ParametrizedStep.WeightChain;
+import org.jbehave.eclipse.editor.step.ParametrizedStep;
+import org.jbehave.eclipse.editor.step.ParametrizedStep.Token;
+import org.jbehave.eclipse.editor.step.ParametrizedStep.WeightChain;
 import org.junit.Test;
 
 public class ParametrizedStringTest {

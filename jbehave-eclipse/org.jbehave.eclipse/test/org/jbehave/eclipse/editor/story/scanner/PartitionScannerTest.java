@@ -16,7 +16,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.junit.Before;
 import org.junit.Test;
 

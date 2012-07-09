@@ -6,11 +6,11 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.editor.story.StoryPartition;
 import org.jbehave.eclipse.parser.StoryPart;
 import org.jbehave.eclipse.parser.StoryPartVisitor;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.StoryPartDocumentUtils;
 import org.jbehave.eclipse.util.New;
 
 public class StoryPartitionScanner implements org.eclipse.jface.text.rules.IPartitionTokenScanner {

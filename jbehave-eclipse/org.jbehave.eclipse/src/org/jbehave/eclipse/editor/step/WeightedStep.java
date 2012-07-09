@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.step;
+package org.jbehave.eclipse.editor.step;
 
 import org.jbehave.eclipse.text.JDTUtils;
 import org.jbehave.eclipse.util.HasHTMLComment;

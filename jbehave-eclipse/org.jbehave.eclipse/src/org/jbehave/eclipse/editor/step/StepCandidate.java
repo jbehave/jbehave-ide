@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.step;
+package org.jbehave.eclipse.editor.step;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -30,8 +30,8 @@ public class StepCandidate {
 	public final IAnnotation annotation;
 	public final StepType stepType;
 	public final String stepPattern;
-	private ParametrizedStep parametrizedStep;
 	public final Integer priority;
+	private ParametrizedStep parametrizedStep;
 
 	public StepCandidate(LocalizedStepSupport localizedSupport,
 			String parameterPrefix, IMethod method, IAnnotation annotation,

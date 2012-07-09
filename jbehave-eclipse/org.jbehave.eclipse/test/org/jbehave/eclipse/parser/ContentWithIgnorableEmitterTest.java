@@ -10,13 +10,13 @@ import java.util.Locale;
 import org.eclipse.jdt.core.IAnnotation;
 import org.eclipse.jdt.core.IMethod;
 import org.jbehave.core.steps.StepType;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.ParametrizedStep;
+import org.jbehave.eclipse.editor.step.StepCandidate;
+import org.jbehave.eclipse.editor.step.ParametrizedStep.WeightChain;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.StepCandidate;
-import org.jbehave.eclipse.step.ParametrizedStep;
-import org.jbehave.eclipse.step.ParametrizedStep.WeightChain;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -80,7 +80,7 @@ public class ContentWithIgnorableEmitterTest {
         WeightChain chain = parametrizedStep.calculateWeightChain(input);
         List<String> chainTokens = chain.tokenize();
         for(int i=0;i<chainTokens.size();i++) {
-            org.jbehave.eclipse.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
+            org.jbehave.eclipse.editor.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
             // be aware that the token length can be shorter than the content length
             // because content can also contain comment :)
             String content = chainTokens.get(i);
@@ -110,7 +110,7 @@ public class ContentWithIgnorableEmitterTest {
         WeightChain chain = parametrizedStep.calculateWeightChain(input);
         List<String> chainTokens = chain.tokenize();
         for(int i=0;i<chainTokens.size();i++) {
-            org.jbehave.eclipse.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
+            org.jbehave.eclipse.editor.step.ParametrizedStep.Token pToken = parametrizedStep.getToken(i);
             // be aware that the token length can be shorter than the content length
             // because content can also contain comment :)
             String content = chainTokens.get(i);

@@ -12,10 +12,10 @@ import org.eclipse.swt.graphics.Image;
 import org.jbehave.core.steps.StepType;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.ImageIds;
-import org.jbehave.eclipse.step.StepSupport;
-import org.jbehave.eclipse.step.LocalizedStepSupport;
-import org.jbehave.eclipse.step.StepCandidate;
-import org.jbehave.eclipse.step.WeightedStep;
+import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
+import org.jbehave.eclipse.editor.step.StepCandidate;
+import org.jbehave.eclipse.editor.step.StepSupport;
+import org.jbehave.eclipse.editor.step.WeightedStep;
 
 public class StepCompletionProposalMixin {
 
