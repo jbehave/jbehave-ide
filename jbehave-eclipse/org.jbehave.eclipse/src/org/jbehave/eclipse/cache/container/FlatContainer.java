@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jdt.methodcache;
+package org.jbehave.eclipse.cache.container;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

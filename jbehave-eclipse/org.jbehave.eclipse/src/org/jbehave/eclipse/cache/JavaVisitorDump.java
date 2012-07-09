@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jdt;
+package org.jbehave.eclipse.cache;
 
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -9,11 +9,17 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
 
 public class JavaVisitorDump<T> extends JavaVisitorAdapter<T> {
-    private static final boolean dump = true;
+
+	private final boolean dump;
     
     public JavaVisitorDump() {
+    	this(true);
     }
     
+    public JavaVisitorDump(boolean dump) {
+    	this.dump = dump;
+    }
+
     public boolean visit(IPackageFragmentRoot packageFragmentRoot, T arg) {
         if(dump) {
             System.out.println("JavaScanner.Visitor.visit(packageFragmentRoot...:" + packageFragmentRoot.getElementName() + ")");

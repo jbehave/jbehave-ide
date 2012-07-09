@@ -1,6 +1,6 @@
-package org.jbehave.eclipse.jdt.methodcache;
+package org.jbehave.eclipse.cache.container;
 
-import static org.jbehave.eclipse.jdt.methodcache.Containers.wrapMonitorForRecursive;
+import static org.jbehave.eclipse.cache.container.Containers.wrapMonitorForRecursive;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
@@ -12,7 +12,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
-import org.jbehave.eclipse.jdt.methodcache.Containers.Factory;
+import org.jbehave.eclipse.cache.container.Containers.Factory;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;

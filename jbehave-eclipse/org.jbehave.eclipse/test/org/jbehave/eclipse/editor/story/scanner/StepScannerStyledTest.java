@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.editor.scanner;
+package org.jbehave.eclipse.editor.story.scanner;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.osgi.service.prefs.BackingStoreException;
 
 public class StepScannerStyledTest {
     private static final String STEP1 = "an account named '$name' with the following properties:$properties";

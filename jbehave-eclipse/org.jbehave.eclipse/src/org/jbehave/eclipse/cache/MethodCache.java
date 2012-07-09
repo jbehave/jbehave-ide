@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jdt.methodcache;
+package org.jbehave.eclipse.cache;
 
 import static org.jbehave.eclipse.util.Bytes.areDifferents;
 
@@ -14,9 +14,8 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
-import org.jbehave.eclipse.jdt.JavaScanner;
-import org.jbehave.eclipse.jdt.JavaVisitorAdapter;
-import org.jbehave.eclipse.util.C2;
+import org.jbehave.eclipse.cache.container.Container;
+import org.jbehave.eclipse.cache.container.HierarchicalContainer;
 import org.jbehave.eclipse.util.ProcessGroup;
 import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
@@ -24,18 +23,18 @@ import org.slf4j.LoggerFactory;
 
 import fj.Effect;
 
-public class MethodPerPackageFragmentRootCache<E> extends
-        JavaVisitorAdapter<MethodPerPackageFragmentRootCache.Bucket<E>> {
+public class MethodCache<E> extends
+        JavaVisitorAdapter<MethodCache.Bucket<E>> {
 
-    private static AtomicInteger buildTickGen = new AtomicInteger();
+    private static AtomicInteger buildTickGenerator = new AtomicInteger();
     
-    private Logger log = LoggerFactory.getLogger(MethodPerPackageFragmentRootCache.class);
+    private Logger log = LoggerFactory.getLogger(MethodCache.class);
 
     private final HierarchicalContainer<E> content = new HierarchicalContainer<E>("<root>");
-    private C2<IMethod, Container<E>> callback;
+    private Callback<IMethod, Container<E>> callback;
     private byte[] cachedFilterHash;
 
-    public MethodPerPackageFragmentRootCache(C2<IMethod, Container<E>> callback) {
+    public MethodCache(Callback<IMethod, Container<E>> callback) {
         this.callback = callback;
     }
 
@@ -46,7 +45,7 @@ public class MethodPerPackageFragmentRootCache<E> extends
         JavaScanner<Bucket<E>> javaScanner = new JavaScanner<Bucket<E>>(project, this, group);
         initializer.e(javaScanner);
         
-        int buildTick = buildTickGen.incrementAndGet();
+        int buildTick = buildTickGenerator.incrementAndGet();
         
         byte[] filterHash = javaScanner.getFilterHash();
         boolean filterChanged = hasFilterChanged(filterHash);

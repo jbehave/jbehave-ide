@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jdt.methodcache;
+package org.jbehave.eclipse.cache.container;
 
 
 import org.apache.commons.lang.StringUtils;

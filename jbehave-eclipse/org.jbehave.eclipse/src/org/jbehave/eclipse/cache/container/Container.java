@@ -1,6 +1,6 @@
-package org.jbehave.eclipse.jdt.methodcache;
+package org.jbehave.eclipse.cache.container;
 
-import static org.jbehave.eclipse.jdt.methodcache.Containers.modificationStampOf;
+import static org.jbehave.eclipse.cache.container.Containers.modificationStampOf;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -23,7 +23,7 @@ public abstract class Container<E> {
         this.containerName = containerName;
     }
 
-    public int getLastBuildTick() {
+    int getLastBuildTick() {
         return lastBuildTick;
     }
 
@@ -44,17 +44,17 @@ public abstract class Container<E> {
 
     public abstract void traverse(Visitor<E, ?> visitor);
 
-    abstract void clear();
+    public abstract void clear();
 
     public abstract void add(E element);
 
-    abstract Container<E> specializeFor(IPackageFragmentRoot pkgFragmentRoot);
+    public abstract Container<E> specializeFor(IPackageFragmentRoot pkgFragmentRoot);
 
-    abstract Container<E> specializeFor(IPackageFragment pkgFragment);
+    public abstract Container<E> specializeFor(IPackageFragment pkgFragment);
 
-    abstract Container<E> specializeFor(ICompilationUnit cunit);
+    public abstract Container<E> specializeFor(ICompilationUnit cunit);
 
-    boolean prepareForTraversal(IJavaElement element, int buildTick) {
+    public boolean prepareForTraversal(IJavaElement element, int buildTick) {
         setLastBuildTick(buildTick);
         long timestamp = modificationStampOf(element);
         log.debug("Preparing for traversal [" + element.getElementName() + "] in [" + Containers.pathOf(element) + "] ts: " + timestamp);
@@ -92,7 +92,7 @@ public abstract class Container<E> {
         return true;
     }
 
-    void resetForBuild(IJavaElement element, int buildTick) {
+    public void resetForBuild(IJavaElement element, int buildTick) {
         setLastBuildTick(buildTick);
         long timestamp = modificationStampOf(element);
         setTimestamp(timestamp);

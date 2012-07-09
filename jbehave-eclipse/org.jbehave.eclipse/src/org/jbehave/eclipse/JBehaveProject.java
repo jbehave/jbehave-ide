@@ -24,16 +24,16 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.JavaModelException;
 import org.jbehave.core.steps.PatternVariantBuilder;
 import org.jbehave.core.steps.StepType;
-import org.jbehave.eclipse.jdt.JavaScanner;
-import org.jbehave.eclipse.jdt.methodcache.Container;
-import org.jbehave.eclipse.jdt.methodcache.Containers;
-import org.jbehave.eclipse.jdt.methodcache.MethodPerPackageFragmentRootCache;
+import org.jbehave.eclipse.cache.Callback;
+import org.jbehave.eclipse.cache.JavaScanner;
+import org.jbehave.eclipse.cache.MethodCache;
+import org.jbehave.eclipse.cache.container.Container;
+import org.jbehave.eclipse.cache.container.Containers;
 import org.jbehave.eclipse.preferences.ClassScannerPreferences;
 import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.step.LocalizedStepSupport;
 import org.jbehave.eclipse.step.StepCandidate;
 import org.jbehave.eclipse.step.StepLocator;
-import org.jbehave.eclipse.util.C2;
 import org.jbehave.eclipse.util.LocaleUtils;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.ProcessGroup;
@@ -49,7 +49,7 @@ public class JBehaveProject {
     private static Logger log = LoggerFactory.getLogger(JBehaveProject.class);
 
     private IProject project;
-    private MethodPerPackageFragmentRootCache<StepCandidate> cache;
+    private MethodCache<StepCandidate> cache;
     private LocalizedStepSupport localizedStepSupport;
     private ProjectPreferences projectPreferences;
     private ClassScannerPreferences classScannerPreferences;
@@ -64,7 +64,7 @@ public class JBehaveProject {
 
     public JBehaveProject(IProject project) {
         this.project = project;
-        this.cache = new MethodPerPackageFragmentRootCache<StepCandidate>(newCallback());
+        this.cache = new MethodCache<StepCandidate>(newCallback());
         this.localizedStepSupport = new LocalizedStepSupport();
         initializeProjectPreferencesAndListener(project);
         initializeClassScannerPreferencesAndListener(project);
@@ -136,8 +136,8 @@ public class JBehaveProject {
         return getLocalizedStepSupport().getLocale();
     }
 
-    private C2<IMethod, Container<StepCandidate>> newCallback() {
-        return new C2<IMethod, Container<StepCandidate>>() {
+    private Callback<IMethod, Container<StepCandidate>> newCallback() {
+        return new Callback<IMethod, Container<StepCandidate>>() {
             public void op(IMethod method, Container<StepCandidate> container) {
                 try {
                     extractMethodSteps(method, container);

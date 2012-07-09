@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.editor.outline;
+package org.jbehave.eclipse.editor.story.outline;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

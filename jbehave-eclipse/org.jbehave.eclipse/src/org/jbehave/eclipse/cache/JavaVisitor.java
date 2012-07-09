@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jdt;
+package org.jbehave.eclipse.cache;
 
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
