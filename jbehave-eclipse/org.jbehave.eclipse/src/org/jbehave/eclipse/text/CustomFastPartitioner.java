@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jface;
+package org.jbehave.eclipse.text;
 
 import java.util.ArrayList;
 import java.util.List;

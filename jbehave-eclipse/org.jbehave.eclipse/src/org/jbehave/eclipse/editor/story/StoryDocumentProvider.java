@@ -14,8 +14,8 @@ import org.jbehave.eclipse.JBehaveProjectRegistry;
 import org.jbehave.eclipse.editor.story.scanner.AllInOnePartitionScanner;
 import org.jbehave.eclipse.editor.story.scanner.AllInOneScanner;
 import org.jbehave.eclipse.editor.story.scanner.StoryPartitionScanner;
-import org.jbehave.eclipse.jface.ProjectAwareFastPartitioner;
-import org.jbehave.eclipse.jface.UIUtils;
+import org.jbehave.eclipse.text.ProjectAwareFastPartitioner;
+import org.jbehave.eclipse.text.UIUtils;
 import org.jbehave.eclipse.util.Strings;
 
 public class StoryDocumentProvider extends FileDocumentProvider {

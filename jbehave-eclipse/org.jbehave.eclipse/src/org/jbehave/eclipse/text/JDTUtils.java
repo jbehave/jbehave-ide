@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jface;
+package org.jbehave.eclipse.text;
 
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;

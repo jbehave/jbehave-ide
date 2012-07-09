@@ -36,13 +36,13 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.jbehave.eclipse.Activator;
-import org.jbehave.eclipse.jface.ColorManager;
-import org.jbehave.eclipse.textstyle.StyleRangeConverter;
-import org.jbehave.eclipse.textstyle.TextStyle;
-import org.jbehave.eclipse.textstyle.TextStyleLabelProvider;
-import org.jbehave.eclipse.textstyle.TextStylePreferences;
-import org.jbehave.eclipse.textstyle.TextStyleTreeBuilder;
-import org.jbehave.eclipse.textstyle.TextStyleTreeContentProvider;
+import org.jbehave.eclipse.text.ColorManager;
+import org.jbehave.eclipse.text.style.StyleRangeConverter;
+import org.jbehave.eclipse.text.style.TextStyle;
+import org.jbehave.eclipse.text.style.TextStyleLabelProvider;
+import org.jbehave.eclipse.text.style.TextStylePreferences;
+import org.jbehave.eclipse.text.style.TextStyleTreeBuilder;
+import org.jbehave.eclipse.text.style.TextStyleTreeContentProvider;
 import org.jbehave.eclipse.util.New;
 
 public class EditorColorPreferencePage extends PreferencePage implements org.eclipse.ui.IWorkbenchPreferencePage {

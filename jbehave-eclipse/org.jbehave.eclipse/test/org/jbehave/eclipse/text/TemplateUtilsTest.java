@@ -1,8 +1,8 @@
-package org.jbehave.eclipse.jface;
+package org.jbehave.eclipse.text;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.jbehave.eclipse.jface.TemplateUtils.templatizeVariables;
+import static org.jbehave.eclipse.text.TemplateUtils.templatizeVariables;
 
 import org.junit.Test;
 

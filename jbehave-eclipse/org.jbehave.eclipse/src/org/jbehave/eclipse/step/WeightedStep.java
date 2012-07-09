@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.step;
 
-import org.jbehave.eclipse.jface.JDTUtils;
+import org.jbehave.eclipse.text.JDTUtils;
 import org.jbehave.eclipse.util.HasHTMLComment;
 
 public class WeightedStep implements Comparable<WeightedStep>, HasHTMLComment {

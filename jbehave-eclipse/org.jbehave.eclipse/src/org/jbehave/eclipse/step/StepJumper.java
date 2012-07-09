@@ -9,10 +9,10 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.PartInitException;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
-import org.jbehave.eclipse.jface.EditorUtils;
-import org.jbehave.eclipse.jface.UIUtils;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.StoryPart;
+import org.jbehave.eclipse.text.EditorUtils;
+import org.jbehave.eclipse.text.UIUtils;
 import org.jbehave.eclipse.util.Ref;
 import org.jbehave.eclipse.util.Strings;
 

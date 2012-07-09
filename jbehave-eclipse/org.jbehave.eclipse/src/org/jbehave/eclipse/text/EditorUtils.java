@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.jface;
+package org.jbehave.eclipse.text;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.text.BadLocationException;

@@ -8,9 +8,9 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.Token;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
-import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.textstyle.TextStyle;
+import org.jbehave.eclipse.text.TextAttributeProvider;
+import org.jbehave.eclipse.text.style.TextStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

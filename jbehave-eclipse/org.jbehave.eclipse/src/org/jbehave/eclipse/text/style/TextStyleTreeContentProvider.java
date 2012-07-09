@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.textstyle;
+package org.jbehave.eclipse.text.style;
 
 import java.util.List;
 

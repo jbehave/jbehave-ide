@@ -4,11 +4,11 @@ import org.eclipse.jface.text.rules.IToken;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.Keyword;
 import org.jbehave.eclipse.editor.story.StoryPartition;
-import org.jbehave.eclipse.jface.TextAttributeProvider;
 import org.jbehave.eclipse.parser.Constants;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryPart;
-import org.jbehave.eclipse.textstyle.TextStyle;
+import org.jbehave.eclipse.text.TextAttributeProvider;
+import org.jbehave.eclipse.text.style.TextStyle;
 
 public class ExampleTableScanner extends AbstractStoryScanner {
     

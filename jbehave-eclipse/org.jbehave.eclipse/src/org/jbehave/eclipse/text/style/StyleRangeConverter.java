@@ -1,9 +1,9 @@
-package org.jbehave.eclipse.textstyle;
+package org.jbehave.eclipse.text.style;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Color;
-import org.jbehave.eclipse.jface.ColorManager;
+import org.jbehave.eclipse.text.ColorManager;
 
 public class StyleRangeConverter {
 
