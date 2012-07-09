@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.rule;
+package org.jbehave.eclipse.editor.story.scanner.rule;
 
 import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.jbehave.eclipse.util.BidirectionalStream;

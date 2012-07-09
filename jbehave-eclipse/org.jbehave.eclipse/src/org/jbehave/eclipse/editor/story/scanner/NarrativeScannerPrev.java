@@ -1,6 +1,6 @@
 package org.jbehave.eclipse.editor.story.scanner;
 
-import static org.jbehave.eclipse.rule.Rules.lineStartsWithRule;
+import static org.jbehave.eclipse.editor.story.scanner.rule.Rules.lineStartsWithRule;
 
 import java.util.Observable;
 import java.util.Observer;

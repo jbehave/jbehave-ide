@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.rule;
+package org.jbehave.eclipse.editor.story.scanner.rule;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
