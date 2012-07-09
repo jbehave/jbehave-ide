@@ -249,14 +249,14 @@ public class MarkingStoryValidator {
             int count = candidates.size();
             log.debug("#" + count + "result(s) found for >>" + Strings.escapeNL(key) + "<<");
             if (count == 0)
-                part.addErrorMark(Marks.Code.NoMatchingStep, "No step is matching <" + key + ">");
+                part.addWarningMark(Marks.Code.NoMatchingStep, "No step is matching <" + key + ">");
             else if (count > 1) {
                 
                 fj.data.List<Integer> collectedPrios = iterableList(candidates).map(new TransformByPriority());
                 int max = collectedPrios.maximum(Ord.intOrd);
                 int countWithMax = collectedPrios.filter(Equal.intEqual.eq(max)).length();
                 if (countWithMax>1) {
-                    MarkData mark = part.addErrorMark(Marks.Code.MultipleMatchingSteps, "Ambiguous step: " + count + " steps are matching <" + key + "> got: " + candidates);
+                    MarkData mark = part.addWarningMark(Marks.Code.MultipleMatchingSteps, "Ambiguous step: " + count + " steps are matching <" + key + "> got: " + candidates);
                     Marks.putStepsAsHtml(mark, candidates);
                 }
                 else {
@@ -328,7 +328,11 @@ public class MarkingStoryValidator {
         public MarkData addInfoMark(Marks.Code code, String message) {
             return addMark(code, message, IMarker.SEVERITY_INFO);
         }
-        
+
+        public MarkData addWarningMark(Marks.Code code, String message) {
+            return addMark(code, message, IMarker.SEVERITY_WARNING);
+        }
+
         public MarkData addMark(Marks.Code code, String message, int severity) {
             MarkData markData = new MarkData()//
                     .severity(severity)//
