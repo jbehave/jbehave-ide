@@ -19,7 +19,8 @@ import org.jbehave.eclipse.editor.story.outline.QuickOutlinePopupDialog;
 import org.jbehave.eclipse.util.New;
 
 public class QuickOutlinePopupDialogMain {
-    public static void main(String[] args) {
+
+	public static void main(String[] args) {
         List<StepCandidate> steps = New.arrayList();
         steps.add(new StepCandidate(null, "$", null, null, StepType.GIVEN, "a user named $username", 0));
         steps.add(new StepCandidate(null, "$", null, null, StepType.WHEN, "the user's firstname is changed to $firstname", 0));
@@ -46,13 +47,13 @@ public class QuickOutlinePopupDialogMain {
         
         final ImageRegistry imageRegistry = new ImageRegistry(display);
 
-        Button btn = new Button(shell, SWT.PUSH);
-        btn.setText("Press to see the InfoPopup");
-        btn.setBounds(90, 10, 200, 30);
+        Button button = new Button(shell, SWT.PUSH);
+        button.setText("Press to see the InfoPopup");
+        button.setBounds(90, 10, 200, 30);
 
-        btn.addSelectionListener(new SelectionAdapter() {
+        button.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent se) {
-                // You can set the sixe of the Rectangle
+                // You can set the size of the Rectangle
                 new QuickOutlinePopupDialog(new Shell(), SWT.NONE, editor, imageRegistry).open();
             }
         });

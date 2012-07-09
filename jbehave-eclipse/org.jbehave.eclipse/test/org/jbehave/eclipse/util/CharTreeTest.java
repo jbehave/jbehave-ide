@@ -14,34 +14,29 @@ import org.junit.Test;
 
 public class CharTreeTest {
     
-    private CharTree<Keyword> cn;
+    private CharTree<Keyword> tree;
 
     @Before
     public void setUp () {
         LocalizedKeywords keywords = new LocalizedKeywords();
-        cn = new CharTree<Keyword>('/', null);
-        for(Keyword kw : Keyword.values())
-            cn.push(kw.asString(keywords), kw);
+        tree = new CharTree<Keyword>('/', null);
+        for(Keyword keyword : Keyword.values())
+            tree.push(keyword.asString(keywords), keyword);
         
     }
         
     @Test
-    public void lookup() {
-        assertEquals(Given, cn.lookup("Given"));
-        assertEquals(Narrative, cn.lookup("Narrative:"));
-        assertEquals(Given, cn.lookup("Given a user named \"Bob\""));
-        assertEquals(InOrderTo, cn.lookup("In order to be more communicative"));
+    public void canFindElement() {
+        assertThat(tree.lookup("Given"), equalTo(Given));
+        assertThat(tree.lookup("Narrative:"), equalTo(Narrative));
+        assertThat(tree.lookup("Given a user named \"Bob\""), equalTo(Given));
+        assertThat(tree.lookup("In order to be more communicative"), equalTo(InOrderTo));
     }
     
-    private void assertEquals(Keyword expected, Keyword actual) {
-        assertThat(actual, equalTo(expected));
-    }
-
-
     @Test
-    public void lookup_missing() {
-        assertEquals(null, cn.lookup("Gaven"));
-        assertEquals(null, cn.lookup("\n"));
+    public void missingElementReturnsNull() {
+        assertThat(tree.lookup("Gaven"), equalTo(null));
+        assertThat(tree.lookup("\n"), equalTo(null));
     }
 
 }

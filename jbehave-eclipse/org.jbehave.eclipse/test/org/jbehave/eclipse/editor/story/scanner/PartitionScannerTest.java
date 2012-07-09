@@ -35,7 +35,7 @@ public class PartitionScannerTest {
     }
 
     @Test
-    public void usecase_ex1() throws Exception {
+    public void canScanADocument() throws Exception {
         when(jbehaveProject.getLocalizedStepSupport()).thenReturn(localizedSupport);
         IDocument document= new Document(storyAsText);
         
@@ -45,17 +45,15 @@ public class PartitionScannerTest {
         checkNextToken(scanner, document, "Narrative", 0, 172);
         checkNextToken(scanner, document, "Scenario", 172, 57);
         checkNextToken(scanner, document, "Step", 229, 208);
+        
         assertThat(scanner.nextToken().isEOF(), is(true));
     }
     
     private void checkNextToken(IPartitionTokenScanner scanner, IDocument document, Object jk, int offset, int length) throws BadLocationException {
         IToken token = scanner.nextToken();
         assertThat(token.getData(), equalTo(jk));
-        //System.out.print(jk + " > ");
-        //dumpState(scanner, document);
         assertThat(scanner.getTokenOffset(), equalTo(offset));
-        assertThat(scanner.getTokenLength(), equalTo(length));
-        
+        assertThat(scanner.getTokenLength(), equalTo(length));        
     }
     
 }

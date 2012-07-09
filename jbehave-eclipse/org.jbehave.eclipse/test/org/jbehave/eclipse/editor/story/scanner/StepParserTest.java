@@ -35,42 +35,41 @@ public class StepParserTest {
     private Logger log = LoggerFactory.getLogger(StepParserTest.class);
 
     private String storyAsText;
-    private TextAttribute defaultAttr;
-    private TextAttribute keywordAttr;
-    private TextAttribute paramAttr;
-    private TextAttribute paramValueAttr;
-    private TextAttribute exampleTableSep;
+    private TextAttribute defaultAttribute;
+    private TextAttribute keywordAttribute;
+    private TextAttribute parameterAttribute;
+    private TextAttribute parameterValueAttribute;
+    private TextAttribute exampleTableSeparator;
     private StepLocator locator;
     private TextAttributeProvider textAttributeProvider;
     private JBehaveProject jbehaveProject;
-    //
-    private static LocalizedStepSupport localizedSupport = createLocalizedStepSupport();
-
     private int offset;
     private TextAttribute exampleTableCell;
+    private static LocalizedStepSupport localizedSupport = createLocalizedStepSupport();
+
     
     @Before
     public void setUp () throws IOException {
-        defaultAttr = mock(TextAttribute.class);
-        keywordAttr = mock(TextAttribute.class);
-        paramAttr = mock(TextAttribute.class);
-        paramValueAttr = mock(TextAttribute.class);
-        exampleTableSep = mock(TextAttribute.class);
+        defaultAttribute = mock(TextAttribute.class);
+        keywordAttribute = mock(TextAttribute.class);
+        parameterAttribute = mock(TextAttribute.class);
+        parameterValueAttribute = mock(TextAttribute.class);
+        exampleTableSeparator = mock(TextAttribute.class);
         exampleTableCell = mock(TextAttribute.class);
         
-        when(defaultAttr.toString()).thenReturn("mock-default");
-        when(keywordAttr.toString()).thenReturn("mock-keyword");
-        when(paramAttr.toString()).thenReturn("mock-parameter");
-        when(paramValueAttr.toString()).thenReturn("mock-parameter-value");
-        when(exampleTableSep.toString()).thenReturn("mock-table-sep");
+        when(defaultAttribute.toString()).thenReturn("mock-default");
+        when(keywordAttribute.toString()).thenReturn("mock-keyword");
+        when(parameterAttribute.toString()).thenReturn("mock-parameter");
+        when(parameterValueAttribute.toString()).thenReturn("mock-parameter-value");
+        when(exampleTableSeparator.toString()).thenReturn("mock-table-sep");
         when(exampleTableCell.toString()).thenReturn("mock-table-cell");
         
         textAttributeProvider = mock(TextAttributeProvider.class);
-        when(textAttributeProvider.get(TextStyle.STEP_DEFAULT)).thenReturn(defaultAttr);
-        when(textAttributeProvider.get(TextStyle.STEP_KEYWORD)).thenReturn(keywordAttr);
-        when(textAttributeProvider.get(TextStyle.STEP_PARAMETER)).thenReturn(paramAttr);
-        when(textAttributeProvider.get(TextStyle.STEP_PARAMETER_VALUE)).thenReturn(paramValueAttr);
-        when(textAttributeProvider.get(TextStyle.STEP_EXAMPLE_TABLE_SEPARATOR)).thenReturn(exampleTableSep);
+        when(textAttributeProvider.get(TextStyle.STEP_DEFAULT)).thenReturn(defaultAttribute);
+        when(textAttributeProvider.get(TextStyle.STEP_KEYWORD)).thenReturn(keywordAttribute);
+        when(textAttributeProvider.get(TextStyle.STEP_PARAMETER)).thenReturn(parameterAttribute);
+        when(textAttributeProvider.get(TextStyle.STEP_PARAMETER_VALUE)).thenReturn(parameterValueAttribute);
+        when(textAttributeProvider.get(TextStyle.STEP_EXAMPLE_TABLE_SEPARATOR)).thenReturn(exampleTableSeparator);
         when(textAttributeProvider.get(TextStyle.STEP_EXAMPLE_TABLE_CELL)).thenReturn(exampleTableCell);
         
         locator = mock(StepLocator.class);
@@ -114,24 +113,24 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, 0, document.getLength());
 
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
 
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         assertThat(offset, equalTo(document.getLength()));
     }
@@ -149,10 +148,10 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -179,25 +178,25 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -222,25 +221,25 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
-        checkToken(scanner, document, paramValueAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
+        checkToken(scanner, document, parameterValueAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -269,24 +268,24 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         
-        checkToken(scanner, document, defaultAttr); // NL
+        checkToken(scanner, document, defaultAttribute); // NL
 
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         
-        checkToken(scanner, document, defaultAttr); // NL
+        checkToken(scanner, document, defaultAttribute); // NL
 
         consumeRemaining(document, scanner);
         
@@ -315,24 +314,24 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
 
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         
-        checkToken(scanner, document, defaultAttr); // NL
+        checkToken(scanner, document, defaultAttribute); // NL
         
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         checkToken(scanner, document, exampleTableCell);
-        checkToken(scanner, document, exampleTableSep);
+        checkToken(scanner, document, exampleTableSeparator);
         
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -351,17 +350,17 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -381,8 +380,8 @@ public class StepParserTest {
         StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, 179);
         
-        checkToken(scanner, document, keywordAttr);
-        checkToken(scanner, document, defaultAttr);
+        checkToken(scanner, document, keywordAttribute);
+        checkToken(scanner, document, defaultAttribute);
         
         consumeRemaining(document, scanner);
         
@@ -398,12 +397,12 @@ public class StepParserTest {
         }
     }
     
-    private void checkToken(StepScannerStyled scanner, IDocument document, Object jk) throws BadLocationException {
-        log.debug(jk + " > ");
+    private void checkToken(StepScannerStyled scanner, IDocument document, Object object) throws BadLocationException {
+        log.debug(object + " > ");
         IToken token = scanner.nextToken();
         dumpState(scanner, document);
 
-        assertThat(token.getData(), equalTo(jk));
+        assertThat(token.getData(), equalTo(object));
         assertThat(offset, equalTo(scanner.getTokenOffset()));
         offset += scanner.getTokenLength();
     }

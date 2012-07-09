@@ -1,2 +1,3 @@
 - Is log package used? 
 - Is HtmlStateMachine used? 
+- Are org.eclipse.wb.swt classes required?

@@ -30,10 +30,10 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 public class StepScannerStyledTest {
+
+	private static final String NL = "\n";    
     private static final String STEP1 = "an account named '$name' with the following properties:$properties";
-    public static final String NL = "\n";
-    
-    public static final String GIVEN1 = "Given an account named 'Travis' with the following properties:" + NL +
+    private static final String GIVEN1 = "Given an account named 'Travis' with the following properties:" + NL +
             "|key|value|" + NL +
             "!-- Some comment" + NL + 
             "|Login|Travis|" + NL +
@@ -49,7 +49,7 @@ public class StepScannerStyledTest {
 
     @SuppressWarnings("rawtypes")
     @Before
-    public void prepare () throws JavaModelException {
+    public void prepare() throws JavaModelException {
         stepLocator = mock(StepLocator.class);
         textAttributeProvider = mock(TextAttributeProvider.class);
         localizedStepSupport = new LocalizedStepSupport();
@@ -126,4 +126,5 @@ public class StepScannerStyledTest {
         }
         assertThat(index, equalTo(expected.length));
     }
+
 }

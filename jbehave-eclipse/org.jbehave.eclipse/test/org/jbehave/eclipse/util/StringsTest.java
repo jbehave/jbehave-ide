@@ -11,30 +11,20 @@ import org.jbehave.eclipse.util.Strings;
 import org.junit.Test;
 
 public class StringsTest {
+	
     @Test
-    public void tet_removeTrailingNewline () {
-        assertEquals("a", removeTrailingNewlines("a"));
-        assertEquals("a", removeTrailingNewlines("a\r\n"));
-        assertEquals("a", removeTrailingNewlines("a\n"));
-        assertEquals("a", removeTrailingNewlines("a\n\n"));
-        assertEquals("a", removeTrailingNewlines("a\r"));
-        assertEquals("a", removeTrailingNewlines("a\r\r"));
-        assertEquals("a\nb", removeTrailingNewlines("a\nb\n"));
-    }
-    
-    private static <T> void assertEquals(T expected, T actual) {
-        assertThat(actual, equalTo(expected));
+    public void canRemoveTrailingNewlines() {
+        assertThat(removeTrailingNewlines("a"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\r\n"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\n"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\n\n"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\r"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\r\r"), equalTo("a"));
+        assertThat(removeTrailingNewlines("a\nb\n"), equalTo("a\nb"));
     }
     
     @Test
-    public void getSubLineUntilOffset() throws IOException {
-        String text = IOUtils.toString(getClass().getResourceAsStream("/data/tfdm_update-1.story"));
-        String line = Strings.substringUntilOffset(text, 25);
-        assertThat(line, equalTo("Given an inactive direct "));
-    }
-    
-    @Test
-    public void removeLeftSpaces() {
+    public void canRemoveLeadingSpaces() {
         assertThat(Strings.removeLeadingSpaces("   a  "), equalTo("a  "));
         assertThat(Strings.removeLeadingSpaces("   abc"), equalTo("abc"));
         assertThat(Strings.removeLeadingSpaces("   a c"), equalTo("a c"));
@@ -45,5 +35,12 @@ public class StringsTest {
         
     }
 
+    @Test
+    public void canSubstringUntilOffset() throws IOException {
+        String text = IOUtils.toString(getClass().getResourceAsStream("/data/tfdm_update-1.story"));
+        String line = Strings.substringUntilOffset(text, 25);
+        assertThat(line, equalTo("Given an inactive direct "));
+    }
+    
 }
 
