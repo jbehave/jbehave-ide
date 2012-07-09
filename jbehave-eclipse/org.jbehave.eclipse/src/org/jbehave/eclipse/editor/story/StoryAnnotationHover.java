@@ -158,6 +158,8 @@ public class StoryAnnotationHover implements IAnnotationHover, IAnnotationHoverE
                         message = StringEscapeUtils.escapeHtml(message);
                         return String.format("%s<br><br>%s", message, html);
                     }
+				default:
+					break;
                 }
                 return annotation.getText();
             }

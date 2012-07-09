@@ -67,9 +67,9 @@ public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider impl
         cell.setStyleRanges(styledString.getStyleRanges());
     }
 
-    private void defineImage(StepCandidate pStep, ViewerCell cell) {
+    private void defineImage(StepCandidate step, ViewerCell cell) {
         String key = null;
-        switch (pStep.stepType) {
+        switch (step.stepType) {
             case GIVEN:
                 key = ImageIds.STEP_GIVEN;
                 break;
@@ -79,6 +79,8 @@ public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider impl
             case THEN:
                 key = ImageIds.STEP_THEN;
                 break;
+		default:
+			break;
         }
 
         if (key != null) {

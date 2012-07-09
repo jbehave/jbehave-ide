@@ -61,6 +61,8 @@ public class OutlineModelBuilder extends StoryPartVisitor {
             case ExampleTable:
             case Step:
                 return true;
+		default:
+			break;
         }
         return false;
     }

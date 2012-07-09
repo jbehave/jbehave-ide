@@ -56,12 +56,12 @@ public class StepCompletionProposalMixin {
     }
     
     public static String getAdditionalHTML(Trait trait) {
-        StepCandidate pStep = trait.getWeightedStep().stepCandidate;
+        StepCandidate step = trait.getWeightedStep().stepCandidate;
         
-        String htmlString = "<b>" + pStep.fullStep() + "</b>";
+        String htmlString = "<b>" + step.fullStep() + "</b>";
         htmlString += "<br><br>";
         try {
-            Reader reader = JavadocContentAccess.getContentReader(pStep.method, true);
+            Reader reader = JavadocContentAccess.getContentReader(step.method, true);
             String javadoc = IOUtils.toString(reader);//JDTUtils.getJavadocOf();
             if(StringUtils.isBlank(javadoc)) {
                 javadoc = "<small>No Javadoc</small>";
@@ -85,6 +85,8 @@ public class StepCompletionProposalMixin {
             case THEN:
                 key = ImageIds.STEP_THEN;
                 break;
+		default:
+			break;
         }
         if (key != null)
             return Activator.getDefault().getImageRegistry().get(key);

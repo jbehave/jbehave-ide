@@ -83,7 +83,11 @@ public class QuickOutlineStyledLabelProvider extends StyledCellLabelProvider imp
                     case Then:
                         key = ImageIds.STEP_THEN;
                         break;
+				default:
+					break;
                 }
+		default:
+			break;
         }
 
         if (key != null) {

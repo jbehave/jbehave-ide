@@ -19,6 +19,8 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
             case NoMatchingStep: {
                 return true;
             }
+		default:
+			break;
         }
         return false;
     }
@@ -35,6 +37,8 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
                 resolutions.add(new UhUhResolution());
                 break;
             }
+		default:
+			break;
         }
         return resolutions.toArray(new IMarkerResolution[resolutions.size()]);
     }

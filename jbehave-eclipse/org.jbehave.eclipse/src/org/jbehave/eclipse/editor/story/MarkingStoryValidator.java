@@ -181,6 +181,8 @@ public class MarkingStoryValidator {
                             else
                                 iWantTo = part;
                             break;
+					default:
+						break;
                     }
                 }
             }
