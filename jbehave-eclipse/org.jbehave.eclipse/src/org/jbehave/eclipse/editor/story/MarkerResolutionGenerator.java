@@ -7,7 +7,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
-import org.jbehave.eclipse.text.UIUtils;
+import org.jbehave.eclipse.UIUtils;
 import org.jbehave.eclipse.util.New;
 
 public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {

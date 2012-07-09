@@ -9,7 +9,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
 import org.jbehave.eclipse.Activator;
 import org.jbehave.eclipse.JBehaveProject;
-import org.jbehave.eclipse.text.JDTUtils;
+import org.jbehave.eclipse.editor.JDTUtils;
 import org.jbehave.eclipse.util.Visitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

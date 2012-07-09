@@ -1,4 +1,4 @@
-package org.jbehave.eclipse.text;
+package org.jbehave.eclipse.editor;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jface.text.BadLocationException;
@@ -6,6 +6,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITypedRegion;
 import org.jbehave.eclipse.Activator;
+import org.jbehave.eclipse.text.ProjectAwareFastPartitioner;
 
 public class EditorUtils {
 

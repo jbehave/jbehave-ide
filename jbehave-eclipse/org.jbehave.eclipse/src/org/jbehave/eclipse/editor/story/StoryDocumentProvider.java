@@ -11,11 +11,11 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.part.FileEditorInput;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
+import org.jbehave.eclipse.UIUtils;
 import org.jbehave.eclipse.editor.story.scanner.AllInOnePartitionScanner;
 import org.jbehave.eclipse.editor.story.scanner.AllInOneScanner;
 import org.jbehave.eclipse.editor.story.scanner.StoryPartitionScanner;
 import org.jbehave.eclipse.text.ProjectAwareFastPartitioner;
-import org.jbehave.eclipse.text.UIUtils;
 import org.jbehave.eclipse.util.Strings;
 
 public class StoryDocumentProvider extends FileDocumentProvider {

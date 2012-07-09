@@ -9,6 +9,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.jbehave.eclipse.Activator;
+import org.jbehave.eclipse.editor.EditorUtils;
 import org.jbehave.eclipse.util.New;
 
 public class MarkData {

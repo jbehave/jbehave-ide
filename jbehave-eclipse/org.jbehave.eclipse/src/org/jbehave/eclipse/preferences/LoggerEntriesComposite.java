@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.jbehave.eclipse.text.UIUtils;
+import org.jbehave.eclipse.UIUtils;
 
 import ch.qos.logback.classic.Level;
 
