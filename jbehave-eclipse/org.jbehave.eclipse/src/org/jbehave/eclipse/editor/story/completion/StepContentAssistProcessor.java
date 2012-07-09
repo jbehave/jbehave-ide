@@ -76,14 +76,14 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
                 }
             }
             
-            logger.debug("Autocompletion offset: {} partion text: <{}>", offset, partitionText);
+            logger.debug("Autocompletion offset: {} partition text: <{}>", offset, partitionText);
             logger.debug("Autocompletion line start: <{}>", lineStart);
 
             if(StringUtils.isEmpty(lineStart)) {
                 return createKeywordCompletionProposals(jbehaveProject, offset, 0, viewer);
             }
-            else if(StepSupport.isTheStartIgnoringCaseOfStep(localizedStepSupport, lineStart) //
-                    && !StepSupport.isStepType(localizedStepSupport, lineStart)) {
+            else if(StepSupport.isStartOfStepIgnoringCase(localizedStepSupport, lineStart) //
+                    && !StepSupport.isStep(localizedStepSupport, lineStart)) {
                 return createKeywordCompletionProposals(jbehaveProject, lineOffset, lineStart.length(), viewer);
             }
             
@@ -92,7 +92,7 @@ public class StepContentAssistProcessor implements IContentAssistProcessor {
             
             String stepStartUsedForSearch = stepStart;
             // special case: one must find the right type of step
-            boolean isAndCase = StepSupport.isStepAndType(localizedStepSupport, lineStart); 
+            boolean isAndCase = StepSupport.isStepAnd(localizedStepSupport, lineStart); 
             if(isAndCase) {
                 StoryElement part = new StoryDocumentUtils(localizedStepSupport).findStoryElementAtOffset(document, offset).get();
                 Keyword kw = part.getPreferredKeyword();

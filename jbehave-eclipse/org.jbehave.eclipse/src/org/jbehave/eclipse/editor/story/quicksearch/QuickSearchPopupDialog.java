@@ -316,7 +316,7 @@ public class QuickSearchPopupDialog extends PopupDialog {
         if (pattern.length() == 0) {
             namePattern = null;
         } else {
-            namePattern = Strings.convertToPattern(pattern);
+            namePattern = Strings.convertGlobToPattern(pattern);
         }
 
         // Update the name pattern filter on the tree viewer

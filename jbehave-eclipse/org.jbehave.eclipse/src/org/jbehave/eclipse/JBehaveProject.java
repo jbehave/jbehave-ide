@@ -37,7 +37,7 @@ import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.util.LocaleUtils;
 import org.jbehave.eclipse.util.New;
 import org.jbehave.eclipse.util.ProcessGroup;
-import org.jbehave.eclipse.util.StringEnhancer;
+import org.jbehave.eclipse.util.StringDecorator;
 import org.jbehave.eclipse.util.Visitor;
 import org.osgi.service.prefs.BackingStoreException;
 import org.slf4j.Logger;
@@ -256,7 +256,7 @@ public class JBehaveProject {
             Integer priority = Integer.valueOf(0);
 
             List<String> patterns = new ArrayList<String>();
-            if (StringEnhancer.enhanceString(elementName).endsWithOneOf("Given", "When", "Then")) {
+            if (StringDecorator.decorate(elementName).endsWithOneOf("Given", "When", "Then")) {
                 // TODO check import declaration matches org.jbehave...
                 stepType = StepType.valueOf(elementName.toUpperCase());
                 String stepPattern = getValue(annotationAttributes, "value");
@@ -265,7 +265,7 @@ public class JBehaveProject {
                 for (String variant : b.allVariants()) {
                     patterns.add(variant);
                 }
-            } else if (StringEnhancer.enhanceString(elementName).endsWithOneOf("Aliases")) {
+            } else if (StringDecorator.decorate(elementName).endsWithOneOf("Aliases")) {
                 // TODO check import declaration matches org.jbehave...
                 Object aliases = getValue(annotationAttributes, "values");
                 if (aliases instanceof Object[]) {
@@ -280,7 +280,7 @@ public class JBehaveProject {
                     if (!patterns.isEmpty() && stepType == null)
                         stepType = StepType.GIVEN;
                 }
-            } else if (StringEnhancer.enhanceString(elementName).endsWithOneOf("Alias")) {
+            } else if (StringDecorator.decorate(elementName).endsWithOneOf("Alias")) {
                 // TODO check import declaration matches org.jbehave...
                 String stepPattern = getValue(annotationAttributes, "value");
                 PatternVariantBuilder b = new PatternVariantBuilder(stepPattern);

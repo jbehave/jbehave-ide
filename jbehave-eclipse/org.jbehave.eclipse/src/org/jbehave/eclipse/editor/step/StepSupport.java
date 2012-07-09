@@ -1,17 +1,17 @@
 package org.jbehave.eclipse.editor.step;
 
-import static org.jbehave.eclipse.util.StringEnhancer.enhanceString;
+import static org.jbehave.eclipse.util.StringDecorator.decorate;
 import static org.jbehave.eclipse.util.Strings.array;
 
 import org.jbehave.core.steps.StepType;
-import org.jbehave.eclipse.util.StringEnhancer;
+import org.jbehave.eclipse.util.StringDecorator;
 import org.jbehave.eclipse.util.Strings;
 
 public class StepSupport {
 
-	public static boolean isTheStartIgnoringCaseOfStep(
+	public static boolean isStartOfStepIgnoringCase(
 			LocalizedStepSupport localizedStepSupport, String step) {
-		return enhanceString(step).isTheStartIgnoringCaseOfOneOf(//
+		return decorate(step).isStartOfOneOfIgnoringCase(//
 				localizedStepSupport.given(true), //
 				localizedStepSupport.when(true), //
 				localizedStepSupport.then(true), //
@@ -20,37 +20,37 @@ public class StepSupport {
 
 	public static boolean isStepIgnoringCase(
 			LocalizedStepSupport localizedStepSupport, String step) {
-		return enhanceString(step).startsIgnoringCaseWithOneOf(//
+		return decorate(step).startsWithOneOfIgnoringCase(//
 				localizedStepSupport.given(true), //
 				localizedStepSupport.when(true), //
 				localizedStepSupport.then(true), //
 				localizedStepSupport.and(true));
 	}
 
-	public static boolean isStepType(LocalizedStepSupport localizedStepSupport,
+	public static boolean isStep(LocalizedStepSupport localizedStepSupport,
 			String step) {
-		return enhanceString(step).equalsToOneOf(//
+		return decorate(step).equalsToOneOf(//
 				localizedStepSupport.given(true), //
 				localizedStepSupport.when(true), //
 				localizedStepSupport.then(true), //
 				localizedStepSupport.and(true));
 	}
 
-	public static boolean isStepAndType(
+	public static boolean isStepAnd(
 			LocalizedStepSupport localizedStepSupport, String step) {
-		return enhanceString(step).startsIgnoringCaseWithOneOf(
+		return decorate(step).startsWithOneOfIgnoringCase(
 				localizedStepSupport.and(true));
 	}
 
 	public static int stepKeywordIndex(
 			LocalizedStepSupport localizedStepSupport, String step) {
-		StringEnhancer enhanced = enhanceString(step);
+		StringDecorator enhanced = decorate(step);
 		for (String prefix : array(//
 				localizedStepSupport.given(true), //
 				localizedStepSupport.when(true), //
 				localizedStepSupport.then(true), //
 				localizedStepSupport.and(true))) {
-			if (enhanced.startsIgnoringCaseWith(prefix)) {
+			if (enhanced.startsWithIgnoringCase(prefix)) {
 				return prefix.length();
 			}
 		}
@@ -64,7 +64,7 @@ public class StepSupport {
 	 * alternative.
 	 * 
 	 * @param step
-	 * @return
+	 * @return A step without keyword
 	 */
 	public static String stepWithoutKeyword(
 			LocalizedStepSupport localizedStepSupport, String step) {
@@ -79,13 +79,13 @@ public class StepSupport {
 
 	public static String stepType(LocalizedStepSupport localizedStepSupport,
 			String step) {
-		StringEnhancer enhanced = enhanceString(step);
-		if (enhanced.startsIgnoringCaseWith(localizedStepSupport.when(true)))
+		StringDecorator enhanced = decorate(step);
+		if (enhanced.startsWithIgnoringCase(localizedStepSupport.when(true)))
 			return StepType.WHEN.name();
-		else if (enhanced.startsIgnoringCaseWith(localizedStepSupport
+		else if (enhanced.startsWithIgnoringCase(localizedStepSupport
 				.given(true)))
 			return StepType.GIVEN.name();
-		else if (enhanced.startsIgnoringCaseWith(localizedStepSupport
+		else if (enhanced.startsWithIgnoringCase(localizedStepSupport
 				.then(true)))
 			return StepType.THEN.name();
 		return null;

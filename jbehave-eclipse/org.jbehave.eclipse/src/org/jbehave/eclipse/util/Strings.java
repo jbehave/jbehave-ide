@@ -91,11 +91,11 @@ public class Strings {
 		return builder.toString();
 	}
 
-	public static Pattern convertToPattern(String line) {
-		return Pattern.compile(convertToRegex(line));
+	public static Pattern convertGlobToPattern(String line) {
+		return Pattern.compile(convertGlobToRegex(line));
 	}
 
-	public static String convertToRegex(String line) {
+	public static String convertGlobToRegex(String line) {
 		line = line.trim();
 		int strLen = line.length();
 		StringBuilder sb = new StringBuilder(strLen);

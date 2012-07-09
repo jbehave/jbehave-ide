@@ -27,9 +27,9 @@ public class StringMatcher {
         return this;
     }
     
-    private static void compileRegexTo(List<Pattern> dst, String... regexes) {
+    private static void compileRegexTo(List<Pattern> patterns, String... regexes) {
         for(int i=0;i<regexes.length;i++) {
-            dst.add(Pattern.compile(regexes[i]));
+            patterns.add(Pattern.compile(regexes[i]));
         }
     }
     
@@ -49,9 +49,9 @@ public class StringMatcher {
         cached = null;
     }
 
-    private static void compileGlobTo(List<Pattern> dst, String... globs) {
+    private static void compileGlobTo(List<Pattern> patterns, String... globs) {
         for(int i=0;i<globs.length;i++) {
-            dst.add(Strings.convertToPattern(globs[i]));
+            patterns.add(Strings.convertGlobToPattern(globs[i]));
         }
     }
     
