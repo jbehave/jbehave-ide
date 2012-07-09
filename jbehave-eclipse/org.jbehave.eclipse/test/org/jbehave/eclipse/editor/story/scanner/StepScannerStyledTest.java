@@ -19,7 +19,7 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.step.LocalizedStepSupport;
 import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.editor.step.StepLocator;
-import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
+import org.jbehave.eclipse.editor.story.scanner.StepScanner;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.preferences.ProjectPreferences;
 import org.jbehave.eclipse.util.Visitor;
@@ -40,7 +40,7 @@ public class StepScannerStyledTest {
             "|Password|p4cm4n|" + NL;
     
     private TextAttributeProvider textAttributeProvider;
-    private StepScannerStyled scanner;
+    private StepScanner scanner;
     private Document document;
     private StepLocator stepLocator;
     private StepCandidate candidate;
@@ -68,7 +68,7 @@ public class StepScannerStyledTest {
             }
         }).when(jbehaveProject).traverseSteps(Mockito.<Visitor<StepCandidate, ?>>any());
         
-        scanner = new StepScannerStyled(jbehaveProject, textAttributeProvider) {
+        scanner = new StepScanner(jbehaveProject, textAttributeProvider) {
             @Override
             protected Token newToken(String styleId) {
                 return new Token(styleId);

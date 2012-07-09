@@ -21,25 +21,15 @@ import org.jbehave.eclipse.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * <p>
- * A token scanner scans a range of a document and reports about the token it
- * finds. <b>A scanner has state</b>. When asked, the scanner returns the offset
- * and the length of the last found token.
- * </p>
- */
-public class StepScannerStyled extends AbstractStoryScanner {
+public class StepScanner extends StoryTokenScanner {
 
-	private Logger log = LoggerFactory.getLogger(StepScannerStyled.class);
+	private Logger log = LoggerFactory.getLogger(StepScanner.class);
 
-	//
 	private IToken keywordToken;
 	private IToken parameterToken;
 	private IToken parameterValueToken;
 
-	//
-
-	public StepScannerStyled(JBehaveProject jbehaveProject,
+	public StepScanner(JBehaveProject jbehaveProject,
 			TextAttributeProvider textAttributeProvider) {
 		super(jbehaveProject, textAttributeProvider);
 		initialize();
@@ -48,7 +38,6 @@ public class StepScannerStyled extends AbstractStoryScanner {
 	@Override
 	protected void initialize() {
 		super.initialize();
-
 		setDefaultToken(newToken(TextStyle.STEP_DEFAULT));
 		keywordToken = newToken(TextStyle.STEP_KEYWORD);
 		parameterToken = newToken(TextStyle.STEP_PARAMETER);
@@ -148,7 +137,7 @@ public class StepScannerStyled extends AbstractStoryScanner {
 		int expectedOffset = initialOffset
 				+ (stepSep + cleanedAfterKeyword.length());
 		if (offset < expectedOffset) {
-			log.debug("Remaings, offset: {}, length: {}",
+			log.debug("Remainings, offset: {}, length: {}",
 					o(offset, expectedOffset - offset));
 			emit(emitter, getDefaultToken(), offset, expectedOffset - offset);
 		}

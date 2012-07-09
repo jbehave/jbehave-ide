@@ -16,12 +16,12 @@ import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.StoryElement;
 import org.jbehave.eclipse.parser.RegexUtils.TokenizerCallback;
 
-public class MiscScanner extends AbstractStoryScanner {
+public class MetaScanner extends StoryTokenScanner {
     
     private IToken keywordToken;
     private IToken metaPropertyToken;
 
-    public MiscScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
+    public MetaScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
         super(jbehaveProject, textAttributeProvider);
         initialize();
     }
@@ -37,7 +37,7 @@ public class MiscScanner extends AbstractStoryScanner {
     @Override
     protected boolean isAccepted(StoryElement element) {
         Keyword keyword = element.getPreferredKeyword();
-        if(StoryPartition.Misc==StoryPartition.partitionOf(keyword)) {
+        if(StoryPartition.Meta==StoryPartition.partitionOf(keyword)) {
             return true;
         }
         return false;

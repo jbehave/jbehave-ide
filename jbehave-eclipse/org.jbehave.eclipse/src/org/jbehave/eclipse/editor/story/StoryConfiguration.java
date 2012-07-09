@@ -18,11 +18,11 @@ import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.editor.story.completion.StepContentAssistant;
 import org.jbehave.eclipse.editor.story.scanner.AllInOneScanner;
 import org.jbehave.eclipse.editor.story.scanner.ExampleTableScanner;
-import org.jbehave.eclipse.editor.story.scanner.MiscScanner;
+import org.jbehave.eclipse.editor.story.scanner.MetaScanner;
 import org.jbehave.eclipse.editor.story.scanner.NarrativeScanner;
 import org.jbehave.eclipse.editor.story.scanner.ScenarioScanner;
 import org.jbehave.eclipse.editor.story.scanner.SingleTokenScanner;
-import org.jbehave.eclipse.editor.story.scanner.StepScannerStyled;
+import org.jbehave.eclipse.editor.story.scanner.StepScanner;
 import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
 
@@ -69,7 +69,7 @@ public class StoryConfiguration extends SourceViewerConfiguration {
 
     protected ITokenScanner getStepScanner() {
         if (stepScanner == null) {
-            stepScanner = new StepScannerStyled(getJBehaveProject(), textAttributeProvider);
+            stepScanner = new StepScanner(getJBehaveProject(), textAttributeProvider);
         }
         return stepScanner;
     }
@@ -101,7 +101,7 @@ public class StoryConfiguration extends SourceViewerConfiguration {
     
     protected ITokenScanner getMiscScanner() {
         if (miscScanner == null) {
-            miscScanner = new MiscScanner(getJBehaveProject(), textAttributeProvider);
+            miscScanner = new MetaScanner(getJBehaveProject(), textAttributeProvider);
         }
         return miscScanner;
     }
@@ -165,8 +165,8 @@ public class StoryConfiguration extends SourceViewerConfiguration {
             reconciler.setRepairer(dr, StoryPartition.ExampleTable.name());
             
             dr = new DefaultDamagerRepairer(getMiscScanner());
-            reconciler.setDamager(dr, StoryPartition.Misc.name());
-            reconciler.setRepairer(dr, StoryPartition.Misc.name());
+            reconciler.setDamager(dr, StoryPartition.Meta.name());
+            reconciler.setRepairer(dr, StoryPartition.Meta.name());
         }
         
         return reconciler;

@@ -14,17 +14,17 @@ import org.jbehave.eclipse.parser.StoryElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AllInOneScanner extends AbstractStoryScanner {
+public class AllInOneScanner extends StoryTokenScanner {
     
     private Logger logger = LoggerFactory.getLogger(AllInOneScanner.class);
     
     public static boolean allInOne = true;
     
     private ExampleTableScanner exampleTableScanner;
-    private MiscScanner miscScanner;
+    private MetaScanner metaScanner;
     private NarrativeScanner narrativeScanner;
     private ScenarioScanner scenarioScanner;
-    private StepScannerStyled stepScannerStyled;
+    private StepScanner stepScannerStyled;
 
     private Region realRange;
 
@@ -34,10 +34,10 @@ public class AllInOneScanner extends AbstractStoryScanner {
         super(jbehaveProject, textAttributeProvider);
         initialize();
         exampleTableScanner = new ExampleTableScanner(jbehaveProject, textAttributeProvider);
-        miscScanner = new MiscScanner(jbehaveProject, textAttributeProvider);
+        metaScanner = new MetaScanner(jbehaveProject, textAttributeProvider);
         narrativeScanner = new NarrativeScanner(jbehaveProject, textAttributeProvider);
         scenarioScanner = new ScenarioScanner(jbehaveProject, textAttributeProvider);
-        stepScannerStyled = new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        stepScannerStyled = new StepScanner(jbehaveProject, textAttributeProvider);
     }
     
     @Override
@@ -108,7 +108,7 @@ public class AllInOneScanner extends AbstractStoryScanner {
             case GivenStories:
             case Meta:
             case MetaProperty:
-                emit(miscScanner, element);
+                emit(metaScanner, element);
                 break;
             case Scenario:
                 emit(scenarioScanner, element);
@@ -120,7 +120,7 @@ public class AllInOneScanner extends AbstractStoryScanner {
         }
     }
 
-    private void emit(AbstractStoryScanner scanner, StoryElement element) {
+    private void emit(StoryTokenScanner scanner, StoryElement element) {
         scanner.setRange(document, 0, document.getLength());
         scanner.emit(element);
         addFragments(scanner.getFragments());

@@ -1,3 +1,6 @@
 - Is log package used? 
 - Is HtmlStateMachine used? 
 - Are org.eclipse.wb.swt classes required?
+
+- Not all editor marks should be errors - some can be warnings (e.g. duplicate steps or even missing steps)
+- Changing the parameter prefix seems to have no effect.

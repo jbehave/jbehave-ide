@@ -12,7 +12,7 @@ public enum StoryPartition {
     ExampleTable,
     Comment,
     Scenario,
-    Misc,
+    Meta,
     Undefined;
     
     public static boolean arePartitionsEqual(Keyword keyword1, Keyword keyword2) {
@@ -53,7 +53,7 @@ public enum StoryPartition {
             case GivenStories: 
             case Meta: 
             case MetaProperty:
-                return Misc;
+                return Meta;
         }
         return Undefined;
     }

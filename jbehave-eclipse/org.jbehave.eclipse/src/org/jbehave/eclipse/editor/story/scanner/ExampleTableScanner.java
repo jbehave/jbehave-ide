@@ -10,7 +10,7 @@ import org.jbehave.eclipse.parser.RegexUtils;
 import org.jbehave.eclipse.parser.ContentWithIgnorableEmitter;
 import org.jbehave.eclipse.parser.StoryElement;
 
-public class ExampleTableScanner extends AbstractStoryScanner {
+public class ExampleTableScanner extends StoryTokenScanner {
     
     private IToken keywordToken;
 

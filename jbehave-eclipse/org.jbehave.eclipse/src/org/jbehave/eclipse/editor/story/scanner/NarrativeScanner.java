@@ -8,7 +8,7 @@ import org.jbehave.eclipse.editor.text.TextAttributeProvider;
 import org.jbehave.eclipse.editor.text.style.TextStyle;
 import org.jbehave.eclipse.parser.StoryElement;
 
-public class NarrativeScanner extends AbstractStoryScanner {
+public class NarrativeScanner extends StoryTokenScanner {
     
     private IToken keywordToken;
 

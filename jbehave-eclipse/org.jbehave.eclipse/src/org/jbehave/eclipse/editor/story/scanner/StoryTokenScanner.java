@@ -37,9 +37,9 @@ import org.slf4j.LoggerFactory;
  * of the last found token.
  * </p>
  */
-public abstract class AbstractStoryScanner implements ITokenScanner {
+public abstract class StoryTokenScanner implements ITokenScanner {
     
-    private Logger log = LoggerFactory.getLogger(AbstractStoryScanner.class);
+    private Logger log = LoggerFactory.getLogger(StoryTokenScanner.class);
     
     protected final TextAttributeProvider textAttributeProvider;
     protected final JBehaveProject jbehaveProject;
@@ -55,7 +55,7 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
     protected IDocument document;
     protected Region range;
 
-    public AbstractStoryScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
+    public StoryTokenScanner(JBehaveProject jbehaveProject, TextAttributeProvider textAttributeProvider) {
         this.jbehaveProject = jbehaveProject;
         this.textAttributeProvider = textAttributeProvider;
         textAttributeProvider.addObserver(new Observer() {
@@ -195,7 +195,7 @@ public abstract class AbstractStoryScanner implements ITokenScanner {
             emitterCallback = new Callback<IToken>() {
                 @Override
                 public void emit(IToken arg, int offset, int length) {
-                    AbstractStoryScanner.this.emit(arg, offset, length);
+                    StoryTokenScanner.this.emit(arg, offset, length);
                 }
                 @Override
                 public void emitIgnorable(int offset, int length) {

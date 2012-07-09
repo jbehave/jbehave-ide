@@ -110,7 +110,7 @@ public class StepParserTest {
         
         IDocument document= new Document(storyAsText);
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, 0, document.getLength());
 
         checkToken(scanner, document, keywordAttribute);
@@ -145,7 +145,7 @@ public class StepParserTest {
         
         offset = 1;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
         checkToken(scanner, document, keywordAttribute);
@@ -175,7 +175,7 @@ public class StepParserTest {
         
         offset = 1;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
         checkToken(scanner, document, keywordAttribute);
@@ -218,7 +218,7 @@ public class StepParserTest {
         
         offset = 1;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength()-offset);
         
         checkToken(scanner, document, keywordAttribute);
@@ -265,7 +265,7 @@ public class StepParserTest {
         
         offset = 0;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
         checkToken(scanner, document, keywordAttribute);
@@ -311,7 +311,7 @@ public class StepParserTest {
         
         offset = 0;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
         checkToken(scanner, document, keywordAttribute);
@@ -347,7 +347,7 @@ public class StepParserTest {
         
         offset = 0;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, document.getLength());
         
         checkToken(scanner, document, keywordAttribute);
@@ -377,7 +377,7 @@ public class StepParserTest {
         IDocument document= new Document(storyAsText);
         offset = 477;
         
-        StepScannerStyled scanner= new StepScannerStyled(jbehaveProject, textAttributeProvider);
+        StepScanner scanner= new StepScanner(jbehaveProject, textAttributeProvider);
         scanner.setRange(document, offset, 179);
         
         checkToken(scanner, document, keywordAttribute);
@@ -388,7 +388,7 @@ public class StepParserTest {
         assertThat(offset, equalTo(477+179));
     }
 
-    private void consumeRemaining(IDocument document, StepScannerStyled scanner) throws BadLocationException {
+    private void consumeRemaining(IDocument document, StepScanner scanner) throws BadLocationException {
         IToken token = scanner.nextToken();
         while(!token.isEOF()) {
             offset += scanner.getTokenLength();
@@ -397,7 +397,7 @@ public class StepParserTest {
         }
     }
     
-    private void checkToken(StepScannerStyled scanner, IDocument document, Object object) throws BadLocationException {
+    private void checkToken(StepScanner scanner, IDocument document, Object object) throws BadLocationException {
         log.debug(object + " > ");
         IToken token = scanner.nextToken();
         dumpState(scanner, document);
@@ -407,7 +407,7 @@ public class StepParserTest {
         offset += scanner.getTokenLength();
     }
     
-    private void dumpState(StepScannerStyled scanner, IDocument doc) throws BadLocationException {
+    private void dumpState(StepScanner scanner, IDocument doc) throws BadLocationException {
         int tokenOffset = scanner.getTokenOffset();
         int tokenLength = scanner.getTokenLength();
         log.debug(tokenOffset + " ~> " + tokenLength + " >>" + doc.get(tokenOffset, tokenLength) + "<<");
