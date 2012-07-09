@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.jbehave.eclipse.UIUtils;
+import org.jbehave.eclipse.Dialogs;
 
 import ch.qos.logback.classic.Level;
 
@@ -172,7 +172,7 @@ public class LoggerEntriesComposite extends Composite {
             Level level = (Level)selection.getFirstElement();
             String loggerName = StringUtils.trimToEmpty(loggerNameText.getText());
             if(loggerName.isEmpty()) {
-                UIUtils.warn("Missing logger name", "Empty or blank name specified");
+                Dialogs.warning("Missing logger name", "Empty or blank name specified");
                 return;
             }
             

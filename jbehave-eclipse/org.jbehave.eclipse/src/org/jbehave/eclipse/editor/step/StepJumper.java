@@ -9,7 +9,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.PartInitException;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
-import org.jbehave.eclipse.UIUtils;
+import org.jbehave.eclipse.Dialogs;
 import org.jbehave.eclipse.editor.EditorUtils;
 import org.jbehave.eclipse.editor.story.StoryDocumentUtils;
 import org.jbehave.eclipse.parser.RegexUtils;
@@ -38,11 +38,11 @@ public class StepJumper {
 		}
 
 		final StoryElement element = found.get();
-		if (!element.isStep())
+		if (!element.isStep()){
 			return false;
-		final String step = element.extractStepSentenceAndRemoveTrailingNewlines();
-
-		return jumpToDeclaration(viewer, step);
+		}
+		
+		return jumpToDeclaration(viewer, element.stepWithoutKeywordAndTrailingNewlines());
 	}
 
 	public boolean jumpToDeclaration(final ITextViewer viewer, final String step)
@@ -50,7 +50,7 @@ public class StepJumper {
 		// configure search
 		IProject project = EditorUtils.findProject(viewer);
 		if (project == null) {
-			UIUtils.show("Step not found", "No project found.");
+			Dialogs.information("Step not found", "No project found.");
 			return false;
 		}
 
@@ -61,14 +61,14 @@ public class StepJumper {
 
 		JBehaveProject jbehaveProject = JBehaveProjectRegistry.get()
 				.getOrCreateProject(project);
-		IJavaElement methodToJump = jbehaveProject.getStepLocator().findMethod(
+		IJavaElement method = jbehaveProject.getStepLocator().findMethod(
 				cleanedStep);
 		// jump to method
-		if (methodToJump != null) {
-			JavaUI.openInEditor(methodToJump);
+		if (method != null) {
+			JavaUI.openInEditor(method);
 			return true;
 		} else {
-			UIUtils.show("Step not found", "There is no step matching:\n"
+			Dialogs.information("Step not found", "There is no step matching:\n"
 					+ step);
 			return false;
 		}
@@ -76,11 +76,11 @@ public class StepJumper {
 
 	public boolean jumpToMethod(String qualifiedName) throws PartInitException,
 			JavaModelException {
-		IJavaElement methodToJump = jbehaveProject.getStepLocator()
+		IJavaElement method = jbehaveProject.getStepLocator()
 				.findMethodByQualifiedName(qualifiedName);
 		// jump to method
-		if (methodToJump != null) {
-			JavaUI.openInEditor(methodToJump);
+		if (method != null) {
+			JavaUI.openInEditor(method);
 			return true;
 		} else {
 			return false;

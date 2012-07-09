@@ -37,7 +37,7 @@ public class StoryElement {
 		return content;
 	}
 
-	public String extractStepSentence() {
+	public String stepWithoutKeyword() {
 		return StepSupport.stepWithoutKeyword(localizedStepSupport,
 				getContent());
 	}
@@ -45,7 +45,7 @@ public class StoryElement {
 	/**
 	 * @see #isStep()
 	 */
-	public String extractStepSentenceAndRemoveTrailingNewlines() {
+	public String stepWithoutKeywordAndTrailingNewlines() {
 		return StepSupport.stepWithoutKeywordAndTrailingNewlines(
 				localizedStepSupport, getContent());
 	}

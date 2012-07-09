@@ -11,7 +11,7 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import org.eclipse.ui.part.FileEditorInput;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
-import org.jbehave.eclipse.UIUtils;
+import org.jbehave.eclipse.Dialogs;
 import org.jbehave.eclipse.editor.story.scanner.AllInOnePartitionScanner;
 import org.jbehave.eclipse.editor.story.scanner.AllInOneScanner;
 import org.jbehave.eclipse.editor.story.scanner.StoryPartitionScanner;
@@ -34,7 +34,7 @@ public class StoryDocumentProvider extends FileDocumentProvider {
             return document;
         }
         // TODO: what if it is not a file?
-        UIUtils.warn("Unsupported type", "Cannot open the following type: " + element.getClass());
+        Dialogs.warning("Unsupported type", "Cannot open the following type: " + element.getClass());
         return null;
     }
 

@@ -48,7 +48,7 @@ public class StepHyperLinkDetector implements IHyperlinkDetector {
             logger.debug("Part found is not a step part got: {}", part.extractKeyword());
             return NONE;
         }
-        final String step = part.extractStepSentence();
+        final String step = part.stepWithoutKeyword();
         final String partCleaned = RegexUtils.removeTrailingComment(part.getContent());
         IHyperlink link = new IHyperlink() {
 

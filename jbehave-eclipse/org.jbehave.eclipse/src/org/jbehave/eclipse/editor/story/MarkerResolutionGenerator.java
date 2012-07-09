@@ -7,7 +7,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
-import org.jbehave.eclipse.UIUtils;
+import org.jbehave.eclipse.Dialogs;
 import org.jbehave.eclipse.util.New;
 
 public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
@@ -62,7 +62,7 @@ public class MarkerResolutionGenerator implements IMarkerResolutionGenerator2 {
         
         @Override
         public void run(IMarker marker) {
-            UIUtils.show("UhUh!", "Uh Uh! Every one!?!");
+            Dialogs.information("UhUh!", "Uh Uh! Every one!?!");
         }
 
     }

@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.jbehave.eclipse.UIUtils;
+import org.jbehave.eclipse.Dialogs;
 import org.jbehave.eclipse.preferences.ClassScannerFilterEntry.ApplyOn;
 
 public class ClassScannerFiltersComposite extends Composite {
@@ -165,13 +165,13 @@ public class ClassScannerFiltersComposite extends Composite {
         else if(radioClass.getSelection())
             applyOn = ApplyOn.Class;
         else {
-            UIUtils.warn("Missing filter settings", "Select where the filter applied");
+            Dialogs.warning("Missing filter settings", "Select where the filter applied");
             return;
         }
         
         String patterns = StringUtils.trimToEmpty(filterText.getText());
         if(patterns.isEmpty()) {
-            UIUtils.warn("Missing filter settings", "Empty or blank patterns specified");
+            Dialogs.warning("Missing filter settings", "Empty or blank patterns specified");
             return;
         }
         

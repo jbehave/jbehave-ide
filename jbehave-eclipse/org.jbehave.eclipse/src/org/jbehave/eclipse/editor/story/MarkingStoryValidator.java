@@ -314,7 +314,7 @@ public class MarkingStoryValidator {
         }
         
         private void computeExtractStepSentenceAndRemoveTrailingNewlines() {
-            String stepSentence = storyElement.extractStepSentence();
+            String stepSentence = storyElement.stepWithoutKeyword();
             // remove any comment that can still be within the step
             String cleaned = RegexUtils.removeComment(stepSentence);
             extractStepSentenceAndRemoveTrailingNewlines = Strings.removeTrailingNewlines(cleaned);
