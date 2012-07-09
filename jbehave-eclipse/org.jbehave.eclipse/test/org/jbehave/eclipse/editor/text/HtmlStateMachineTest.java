@@ -5,7 +5,7 @@ import org.junit.Test;
 public class HtmlStateMachineTest {
 
     @Test
-    public void sample_1() throws Exception {
+    public void canParseContent() throws Exception {
         String content = "<b>Ambiguous steps</b>" +
                 "<ul>" +
                     "<li>when an agent $clicks on the button<br/>(<code>Agent#clicks</code>)</li>" +

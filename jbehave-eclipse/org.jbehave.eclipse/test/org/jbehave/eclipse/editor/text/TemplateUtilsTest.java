@@ -9,7 +9,7 @@ import org.junit.Test;
 public class TemplateUtilsTest {
 
     @Test 
-    public void templatizeVariables_ () {
+    public void canTemplatizeVariables() {
         assertThat(templatizeVariables("$username"), equalTo("${username}"));
         assertThat(templatizeVariables("a user named $username clicks on $button button"), equalTo("a user named ${username} clicks on ${button} button"));
         assertThat(templatizeVariables("a user named bob clicks on enter button"), equalTo("a user named bob clicks on enter button"));

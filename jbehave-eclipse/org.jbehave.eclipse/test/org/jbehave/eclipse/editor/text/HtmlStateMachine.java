@@ -63,13 +63,11 @@ public class HtmlStateMachine {
                 
             }
         };
-        return null;
+        return styler;
     }
 
-    private String NL = "\\n";
-    
     private void emitNL() {
-        System.out.println(NL);
+        System.out.println("\\n");
     }
     
     private void rawEmit(String what) {
@@ -128,6 +126,8 @@ public class HtmlStateMachine {
                 emitNL();
                 rawEmit("-");
                 break;
+		default:
+			break;
         }
     }
     
