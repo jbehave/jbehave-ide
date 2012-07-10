@@ -49,14 +49,13 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 
-    private ContributionContextTypeRegistry fContextTypeRegistry;
-
-    private ContributionTemplateStore fStore;
-
+	// The Contribution registry and template store
+    private ContributionContextTypeRegistry registry;
+    private ContributionTemplateStore templateStore;
     private String version;
 
-    /** Key to store custom templates. */
-    private static final String CUSTOM_TEMPLATES_KEY = "org.jbehave.customtemplates"; //$NON-NLS-1$
+    // Key to store custom templates
+    private static final String TEMPLATES_KEY = "org.jbehave.eclipse.templates"; //$NON-NLS-1$
 	
 	public Activator() {
 	}
@@ -71,30 +70,29 @@ public class Activator extends AbstractUIPlugin {
     public void initLogger () {
 	    String logFile = getStateLocation().append("plugin.log").toOSString();
 		LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
-		
-		String patternRf = "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n";
-		PatternLayoutEncoder encoderRf = createLoggerPattern(loggerContext, patternRf);
-	    RollingFileAppender<ILoggingEvent> rfAppender = rollingFileLog(logFile, loggerContext, encoderRf);
-	    
-	    // ~~ jbehave console
-	    String patternCl = "%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n";
-        PatternLayoutEncoder encoderCl = createLoggerPattern(loggerContext, patternCl);
-        JBehaveConsoleAppender clAppender = new JBehaveConsoleAppender();
-	    clAppender.setEncoder(encoderCl);
-	    clAppender.start();
-	    
+
+		// rolling file
+		PatternLayoutEncoder encoder = createLoggerPattern(loggerContext, "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n");
+	    RollingFileAppender<ILoggingEvent> rollingFileAppender = rollingFileLog(logFile, loggerContext, encoder);	    
+
 	    // console
-	    ConsoleAppender<ILoggingEvent> soutAppender = new ConsoleAppender<ILoggingEvent>();
-	    soutAppender.setEncoder(encoderRf);
-	    soutAppender.start();
+	    ConsoleAppender<ILoggingEvent> consoleAppender = new ConsoleAppender<ILoggingEvent>();
+	    consoleAppender.setEncoder(encoder);
+	    consoleAppender.start();
+
+	    // jbehave console
+	    PatternLayoutEncoder jbehaveEncoder = createLoggerPattern(loggerContext, "%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n");
+        JBehaveConsoleAppender jbehaveConsoleAppender = new JBehaveConsoleAppender();
+	    jbehaveConsoleAppender.setEncoder(jbehaveEncoder);
+	    jbehaveConsoleAppender.start();
 
 	    // attach the appenders to the root logger
 	    Logger logbackLogger = loggerContext.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME);
         logbackLogger.detachAndStopAllAppenders();
         logbackLogger.setAdditive(true);
-	    logbackLogger.addAppender(rfAppender);
-	    logbackLogger.addAppender(clAppender);
-	    logbackLogger.addAppender(soutAppender);
+	    logbackLogger.addAppender(consoleAppender);
+	    logbackLogger.addAppender(jbehaveConsoleAppender);
+	    logbackLogger.addAppender(rollingFileAppender);
 	    resetLoggerLevels();
 	    
 	    // TODO: investigate why it's not fired on preference flush...
@@ -117,7 +115,7 @@ public class Activator extends AbstractUIPlugin {
     }
 
     public void resetLoggerLevels() {
-        logInfo("Reseting log levels");
+        logInfo("Resetting log levels");
 
         try {
             LoggerPreferences prefs = new LoggerPreferences();
@@ -142,27 +140,27 @@ public class Activator extends AbstractUIPlugin {
 
     protected RollingFileAppender<ILoggingEvent> rollingFileLog(String logFile, LoggerContext loggerContext,
             PatternLayoutEncoder encoder) {
-        RollingFileAppender<ILoggingEvent> rfAppender = new RollingFileAppender<ILoggingEvent>();
-	    rfAppender.setContext(loggerContext);
-        rfAppender.setFile(logFile);
-	    FixedWindowRollingPolicy rollingPolicy = new FixedWindowRollingPolicy();
-	    rollingPolicy.setContext(loggerContext);
+        RollingFileAppender<ILoggingEvent> appender = new RollingFileAppender<ILoggingEvent>();
+	    appender.setContext(loggerContext);
+        appender.setFile(logFile);
+	    FixedWindowRollingPolicy policy = new FixedWindowRollingPolicy();
+	    policy.setContext(loggerContext);
 	    // rolling policies need to know their parent
 	    // it's one of the rare cases, where a sub-component knows about its parent
-	    rollingPolicy.setParent(rfAppender);
-	    rollingPolicy.setFileNamePattern("plugin.%i.log.zip");
-	    rollingPolicy.start();
+	    policy.setParent(appender);
+	    policy.setFileNamePattern("plugin.%i.log.zip");
+	    policy.start();
 
 	    SizeBasedTriggeringPolicy<ILoggingEvent> triggeringPolicy = new SizeBasedTriggeringPolicy<ILoggingEvent>();
 	    triggeringPolicy.setMaxFileSize("5MB");
 	    triggeringPolicy.start();
 
-	    rfAppender.setEncoder(encoder);
-	    rfAppender.setRollingPolicy(rollingPolicy);
-	    rfAppender.setTriggeringPolicy(triggeringPolicy);
+	    appender.setEncoder(encoder);
+	    appender.setRollingPolicy(policy);
+	    appender.setTriggeringPolicy(triggeringPolicy);
 
-	    rfAppender.start();
-        return rfAppender;
+	    appender.start();
+        return appender;
     }
 
 	public void stop(BundleContext context) throws Exception {
@@ -221,27 +219,27 @@ public class Activator extends AbstractUIPlugin {
 	public TemplateStore getTemplateStore() {
         // this is to avoid recursive call when fContextTypeRegistry is null
         getContextTypeRegistry();
-        if (fStore == null) {
-            fStore = new ContributionTemplateStore(
+        if (templateStore == null) {
+            templateStore = new ContributionTemplateStore(
                     getContextTypeRegistry(), getPreferenceStore(),
-                    CUSTOM_TEMPLATES_KEY);
+                    TEMPLATES_KEY);
             try {
-                fStore.load();
+                templateStore.load();
             } catch (final IOException e) {
                 getLog().log(
                         new Status(IStatus.ERROR, PLUGIN_ID, IStatus.OK, "", e)); //$NON-NLS-1$
             }
         }
-        return fStore;
+        return templateStore;
     }
 	
 	public ContextTypeRegistry getContextTypeRegistry() {
-        if (fContextTypeRegistry == null) {
+        if (registry == null) {
             // create an configure the contexts available in the template editor
-            fContextTypeRegistry = new ContributionContextTypeRegistry();
-            fContextTypeRegistry.addContextType(StoryContextType.STORY_CONTEXT_TYPE_ID);
+            registry = new ContributionContextTypeRegistry();
+            registry.addContextType(StoryContextType.STORY_CONTEXT_TYPE_ID);
         }
-        return fContextTypeRegistry;
+        return registry;
     }
 	
 	private AtomicInteger idGen = new AtomicInteger();
