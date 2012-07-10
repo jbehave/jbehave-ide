@@ -16,9 +16,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.jbehave.eclipse.Dialogs;
 import org.jbehave.eclipse.preferences.ClassScannerFilterEntry.ApplyOn;
+import org.jbehave.eclipse.swt.SWTResourceManager;
 
 public class ClassScannerFiltersComposite extends Composite {
     private Text filterText;

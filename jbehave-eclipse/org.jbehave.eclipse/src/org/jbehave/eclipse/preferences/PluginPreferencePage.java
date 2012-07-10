@@ -13,8 +13,8 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.dialogs.PropertyPage;
-import org.eclipse.wb.swt.ResourceManager;
 import org.jbehave.eclipse.Activator;
+import org.jbehave.eclipse.swt.ResourceManager;
 
 public class PluginPreferencePage extends PropertyPage implements IWorkbenchPreferencePage {
 

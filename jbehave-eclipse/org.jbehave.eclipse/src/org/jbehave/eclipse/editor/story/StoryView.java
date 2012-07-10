@@ -16,9 +16,9 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.jbehave.eclipse.JBehaveProject;
 import org.jbehave.eclipse.JBehaveProjectRegistry;
+import org.jbehave.eclipse.swt.SWTResourceManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

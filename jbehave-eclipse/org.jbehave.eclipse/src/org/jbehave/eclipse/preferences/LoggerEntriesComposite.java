@@ -22,8 +22,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.wb.swt.SWTResourceManager;
 import org.jbehave.eclipse.Dialogs;
+import org.jbehave.eclipse.swt.SWTResourceManager;
 
 import ch.qos.logback.classic.Level;
 
