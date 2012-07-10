@@ -157,13 +157,6 @@ public class ProjectPreferencePage extends PropertyPage implements
 		return container;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.ui.dialogs.PropertyPage#setElement(org.eclipse.core.runtime
-	 * .IAdaptable)
-	 */
 	@Override
 	public void setElement(final IAdaptable element) {
 		project = (IProject) element.getAdapter(IResource.class);

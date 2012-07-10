@@ -64,11 +64,6 @@ public class QuickSearchPopupDialog extends PopupDialog {
         filterText.setFocus();
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.jface.dialogs.PopupDialog#getFocusControl()
-     */
     @Override
     protected Control getFocusControl() {
         return filterText;
@@ -103,9 +98,6 @@ public class QuickSearchPopupDialog extends PopupDialog {
        showStepClassInformationAction = new ShowStepClassInformationAction(false);
    }
    
-   /* (non-Javadoc)
-    * @see org.eclipse.jface.dialogs.PopupDialog#fillDialogMenu(org.eclipse.jface.action.IMenuManager)
-    */
    @Override
    protected void fillDialogMenu(IMenuManager dialogMenu) {
        // Add the sort action

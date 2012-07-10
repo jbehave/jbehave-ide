@@ -72,20 +72,10 @@ public class LoggerPreferencePage extends PropertyPage implements org.eclipse.ui
         return container;
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.ui.IWorkbenchPreferencePage#init(org.eclipse.ui.IWorkbench)
-     */
     @Override
     public void init(IWorkbench workbench) {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.ui.dialogs.PropertyPage#setElement(org.eclipse.core.runtime.IAdaptable)
-     */
     @Override
     public void setElement(final IAdaptable element) {
         project = (IProject) element.getAdapter(IResource.class);
@@ -117,9 +107,6 @@ public class LoggerPreferencePage extends PropertyPage implements org.eclipse.ui
         super.contributeButtons(parent);
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.preference.PreferencePage#performOk()
-     */
     @Override
     public boolean performOk() {
         try {
@@ -137,9 +124,6 @@ public class LoggerPreferencePage extends PropertyPage implements org.eclipse.ui
     }
 
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.preference.PreferencePage#performDefaults()
-     */
     @Override
     protected void performDefaults() {
         try {

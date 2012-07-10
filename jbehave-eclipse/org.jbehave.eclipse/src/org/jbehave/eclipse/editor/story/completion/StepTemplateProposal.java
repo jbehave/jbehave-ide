@@ -49,17 +49,11 @@ public class StepTemplateProposal extends TemplateProposal implements
         return getStyledDisplayString().getString();
     }
 
-    /* (non-Javadoc)
-     * @see org.jbehave.eclipse.editor.story.completion.StepCompletionProposalMixin.Trait#getWeightedStep()
-     */
     @Override
     public WeightedStep getWeightedStep() {
         return weightedStep;
     }
 
-    /* (non-Javadoc)
-     * @see org.jbehave.eclipse.editor.story.completion.StepCompletionProposalMixin.Trait#getComplete()
-     */
     @Override
     public String getComplete() {
         return complete;
@@ -70,9 +64,6 @@ public class StepTemplateProposal extends TemplateProposal implements
         return label;
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension6#getStyledDisplayString()
-     */
     @Override
     public StyledString getStyledDisplayString() {
         return StepCompletionProposalMixin.createStyledString(this);
@@ -83,9 +74,6 @@ public class StepTemplateProposal extends TemplateProposal implements
         return StepCompletionProposalMixin.getImage(this);
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.contentassist.ICompletionProposalExtension5#getAdditionalProposalInfo(org.eclipse.core.runtime.IProgressMonitor)
-     */
     @Override
     public Object getAdditionalProposalInfo(IProgressMonitor monitor) {
         return StepCompletionProposalMixin.getAdditionalHTML(this);

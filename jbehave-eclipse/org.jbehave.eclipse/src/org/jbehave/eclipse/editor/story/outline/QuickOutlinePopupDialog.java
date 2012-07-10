@@ -57,11 +57,6 @@ public class QuickOutlinePopupDialog extends PopupDialog {
         filterText.setFocus();
     }
     
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.jface.dialogs.PopupDialog#getFocusControl()
-     */
     @Override
     protected Control getFocusControl() {
         return filterText;

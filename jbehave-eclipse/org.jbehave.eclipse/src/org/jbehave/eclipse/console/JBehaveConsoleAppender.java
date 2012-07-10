@@ -32,11 +32,6 @@ public class JBehaveConsoleAppender extends ch.qos.logback.core.UnsynchronizedAp
         super.stop();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see ch.qos.logback.core.UnsynchronizedAppenderBase#append(java.lang.Object)
-     */
     @Override
     protected void append(final ILoggingEvent event) {
         // Thats probably not the most efficient way, but it works for now

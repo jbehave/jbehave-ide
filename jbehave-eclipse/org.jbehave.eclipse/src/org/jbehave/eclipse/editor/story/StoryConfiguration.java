@@ -117,9 +117,6 @@ public class StoryConfiguration extends SourceViewerConfiguration {
         return new SingleTokenScanner(textAttributeProvider, attributeKey);
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.jface.text.source.SourceViewerConfiguration#getPresentationReconciler(org.eclipse.jface.text.source.ISourceViewer)
-     */
     @Override
     public IPresentationReconciler getPresentationReconciler(ISourceViewer sourceViewer) {
         reconciler = new PresentationReconciler() {
