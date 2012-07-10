@@ -48,7 +48,7 @@ public class LoggerPreferences {
         StringBuilder inlinedEntries = entries.foldLeft(inlineEntries(), new StringBuilder());
         helper.putString(INLINED_ENTRIES, inlinedEntries.toString());
         helper.putBoolean(USE_PROJECT_SETTINGS, useProjectSettings);
-        Activator.logInfo("Storing logger settings; [" + inlinedEntries + "]");
+        Activator.logInfo("Storing logger settings: [" + inlinedEntries + "]");
         helper.flush();
         
         // This is ugly, but property change listener are not fired... 
@@ -59,7 +59,7 @@ public class LoggerPreferences {
     public void load() throws BackingStoreException {
         entries = List.nil();
         String inlinedEntries = helper.getString(INLINED_ENTRIES, "");
-        Activator.logInfo("Loading logger settings; [" + inlinedEntries + "]");
+        Activator.logInfo("Loading logger settings: [" + inlinedEntries + "]");
         for(String entryAsString : inlinedEntries.split(Pattern.quote(SEPARATOR))) {
             String[] frags = entryAsString.split(":");
             if(frags.length<2)

@@ -58,7 +58,7 @@ public class MarkingStoryValidator {
         try {
             file.deleteMarkers(MARKER_ID, true, IResource.DEPTH_ZERO);
         } catch (CoreException e) {
-            log.error("MarkingStoryValidator:Error while deleting existing marks", e);
+            log.error("Failed to delete existing marks", e);
         }
     }
 
@@ -74,17 +74,17 @@ public class MarkingStoryValidator {
             }
         });
         
-        Activator.logInfo("Validating " + storyElements);
+        Activator.logInfo(MarkingStoryValidator.class.getSimpleName()+": Validating parts " + parts);
         
         ProcessGroup<?> group = Activator.getDefault().newProcessGroup();
         group.spawn(checkStepsAsRunnable(parts));
         group.spawn(checkNarrativeAsRunnable(parts));
 
         try {
-            Activator.logInfo("Awaiting termination of part validation");
+            Activator.logInfo(MarkingStoryValidator.class.getSimpleName()+": Awaiting termination of validation");
             group.awaitTermination();
         } catch (InterruptedException e) {
-            Activator.logError("MarkingStoryValidator:Error while checking steps for parts: " + parts, e);
+            Activator.logError(MarkingStoryValidator.class.getSimpleName()+": Error while validating parts: " + parts, e);
         }
 
         IWorkspaceRunnable r = new IWorkspaceRunnable() {
@@ -103,7 +103,7 @@ public class MarkingStoryValidator {
             else
                 r.run(new NullProgressMonitor());
         } catch (CoreException e) {
-            Activator.logError("MarkingStoryValidator:Error while applying marks on <" + file + ">", e);
+            Activator.logError(MarkingStoryValidator.class.getSimpleName()+": Error while applying marks on file <" + file + ">", e);
         }
     }
     
@@ -113,7 +113,7 @@ public class MarkingStoryValidator {
                 try {
                     checkNarrative(parts);
                 } catch (Throwable e) {
-                    Activator.logError("MarkingStoryValidator:Error while checking narrative for parts: " + parts, e);
+                    Activator.logError(MarkingStoryValidator.class.getSimpleName()+": Error while checking narrative for parts: " + parts, e);
                 }
             }
         };
@@ -137,7 +137,7 @@ public class MarkingStoryValidator {
             if(keyword.isNarrative()) {
                 // narrative must be the first
                 if(nonNarrativeOrIgnorable) {
-                    part.addErrorMark(Marks.Code.InvalidNarrativePosition, "Narrative section must be the first one");
+                    part.addErrorMark(Marks.Code.InvalidNarrativePosition, "Narrative must be the first section");
                 }
                 else {
                     switch(keyword) {
@@ -151,7 +151,7 @@ public class MarkingStoryValidator {
                             if(narrative==null)
                                 part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingNarrative, "Missing 'Narrative:' element");
                             else if(inOrderTo!=null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleInOrderTo, "Only one 'In order to ' element is allowed");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleInOrderTo, "Only one 'In order to' element is allowed");
                             else
                                 inOrderTo = part;
                             break;
@@ -159,9 +159,9 @@ public class MarkingStoryValidator {
                             if(narrative==null)
                                 part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingNarrative, "Missing 'Narrative:' element");
                             else if(inOrderTo==null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to ' element");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to' element");
                             else if(asA!=null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleAsA, "Only one 'As a ' element is allowed");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleAsA, "Only one 'As a' element is allowed");
                             else
                                 asA = part;
                             break;
@@ -169,11 +169,11 @@ public class MarkingStoryValidator {
                             if(narrative==null)
                                 part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingNarrative, "Missing 'Narrative:' element");
                             else if(inOrderTo==null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to ' element");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to' element");
                             else if(asA==null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingAsA, "Missing 'As a ' element");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingAsA, "Missing 'As a' element");
                             else if(iWantTo!=null)
-                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleIWantTo, "Only one 'I want to ' element is allowed");
+                                part.addErrorMark(Marks.Code.InvalidNarrativeSequence_multipleIWantTo, "Only one 'I want to' element is allowed");
                             else
                                 iWantTo = part;
                             break;
@@ -195,15 +195,15 @@ public class MarkingStoryValidator {
             if(inOrderTo!=null) {
                 if(asA!=null) {
                     if(iWantTo==null) {
-                      asA.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingIWantTo, "Missing 'I want to ' element");
+                      asA.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingIWantTo, "Missing 'I want to' element");
                     }
                 }
                 else {
-                    inOrderTo.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingAsA, "Missing 'As a ' element");
+                    inOrderTo.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingAsA, "Missing 'As a' element");
                 }
             }
             else {
-                narrative.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to ' element");
+                narrative.addErrorMark(Marks.Code.InvalidNarrativeSequence_missingInOrderTo, "Missing 'In order to' element");
             }
         }
         
@@ -215,7 +215,7 @@ public class MarkingStoryValidator {
                 try {
                     checkSteps(parts);
                 } catch (Throwable e) {
-                    Activator.logError("MarkingStoryValidator:Error while checking steps for parts: " + parts, e);
+                    Activator.logError(MarkingStoryValidator.class.getSimpleName()+": Error while checking steps for parts: " + parts, e);
                 }
             }
         };
@@ -241,7 +241,7 @@ public class MarkingStoryValidator {
             }
         });
         
-        log.info("All candidates have been evaluated");
+        log.debug("All candidates have been evaluated");
 
         for (Part part : steps) {
             String key = part.extractStepSentenceAndRemoveTrailingNewlines();
@@ -357,7 +357,7 @@ public class MarkingStoryValidator {
                         marker.setAttribute("Keyword", keyword.name());
                 }
             } catch (Exception e) {
-                Activator.logError("MarkingStoryValidator:Failed to apply marks", e);
+                Activator.logError(MarkingStoryValidator.class.getSimpleName()+": Failed to apply marks", e);
             }
         }
 

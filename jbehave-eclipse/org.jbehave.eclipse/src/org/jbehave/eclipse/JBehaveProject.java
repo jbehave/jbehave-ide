@@ -140,9 +140,9 @@ public class JBehaveProject {
         return new Callback<IMethod, Container<StepCandidate>>() {
             public void op(IMethod method, Container<StepCandidate> container) {
                 try {
-                    extractMethodSteps(method, container);
+                    addStepCandidates(method, container);
                 } catch (JavaModelException e) {
-                    log.error("Failed to extract step from method <" + method + ">", e);
+                    log.error("Failed to add step candidates for method {}", method, e);
                 }
             };
         };
@@ -150,8 +150,7 @@ public class JBehaveProject {
 
     public void notifyChanges(IJavaElementDelta delta) {
         int kind = delta.getKind();
-        log.debug("Notify JDT change within project <" + project.getName() + "> (" + Integer.toBinaryString(kind) + ")"
-                + delta);
+        log.debug("Notifying change within project {}: {} ({})", o(project.getName(), delta, Integer.toBinaryString(kind)));
         invalidateCache();
     }
 
@@ -191,7 +190,7 @@ public class JBehaveProject {
                 }
             }
 
-            log.debug("Traversing cache for project <" + project.getName() + ">");
+            log.debug("Traversing cache for project " + project.getName());
             cache.traverse(visitor);
         } finally {
             if (rAcquired)
@@ -200,7 +199,7 @@ public class JBehaveProject {
     }
 
     protected void rebuild() {
-        log.info("Re-building cache for project <" + project.getName() + ">");
+        log.info("Rebuilding cache for project " + project.getName());
 
         ProcessGroup<Void> processGroup = Activator.getDefault().newProcessGroup();
         try {
@@ -221,7 +220,7 @@ public class JBehaveProject {
         try {
             processGroup.awaitTermination();
         } catch (InterruptedException e) {
-            log.info("Java traversal interrupted");
+            log.warn("Cache rebuild interrupted");
             invalidateCache();
         }
     }
@@ -229,7 +228,7 @@ public class JBehaveProject {
     protected void invalidateCache() {
         // invalidate cache
         comod.incrementAndGet();
-        Job job = new Job("Step cache invalidated") {
+        Job job = new Job("Cache invalidated") {
             @Override
             protected IStatus run(IProgressMonitor monitor) {
                 for(JBehaveProjectListener listener : listeners) {
@@ -247,7 +246,7 @@ public class JBehaveProject {
 
     }
 
-    private void extractMethodSteps(IMethod method, Container<StepCandidate> container) throws JavaModelException {
+    private void addStepCandidates(IMethod method, Container<StepCandidate> container) throws JavaModelException {
         String parameterPrefix = this.parameterPrefix;
         StepType stepType = null;
         for (IAnnotation annotation : method.getAnnotations()) {
