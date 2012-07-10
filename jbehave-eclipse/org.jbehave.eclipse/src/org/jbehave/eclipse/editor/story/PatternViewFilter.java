@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.jbehave.eclipse.util.TextProvider;
+import org.jbehave.eclipse.editor.text.TextProvider;
 
 /**
  * PatternViewFilter

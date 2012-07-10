@@ -34,9 +34,9 @@ import org.eclipse.ui.PlatformUI;
 import org.jbehave.eclipse.editor.step.StepCandidate;
 import org.jbehave.eclipse.editor.story.PatternViewFilter;
 import org.jbehave.eclipse.editor.story.StoryEditor;
+import org.jbehave.eclipse.editor.text.TextProvider;
 import org.jbehave.eclipse.util.Lists;
 import org.jbehave.eclipse.util.Strings;
-import org.jbehave.eclipse.util.TextProvider;
 
 public class QuickSearchPopupDialog extends PopupDialog {
 

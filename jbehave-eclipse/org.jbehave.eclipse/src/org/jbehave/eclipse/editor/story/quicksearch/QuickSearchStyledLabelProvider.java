@@ -9,7 +9,7 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.jbehave.eclipse.ImageIds;
 import org.jbehave.eclipse.editor.step.StepCandidate;
-import org.jbehave.eclipse.util.TextProvider;
+import org.jbehave.eclipse.editor.text.TextProvider;
 
 public class QuickSearchStyledLabelProvider extends StyledCellLabelProvider implements TextProvider {
     
