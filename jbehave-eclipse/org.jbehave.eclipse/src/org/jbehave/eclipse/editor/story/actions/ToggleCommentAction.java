@@ -35,7 +35,6 @@ public class ToggleCommentAction extends TextEditorAction {
                 process(storyEditor, viewer);
             }
         });
-        storyEditor.oops();
     }
 
     private void process(StoryEditor storyEditor, ISourceViewer viewer) {
@@ -56,8 +55,9 @@ public class ToggleCommentAction extends TextEditorAction {
                 int lineOffset = document.getLineOffset(lineNb);
                 int lineLength = document.getLineLength(lineNb);
                 String text = document.get(lineOffset, lineLength);
-                if (StringUtils.isNotBlank(text) && !text.startsWith(ignorable))
+                if (StringUtils.isNotBlank(text) && !text.startsWith(ignorable)){
                     notCommentedCount++;
+                }
             }
             
             for (int lineNb = startLine; lineNb <= endLine; lineNb++) {

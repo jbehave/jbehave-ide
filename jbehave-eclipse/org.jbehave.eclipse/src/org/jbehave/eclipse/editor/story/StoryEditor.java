@@ -92,12 +92,6 @@ public class StoryEditor extends TextEditor {
         setDocumentProvider(new StoryDocumentProvider());
     }
 
-    public void oops() {
-        //ITextListener listener = storyConfiguration.getReconcilerInternalListener(ITextListener.class);
-        //TextEvent event = new TextEvent(0, 0, null, null, null, true) {};
-        //listener.textChanged(event);
-    }
-
     @Override
     public void init(IEditorSite site, IEditorInput input) throws PartInitException {
         super.init(site, input);
@@ -203,7 +197,7 @@ public class StoryEditor extends TextEditor {
         ProjectAwareFastPartitioner partitioner = (ProjectAwareFastPartitioner) getInputDocument()
                 .getDocumentPartitioner();
         if (partitioner != null) {
-            partitioner.invalidatePartitions();
+            partitioner.invalidate();
         }
         validateAndMark();
     }

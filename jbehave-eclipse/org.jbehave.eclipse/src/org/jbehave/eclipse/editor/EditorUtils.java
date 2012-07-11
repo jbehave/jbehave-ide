@@ -11,16 +11,7 @@ import org.jbehave.eclipse.editor.text.ProjectAwareFastPartitioner;
 public class EditorUtils {
 
     public static IProject findProject(ITextViewer viewer) {
-        // TODO: huge hack but I don't know how to get the
-        // project the other way
-        IDocument document = viewer.getDocument();
-        return findProject(document);
-    }
-    
-    public static IProject findProject(IDocument document) {
-        // TODO: huge hack but I don't know how to get the
-        // project the other way
-        ProjectAwareFastPartitioner partitioner = (ProjectAwareFastPartitioner) document.getDocumentPartitioner();
+        ProjectAwareFastPartitioner partitioner = (ProjectAwareFastPartitioner) viewer.getDocument().getDocumentPartitioner();
         return partitioner.getProject();
     }
 
@@ -39,13 +30,14 @@ public class EditorUtils {
             Integer charEnd = getCharEnd(document, lineNumber, columnNumber);
             if (charEnd != null) {
                 ITypedRegion typedRegion = document.getPartition(charEnd.intValue() - 2);
-                int partitionStartChar = typedRegion.getOffset();
-                return new Integer(partitionStartChar);
-            } else
+                return new Integer(typedRegion.getOffset());
+            } else {
                 return new Integer(lineStartChar);
+            }
         } catch (BadLocationException e) {
             Activator.logError("Unable to calculate charStart at " + lineNumber +", " + columnNumber, e);
             return null;
         }
     }
+    
 }
