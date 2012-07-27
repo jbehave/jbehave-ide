@@ -1,3 +1,0 @@
-Scenario: Something something
-
-Meta:
